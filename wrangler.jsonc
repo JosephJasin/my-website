@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "my-site",
+  "compatibility_date": "2026-10-13",
+  "assets": {
+    "directory": "./_site"
+  },
+  "routes": [
+    { "pattern": "josephjasin.com", "custom_domain": true },
+    { "pattern": "www.josephjasin.com", "custom_domain": true }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "my-website",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/JosephJasin/my-website#readme",
+  "bugs": {
+    "url": "https://github.com/JosephJasin/my-website/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JosephJasin/my-website.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx @11ty/eleventy",
+    "start": "npx @11ty/eleventy --serve"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.1.6"
+  },
+  "devDependencies": {
+    "wrangler": "^4.149.0"
+  }
+}
