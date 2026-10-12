@@ -8,5 +8,8 @@
   "routes": [
     { "pattern": "josephjasin.com", "custom_domain": true },
     { "pattern": "www.josephjasin.com", "custom_domain": true }
-  ]
+  ],
+  "build": {
+    "command": "npm run build"
+  },
 }
