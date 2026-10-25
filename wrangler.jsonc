@@ -3,6 +3,10 @@
   "name": "my-website",
   "keep_vars": true,
   "compatibility_date": "2026-10-13",
+  "vars": {
+    "FIRSTREP_ACCESS_AUD": "41a0d8837e446665e4ac204fdd580d55c7d4bd2e7b18d8257b439cbbc7f3144c",
+    "FIRSTREP_ACCESS_TEAM_DOMAIN": "sparkling-dawn-0b88.cloudflareaccess.com"
+  },
   "assets": {
     "directory": "./_site",
     "binding": "ASSETS",
