@@ -1,0 +1,146 @@
+{
+  "leg-press": {
+    "title": "Axiom Series Leg Press",
+    "source": "https://shop.lifefitness.com/products/axiom-series-leg-press",
+    "tutorialUrl": "https://www.youtube.com/watch?v=tSzWkteRzU0",
+    "tutorialLabel": "Life Fitness demonstration",
+    "videoId": "tSzWkteRzU0",
+    "manualUrl": "https://kb.cybexintl.com/Owners_Manuals/Strength/OM-OP_Life_Fitness_Axiom_Single_Station_Series_1014208-0001.pdf#page=51",
+    "image": "/firstrep/equipment/leg-press.jpg"
+  },
+  "chest-press": {
+    "title": "Axiom Series Chest Press",
+    "source": "https://shop.lifefitness.com/products/axiom-series-chest-press",
+    "tutorialUrl": "https://www.youtube.com/watch?v=tI_qZQzp1Xk",
+    "tutorialLabel": "Life Fitness demonstration",
+    "videoId": "tI_qZQzp1Xk",
+    "manualUrl": "https://kb.cybexintl.com/Owners_Manuals/Strength/OM-OP_Life_Fitness_Axiom_Single_Station_Series_1014208-0001.pdf#page=48",
+    "image": "/firstrep/equipment/chest-press.jpg"
+  },
+  "seated-row": {
+    "title": "Axiom Series Seated Row",
+    "source": "https://shop.lifefitness.com/products/axiom-series-seated-row-1",
+    "tutorialUrl": "https://www.youtube.com/watch?v=ZeSIXXSuVvk",
+    "tutorialLabel": "Life Fitness demonstration",
+    "videoId": "ZeSIXXSuVvk",
+    "manualUrl": "https://kb.cybexintl.com/Owners_Manuals/Strength/OM-OP_Life_Fitness_Axiom_Single_Station_Series_1014208-0001.pdf#page=53",
+    "image": "/firstrep/equipment/seated-row.jpg"
+  },
+  "lat-pulldown": {
+    "title": "Axiom Series Lat Pulldown",
+    "source": "https://shop.lifefitness.com/products/axiom-series-pulldown",
+    "tutorialUrl": "https://www.youtube.com/watch?v=rBAF91sTknI",
+    "tutorialLabel": "Life Fitness demonstration",
+    "videoId": "rBAF91sTknI",
+    "manualUrl": "https://kb.cybexintl.com/Owners_Manuals/Strength/OM-OP_Life_Fitness_Axiom_Single_Station_Series_1014208-0001.pdf#page=52",
+    "image": "/firstrep/equipment/lat-pulldown.jpg"
+  },
+  "leg-curl": {
+    "title": "Axiom Series Leg Curl",
+    "source": "https://shop.lifefitness.com/products/axiom-series-leg-curl",
+    "tutorialUrl": "https://kb.cybexintl.com/Owners_Manuals/Strength/OM-OP_Life_Fitness_Axiom_Single_Station_Series_1014208-0001.pdf#page=49",
+    "tutorialLabel": "Life Fitness illustrated exercise instructions",
+    "manualUrl": "https://kb.cybexintl.com/Owners_Manuals/Strength/OM-OP_Life_Fitness_Axiom_Single_Station_Series_1014208-0001.pdf#page=49",
+    "image": "/firstrep/equipment/leg-curl.jpg"
+  },
+  "leg-extension": {
+    "title": "Axiom Series Leg Extension",
+    "source": "https://shop.lifefitness.com/products/axiom-series-leg-extension",
+    "tutorialUrl": "https://kb.cybexintl.com/Owners_Manuals/Strength/OM-OP_Life_Fitness_Axiom_Single_Station_Series_1014208-0001.pdf#page=50",
+    "tutorialLabel": "Life Fitness illustrated exercise instructions",
+    "manualUrl": "https://kb.cybexintl.com/Owners_Manuals/Strength/OM-OP_Life_Fitness_Axiom_Single_Station_Series_1014208-0001.pdf#page=50",
+    "image": "/firstrep/equipment/leg-extension.jpg"
+  },
+  "shoulder-press": {
+    "title": "Axiom Series Shoulder Press",
+    "source": "https://shop.lifefitness.com/products/axiom-series-shoulder-press",
+    "tutorialUrl": "https://www.youtube.com/watch?v=Kg8NX58A2cs",
+    "tutorialLabel": "Life Fitness demonstration",
+    "videoId": "Kg8NX58A2cs",
+    "manualUrl": "https://kb.cybexintl.com/Owners_Manuals/Strength/OM-OP_Life_Fitness_Axiom_Single_Station_Series_1014208-0001.pdf#page=54",
+    "image": "/firstrep/equipment/shoulder-press.jpg"
+  },
+  "abdominal-crunch": {
+    "title": "Axiom Series Abdominal",
+    "source": "https://shop.lifefitness.com/products/axiom-series-abdominal",
+    "tutorialUrl": "https://www.youtube.com/watch?v=XI8NwQ1Dp6o",
+    "tutorialLabel": "Life Fitness demonstration",
+    "videoId": "XI8NwQ1Dp6o",
+    "manualUrl": "https://kb.cybexintl.com/Owners_Manuals/Strength/OM-OP_Life_Fitness_Axiom_Single_Station_Series_1014208-0001.pdf#page=46",
+    "image": "/firstrep/equipment/abdominal-crunch.jpg"
+  },
+  "cable-triceps": {
+    "title": "Axiom Series Triceps Extension",
+    "source": "https://shop.lifefitness.com/products/axiom-series-triceps-extension",
+    "tutorialUrl": "https://www.youtube.com/watch?v=GdQYdpo_iI0",
+    "tutorialLabel": "Life Fitness cable rope pushdown demonstration",
+    "videoId": "GdQYdpo_iI0",
+    "image": "/firstrep/equipment/cable-triceps.jpg"
+  },
+  "cable-curl": {
+    "title": "Axiom Series Biceps Curl",
+    "source": "https://shop.lifefitness.com/products/axiom-series-biceps-curl",
+    "tutorialUrl": "https://fitnessinstitute.com.au/bicep-curl-cables/",
+    "tutorialLabel": "Fitness Institute cable curl instructions",
+    "image": "/firstrep/equipment/cable-curl.jpg"
+  },
+  "bike": {
+    "title": "Atmos Upright Bike Home Edition",
+    "source": "https://shop.lifefitness.com/products/atmos-upright-bike-home-edition",
+    "tutorialUrl": "https://support.lifefitness.com/hc/en-us/articles/42862231037335-How-to-Adjust-the-Seat-on-Your-Life-Fitness-Atmos-Upright-Bike",
+    "tutorialLabel": "Life Fitness seat setup guide",
+    "image": "/firstrep/equipment/bike.webp"
+  },
+  "recumbent-bike": {
+    "title": "Atmos Recumbent Bike Home Edition",
+    "source": "https://shop.lifefitness.com/products/atmos-recumbent-bike-home-edition",
+    "tutorialUrl": "https://support.lifefitness.com/hc/en-us/articles/42862239184279-How-to-Adjust-the-Seat-on-Your-Life-Fitness-Atmos-Recumbent-Bike",
+    "tutorialLabel": "Life Fitness seat setup guide",
+    "image": "/firstrep/equipment/recumbent-bike.webp"
+  },
+  "treadmill": {
+    "title": "Atmos Treadmill Home Edition",
+    "source": "https://shop.lifefitness.com/products/atmos-treadmill-home-edition",
+    "tutorialUrl": "https://support.lifefitness.com/hc/en-us/articles/42814152246039-Life-Fitness-Atmos-Treadmill-How-to-Use-Your-SL-Console-Guided-Tour",
+    "tutorialLabel": "Life Fitness treadmill controls and safe start guide",
+    "image": "/firstrep/equipment/treadmill.webp"
+  },
+  "multi-press": {
+    "title": "Axiom Series Multi-Press",
+    "source": "https://shop.lifefitness.com/products/axiom-series-multi-press",
+    "tutorialUrl": "https://kb.cybexintl.com/Owners_Manuals/Strength/OM-OP_Life_Fitness_Axiom_Single_Station_Series_1014208-0001.pdf#page=60",
+    "tutorialLabel": "Life Fitness illustrated exercise instructions",
+    "manualUrl": "https://kb.cybexintl.com/Owners_Manuals/Strength/OM-OP_Life_Fitness_Axiom_Single_Station_Series_1014208-0001.pdf#page=60",
+    "image": "/firstrep/equipment/multi-press.jpg"
+  },
+  "lat-row": {
+    "title": "Axiom Series Pulldown / Row",
+    "source": "https://shop.lifefitness.com/products/axiom-series-pulldown-row",
+    "tutorialUrl": "https://kb.cybexintl.com/Owners_Manuals/Strength/OM-OP_Life_Fitness_Axiom_Single_Station_Series_1014208-0001.pdf#page=62",
+    "tutorialLabel": "Life Fitness illustrated exercise instructions",
+    "manualUrl": "https://kb.cybexintl.com/Owners_Manuals/Strength/OM-OP_Life_Fitness_Axiom_Single_Station_Series_1014208-0001.pdf#page=62",
+    "image": "/firstrep/equipment/lat-row.jpg"
+  },
+  "curl-extension": {
+    "title": "Axiom Series Seated Leg Curl / Extension",
+    "source": "https://shop.lifefitness.com/products/axiom-series-seated-leg-curl-extension",
+    "tutorialUrl": "https://www.youtube.com/watch?v=r3XJn8RxGes",
+    "tutorialLabel": "Life Fitness demonstration",
+    "videoId": "r3XJn8RxGes",
+    "manualUrl": "https://kb.cybexintl.com/Owners_Manuals/Strength/OM-OP_Life_Fitness_Axiom_Single_Station_Series_1014208-0001.pdf#page=63",
+    "image": "/firstrep/equipment/curl-extension.jpg"
+  },
+  "ab-back": {
+    "title": "Axiom Series Abdominal / Back Extension",
+    "source": "https://shop.lifefitness.com/products/axiom-series-abdominal-back-extension",
+    "tutorialUrl": "https://kb.cybexintl.com/Owners_Manuals/Strength/OM-OP_Life_Fitness_Axiom_Single_Station_Series_1014208-0001.pdf#page=56",
+    "tutorialLabel": "Life Fitness illustrated exercise instructions",
+    "manualUrl": "https://kb.cybexintl.com/Owners_Manuals/Strength/OM-OP_Life_Fitness_Axiom_Single_Station_Series_1014208-0001.pdf#page=56",
+    "image": "/firstrep/equipment/ab-back.jpg"
+  },
+  "dual-cable": {
+    "title": "Axiom Dual Adjustable Pulley",
+    "source": "https://shop.lifefitness.com/products/axiom-dual-adjustable-pulley",
+    "image": "/firstrep/equipment/dual-cable.jpg"
+  }
+}
