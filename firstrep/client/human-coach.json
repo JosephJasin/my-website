@@ -1,0 +1,2506 @@
+{
+  "plans": [
+    {
+      "id": "human-2",
+      "days": 2,
+      "name": "2-day UPPER-LOWER",
+      "filename": "2-day UPPER-LOWER.pdf",
+      "sourceSha256": "6efcda3c05fa3d5cbbd23dbcf2c5774c416f9fdd94b4b174c1f398385b0c7ad6",
+      "introAndHelp": "2-day UPPER-LOWER\nWelcome to the 2-day Upper-Lower split, here i will explain everything that you will need to know!\n\nFirst let me tell you, how i structured this training plan.\n\nYou will see, that there is 4 different days, even tho this is just a 2-day split. Let me tell you why.\n\nEvery day has a number added to it. They either have number 1 or 2. So what you will do, is that one\nthe first week, you will use the UPPER1 and LOWER1.\n\nAnd on the second week, you will use UPPER2 and LOWER2. And on the third week, you start again\nfrom UPPER1 and LOWER1, and you continue this cycle over and over!\n\nNow let me show you when to take rest days, and in which order you should run this training plan.\n\nSince this is a 2-day split, you have a lot of freedom, when it comes to the rest days and the order of\nthe workouts.\n\nYou can basically schedule the days however you want. The only requirement being, that you take\natleast 2-3days rest between the training sessions.\n\n\nHelp\nAlways follow the order that the exercises are written in.\n\nDefinitely use different weight for different rep ranges, you always have to adjust. For example, if you\nare doing a horizontal push for 5-8reps, you should always choose a heavier weight, than if you did it\nfor 8-12reps!\n\nBelow the name of every bodypart, you can see what type of exercise you are supposed to do, and in\nthe parentheses are example exercises that you should use, you can pick any of these exercises that i\nincluded there, its up to you what you like, and what you have access to!\n\nIf you need any further assistance, or if something is not clear to you, feel free to join my discord, and\ni will help you out!\n\n\nNote\nAlways write down the weight, sets, and reps of the exercises that you did, so you can keep track of\nyour progression, this is very important!",
+      "sequence": [
+        "UPPER1",
+        "LOWER1",
+        "UPPER2",
+        "LOWER2"
+      ],
+      "cycleWeeks": 2,
+      "sessions": [
+        {
+          "id": "UPPER1",
+          "title": "UPPER1",
+          "exercises": [
+            {
+              "id": "upper1-1",
+              "bodypart": "SHOULDERS",
+              "movement": "overhead press",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "standing or sitting overhead press, dumbbells or a barbell"
+              ],
+              "originalLine": "overhead press__3sets__5-8reps__(standing or sitting overhead press, dumbbells or a barbell)"
+            },
+            {
+              "id": "upper1-2",
+              "bodypart": "BACK",
+              "movement": "vertical pull",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "pull up",
+                "chin up",
+                "lat pulldown machine"
+              ],
+              "originalLine": "vertical pull__3sets__8-12reps__(pull up, chin up, lat pulldown machine)"
+            },
+            {
+              "id": "upper1-3",
+              "bodypart": "BACK",
+              "movement": "horizontal pull",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "barbell row",
+                "dumbbel row"
+              ],
+              "originalLine": "horizontal pull__3sets__12-15reps__(barbell row, dumbbel row)"
+            },
+            {
+              "id": "upper1-4",
+              "bodypart": "CHEST",
+              "movement": "horizontal push",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "barbell benchpress",
+                "dumbbell benchpress",
+                "weighted pushup"
+              ],
+              "originalLine": "horizontal push__3sets__5-8reps__(barbell benchpress, dumbbell benchpress, weighted pushup)"
+            },
+            {
+              "id": "upper1-5",
+              "bodypart": "CHEST",
+              "movement": "incline push",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell incline benchpress",
+                "dumbbel incline benchpress",
+                "weighted decline pushup"
+              ],
+              "originalLine": "incline push__3sets__8-12reps__(barbell incline benchpress, dumbbel incline benchpress,weighted decline pushup)"
+            },
+            {
+              "id": "upper1-6",
+              "bodypart": "SHOULDERS",
+              "movement": "lateral raise",
+              "sets": 3,
+              "reps": "15-20reps",
+              "alternatives": [
+                "dumbbell lateral raise",
+                "cable lateral raise"
+              ],
+              "originalLine": "lateral raise__3sets__15-20reps__(dumbbell lateral raise, cable lateral raise)"
+            },
+            {
+              "id": "upper1-7",
+              "bodypart": "SHOULDERS",
+              "movement": "rear delt movement",
+              "sets": 5,
+              "reps": "15-20reps",
+              "alternatives": [
+                "rear delt fly",
+                "reverse peck deck",
+                "facepull"
+              ],
+              "originalLine": "rear delt movement__5sets__15-20reps__(rear delt fly, reverse peck deck, facepull)"
+            },
+            {
+              "id": "upper1-8",
+              "bodypart": "BICEPS",
+              "movement": "normal curl",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell strict curl",
+                "ez-bar curl",
+                "dumbbell curl"
+              ],
+              "originalLine": "normal curl__3sets__8-12reps__(barbell strict curl, ez-bar curl, dumbbell curl)"
+            },
+            {
+              "id": "upper1-9",
+              "bodypart": "BICEPS",
+              "movement": "brachialis & brachioradialis curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "hammer curl",
+                "any curl with overhand grip"
+              ],
+              "originalLine": "brachialis & brachioradialis curl__3sets__12-15reps __(hammer curl, any curl with overhand grip)"
+            },
+            {
+              "id": "upper1-10",
+              "bodypart": "TRICEPS",
+              "movement": "overhead extension",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "skull crusher",
+                "overhead triceps extension with cables or dumbbells"
+              ],
+              "originalLine": "overhead extension__3sets__12-15reps__(skull crusher, overhead triceps extension with cables or dumbbells)"
+            }
+          ]
+        },
+        {
+          "id": "LOWER1",
+          "title": "LOWER1",
+          "exercises": [
+            {
+              "id": "lower1-1",
+              "bodypart": "QUADS",
+              "movement": "squat",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "back squat",
+                "front squat"
+              ],
+              "originalLine": "squat__3sets__5-8reps__(back squat, front squat)"
+            },
+            {
+              "id": "lower1-2",
+              "bodypart": "HAMSTRINGS",
+              "movement": "hip hinge movement",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "romanian deadlift",
+                "stiff leg deadlift",
+                "good mornings"
+              ],
+              "originalLine": "hip hinge movement__3sets__8-12reps__(romanian deadlift, stiff leg deadlift, good mornings)"
+            },
+            {
+              "id": "lower1-3",
+              "bodypart": "GLUTES",
+              "movement": "hip thrust",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "hip thrust with a barbell",
+                "hip thrust machine"
+              ],
+              "originalLine": "hip thrust__3sets__8-12reps__(hip thrust with a barbell, hip thrust machine)"
+            },
+            {
+              "id": "lower1-4",
+              "bodypart": "QUADS",
+              "movement": "isolation",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "legpress",
+                "hack squat",
+                "leg extensions"
+              ],
+              "originalLine": "isolation__3sets__12-15reps__(legpress, hack squat, leg extensions)"
+            },
+            {
+              "id": "lower1-5",
+              "bodypart": "HAMSTRINGS",
+              "movement": "hamstring curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "hamstring curls",
+                "nordic hamstring curls"
+              ],
+              "originalLine": "hamstring curl__3sets__12-15reps__(hamstring curls, nordic hamstring curls)"
+            },
+            {
+              "id": "lower1-6",
+              "bodypart": "CALVES",
+              "movement": "calf raise",
+              "sets": 3,
+              "reps": "15-30reps",
+              "alternatives": [
+                "calf raise machine",
+                "standing on a plate/stairs"
+              ],
+              "originalLine": "calf raise__3sets__15-30reps__(calf raise machine, standing on a plate/stairs)"
+            }
+          ]
+        },
+        {
+          "id": "UPPER2",
+          "title": "UPPER2",
+          "exercises": [
+            {
+              "id": "upper2-1",
+              "bodypart": "CHEST",
+              "movement": "incline push",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "barbell incline benchpress",
+                "dumbbel incline benchpress",
+                "weighted decline pushup"
+              ],
+              "originalLine": "incline push__3sets__5-8reps__(barbell incline benchpress, dumbbel incline benchpress,weighted decline pushup)"
+            },
+            {
+              "id": "upper2-2",
+              "bodypart": "CHEST",
+              "movement": "horizontal push",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell benchpress",
+                "dumbbell benchpress",
+                "weighted pushup"
+              ],
+              "originalLine": "horizontal push__3sets__8-12reps__(barbell benchpress, dumbbell benchpress, weighted pushup)"
+            },
+            {
+              "id": "upper2-3",
+              "bodypart": "BACK",
+              "movement": "horizontal pull",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell row",
+                "dumbbel row"
+              ],
+              "originalLine": "horizontal pull__3sets__8-12reps__(barbell row, dumbbel row)"
+            },
+            {
+              "id": "upper2-4",
+              "bodypart": "BACK",
+              "movement": "vertical pull",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "pull up",
+                "chin up",
+                "lat pulldown machine"
+              ],
+              "originalLine": "vertical pull__3sets__12-15reps__(pull up, chin up, lat pulldown machine)"
+            },
+            {
+              "id": "upper2-5",
+              "bodypart": "SHOULDERS",
+              "movement": "overhead press",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "standing or sitting overhead press, dumbbells or a barbell"
+              ],
+              "originalLine": "overhead press__3sets__8-12reps__(standing or sitting overhead press, dumbbells or a barbell)"
+            },
+            {
+              "id": "upper2-6",
+              "bodypart": "SHOULDERS",
+              "movement": "lateral raise",
+              "sets": 3,
+              "reps": "15-20reps",
+              "alternatives": [
+                "dumbbell lateral raise",
+                "cable lateral raise"
+              ],
+              "originalLine": "lateral raise__3sets__15-20reps__(dumbbell lateral raise, cable lateral raise)"
+            },
+            {
+              "id": "upper2-7",
+              "bodypart": "SHOULDERS",
+              "movement": "rear delt movement",
+              "sets": 5,
+              "reps": "15-20reps",
+              "alternatives": [
+                "rear delt fly",
+                "reverse peck deck",
+                "facepull"
+              ],
+              "originalLine": "rear delt movement__5sets__15-20reps__(rear delt fly, reverse peck deck, facepull)"
+            },
+            {
+              "id": "upper2-8",
+              "bodypart": "BICEPS",
+              "movement": "normal curl",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell strict curl",
+                "ez-bar curl",
+                "dumbbell curl"
+              ],
+              "originalLine": "normal curl__3sets__8-12reps__(barbell strict curl, ez-bar curl, dumbbell curl)"
+            },
+            {
+              "id": "upper2-9",
+              "bodypart": "BICEPS",
+              "movement": "peak focused curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "concetration curl",
+                "preacher curl"
+              ],
+              "originalLine": "peak focused curl__3sets__12-15reps__(concetration curl, preacher curl)"
+            },
+            {
+              "id": "upper2-10",
+              "bodypart": "TRICEPS",
+              "movement": "overhead extension",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "skull crusher",
+                "overhead triceps extension with cables or dumbbells"
+              ],
+              "originalLine": "overhead extension__3sets__12-15reps__(skull crusher, overhead triceps extension with cables or dumbbells"
+            }
+          ]
+        },
+        {
+          "id": "LOWER2",
+          "title": "LOWER2",
+          "exercises": [
+            {
+              "id": "lower2-1",
+              "bodypart": "HAMSTRINGS",
+              "movement": "hip hinge movement",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "romanian deadlift",
+                "stiff leg deadlift",
+                "good mornings"
+              ],
+              "originalLine": "hip hinge movement__3sets__5-8reps__(romanian deadlift, stiff leg deadlift, good mornings)"
+            },
+            {
+              "id": "lower2-2",
+              "bodypart": "QUADS",
+              "movement": "squat",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "back squat",
+                "front squat"
+              ],
+              "originalLine": "squat__3sets__8-12reps__(back squat, front squat)"
+            },
+            {
+              "id": "lower2-3",
+              "bodypart": "GLUTES",
+              "movement": "lunges",
+              "sets": 3,
+              "reps": "15reps each leg",
+              "alternatives": [
+                "lunges",
+                "glute kickbacks"
+              ],
+              "originalLine": "lunges__3sets__15reps each leg__(lunges, glute kickbacks)"
+            },
+            {
+              "id": "lower2-4",
+              "bodypart": "HAMSTRINGS",
+              "movement": "hamstring curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "hamstring curls",
+                "nordic hamstring curls"
+              ],
+              "originalLine": "hamstring curl__3sets__12-15reps__(hamstring curls, nordic hamstring curls)"
+            },
+            {
+              "id": "lower2-5",
+              "bodypart": "QUADS",
+              "movement": "isolation",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "legpress",
+                "hack squat",
+                "leg extensions"
+              ],
+              "originalLine": "isolation__3sets__12-15reps__(legpress, hack squat, leg extensions)"
+            },
+            {
+              "id": "lower2-6",
+              "bodypart": "CALVES",
+              "movement": "calf raise",
+              "sets": 3,
+              "reps": "15-30reps",
+              "alternatives": [
+                "calf raise machine",
+                "standing on a plate/stairs"
+              ],
+              "originalLine": "calf raise__3sets__15-30reps__(calf raise machine, standing on a plate/stairs)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "human-3",
+      "days": 3,
+      "name": "3-day UPPER-LOWER",
+      "filename": "3-day UPPER-LOWER.pdf",
+      "sourceSha256": "6a540335b8047781ae44a961b8c0e915f154a7ff97e551a6c5780bbf73830c29",
+      "introAndHelp": "3-day UPPER-LOWER\nWelcome to the 3-day Upper-Lower split, here i will explain everything that you will need to know!\n\nFirst let me tell you, how i structured this training plan.\n\nThis training plan, puts more emphasis on the upper body, because it has 2 upper body sessions and\nonly 1 lower body session.\n\nNow let me show you when to take rest days, and in which order you should run this training plan.\n\nYou should run this program in this order: UPPER1->LOWER1->UPPER2\n\nYou can pretty much schedule the rest days however you want, The only requirement being, that you\ntake atleast 2-3days rest between the upper body sessions.\n\nSo you can for example do something like this:\n\nday1__UPPER1\n\nday2__rest\n\nday3__LOWER1\n\nday4__rest\n\nday5__UPPER2\n\nday6__rest\n\nday7__rest\n\nHelp\nAlways follow the order that the exercises are written in.\n\nDefinitely use different weight for different rep ranges, you always have to adjust. For example, if you\nare doing a horizontal push for 5-8reps, you should always choose a heavier weight, than if you did it\nfor 8-12reps!\n\nBelow the name of every bodypart, you can see what type of exercise you are supposed to do, and in\nthe parentheses are example exercises that you should use, you can pick any of these exercises that i\nincluded there, its up to you what you like, and what you have access to!\n\nIf you need any further assistance, or if something is not clear to you, feel free to join my discord, and\ni will help you out!\n\n\nNote\nAlways write down the weight, sets, and reps of the exercises that you did, so you can keep track of\nyour progression, this is very important!",
+      "sequence": [
+        "UPPER1",
+        "LOWER1",
+        "UPPER2"
+      ],
+      "cycleWeeks": 1,
+      "sessions": [
+        {
+          "id": "UPPER1",
+          "title": "UPPER1",
+          "exercises": [
+            {
+              "id": "upper1-1",
+              "bodypart": "CHEST",
+              "movement": "incline push",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "barbell incline benchpress",
+                "dumbbel incline benchpress",
+                "weighted decline pushup"
+              ],
+              "originalLine": "incline push__3sets__5-8reps__(barbell incline benchpress, dumbbel incline benchpress,weighted decline pushup)"
+            },
+            {
+              "id": "upper1-2",
+              "bodypart": "CHEST",
+              "movement": "horizontal push",
+              "sets": 2,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell benchpress",
+                "dumbbell benchpress",
+                "weighted pushup"
+              ],
+              "originalLine": "horizontal push__2sets__8-12reps__(barbell benchpress, dumbbell benchpress, weighted pushup)"
+            },
+            {
+              "id": "upper1-3",
+              "bodypart": "CHEST",
+              "movement": "isolation",
+              "sets": 2,
+              "reps": "12-20reps",
+              "alternatives": [
+                "dumbbel flies",
+                "cable flies"
+              ],
+              "originalLine": "isolation__2sets__12-20reps__(dumbbel flies, cable flies)"
+            },
+            {
+              "id": "upper1-4",
+              "bodypart": "SHOULDERS",
+              "movement": "overhead press",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "standing or sitting overhead press, dumbbells or a barbell"
+              ],
+              "originalLine": "overhead press__3sets__8-12reps__(standing or sitting overhead press, dumbbells or a barbell)"
+            },
+            {
+              "id": "upper1-5",
+              "bodypart": "BACK",
+              "movement": "vertical pull",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "pull up",
+                "chin up",
+                "lat pulldown machine"
+              ],
+              "originalLine": "vertical pull__3sets__8-12reps__(pull up, chin up, lat pulldown machine)"
+            },
+            {
+              "id": "upper1-6",
+              "bodypart": "BACK",
+              "movement": "horizontal pull",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "barbell row",
+                "dumbbel row"
+              ],
+              "originalLine": "horizontal pull__3sets__12-15reps__(barbell row, dumbbel row)"
+            },
+            {
+              "id": "upper1-7",
+              "bodypart": "BICEPS",
+              "movement": "normal curl",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell strict curl",
+                "ez-bar curl",
+                "dumbbell curl"
+              ],
+              "originalLine": "normal curl__3sets__8-12reps__(barbell strict curl, ez-bar curl, dumbbell curl)"
+            },
+            {
+              "id": "upper1-8",
+              "bodypart": "BICEPS",
+              "movement": "brachialis & brachioradialis curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "hammer curl",
+                "any curl with overhand grip"
+              ],
+              "originalLine": "brachialis & brachioradialis curl__3sets__12-15reps __(hammer curl, any curl with overhand grip)"
+            },
+            {
+              "id": "upper1-9",
+              "bodypart": "SHOULDERS",
+              "movement": "lateral raise",
+              "sets": 3,
+              "reps": "15-20reps",
+              "alternatives": [
+                "dumbbell lateral raise",
+                "cable lateral raise"
+              ],
+              "originalLine": "lateral raise__3sets__15-20reps__(dumbbell lateral raise, cable lateral raise)"
+            },
+            {
+              "id": "upper1-10",
+              "bodypart": "SHOULDERS",
+              "movement": "rear delt movement",
+              "sets": 3,
+              "reps": "15-20reps",
+              "alternatives": [
+                "rear delt fly",
+                "reverse peck deck",
+                "facepull"
+              ],
+              "originalLine": "rear delt movement__3sets__15-20reps__(rear delt fly, reverse peck deck, facepull)"
+            },
+            {
+              "id": "upper1-11",
+              "bodypart": "TRICEPS",
+              "movement": "overhead extension",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "skull crusher",
+                "overhead triceps extension with cables or dumbbells"
+              ],
+              "originalLine": "overhead extension__3sets__12-15reps__(skull crusher, overhead triceps extension with cables or dumbbells"
+            }
+          ]
+        },
+        {
+          "id": "LOWER1",
+          "title": "LOWER1",
+          "exercises": [
+            {
+              "id": "lower1-1",
+              "bodypart": "QUADS",
+              "movement": "squat",
+              "sets": 5,
+              "reps": "5reps",
+              "alternatives": [
+                "back squat",
+                "front squat"
+              ],
+              "originalLine": "squat__5sets__5reps__(back squat, front squat)"
+            },
+            {
+              "id": "lower1-2",
+              "bodypart": "HAMSTRINGS",
+              "movement": "hip hinge movement",
+              "sets": 4,
+              "reps": "8reps",
+              "alternatives": [
+                "romanian deadlift",
+                "stiff leg deadlift",
+                "good mornings"
+              ],
+              "originalLine": "hip hinge movement__4sets__8reps__(romanian deadlift, stiff leg deadlift, good mornings)"
+            },
+            {
+              "id": "lower1-3",
+              "bodypart": "GLUTES",
+              "movement": "hip thrust",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "hip thrust with a barbell",
+                "hip thrust machine"
+              ],
+              "originalLine": "hip thrust__3sets__8-12reps__(hip thrust with a barbell, hip thrust machine)"
+            },
+            {
+              "id": "lower1-4",
+              "bodypart": "GLUTES",
+              "movement": "lunges",
+              "sets": 3,
+              "reps": "15reps each leg",
+              "alternatives": [
+                "lunges",
+                "glute kickbacks"
+              ],
+              "originalLine": "lunges__3sets__15reps each leg__(lunges, glute kickbacks)"
+            },
+            {
+              "id": "lower1-5",
+              "bodypart": "QUADS",
+              "movement": "isolation",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "legpress",
+                "hack squat",
+                "leg extensions"
+              ],
+              "originalLine": "isolation__3sets__12-15reps__(legpress, hack squat, leg extensions)"
+            },
+            {
+              "id": "lower1-6",
+              "bodypart": "HAMSTRINGS",
+              "movement": "hamstring curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "hamstring curls",
+                "nordic hamstring curls"
+              ],
+              "originalLine": "hamstring curl__3sets__12-15reps__(hamstring curls, nordic hamstring curls)"
+            },
+            {
+              "id": "lower1-7",
+              "bodypart": "CALVES",
+              "movement": "calf raise",
+              "sets": 3,
+              "reps": "15-30reps",
+              "alternatives": [
+                "calf raise machine",
+                "standing on a plate/stairs"
+              ],
+              "originalLine": "calf raise__3sets__15-30reps__(calf raise machine, standing on a plate/stairs)"
+            }
+          ]
+        },
+        {
+          "id": "UPPER2",
+          "title": "UPPER2",
+          "exercises": [
+            {
+              "id": "upper2-1",
+              "bodypart": "SHOULDERS",
+              "movement": "overhead press",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "standing or sitting overhead press, dumbbells or a barbell"
+              ],
+              "originalLine": "overhead press__3sets__5-8reps__(standing or sitting overhead press, dumbbells or a barbell)"
+            },
+            {
+              "id": "upper2-2",
+              "bodypart": "CHEST",
+              "movement": "horizontal push",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "barbell benchpress",
+                "dumbbell benchpress",
+                "weighted pushup"
+              ],
+              "originalLine": "horizontal push__3sets__5-8reps__(barbell benchpress, dumbbell benchpress, weighted pushup)"
+            },
+            {
+              "id": "upper2-3",
+              "bodypart": "CHEST",
+              "movement": "incline push",
+              "sets": 2,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell incline benchpress",
+                "dumbbel incline benchpress",
+                "weighted decline pushup"
+              ],
+              "originalLine": "incline push__2sets__8-12reps__(barbell incline benchpress, dumbbel incline benchpress,weighted decline pushup)"
+            },
+            {
+              "id": "upper2-4",
+              "bodypart": "CHEST",
+              "movement": "isolation",
+              "sets": 2,
+              "reps": "12-20reps",
+              "alternatives": [
+                "dumbbel flies",
+                "cable flies"
+              ],
+              "originalLine": "isolation__2sets__12-20reps__(dumbbel flies, cable flies)"
+            },
+            {
+              "id": "upper2-5",
+              "bodypart": "BACK",
+              "movement": "horizontal pull",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell row",
+                "dumbbel row"
+              ],
+              "originalLine": "horizontal pull__3sets__8-12reps__(barbell row, dumbbel row)"
+            },
+            {
+              "id": "upper2-6",
+              "bodypart": "BACK",
+              "movement": "vertical pull",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "pull up",
+                "chin up",
+                "lat pulldown machine"
+              ],
+              "originalLine": "vertical pull__3sets__12-15reps__(pull up, chin up, lat pulldown machine)"
+            },
+            {
+              "id": "upper2-7",
+              "bodypart": "BICEPS",
+              "movement": "normal curl",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell strict curl",
+                "ez-bar curl",
+                "dumbbell curl"
+              ],
+              "originalLine": "normal curl__3sets__8-12reps__(barbell strict curl, ez-bar curl, dumbbell curl)"
+            },
+            {
+              "id": "upper2-8",
+              "bodypart": "BICEPS",
+              "movement": "peak focused curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "concetration curl",
+                "preacher curl"
+              ],
+              "originalLine": "peak focused curl__3sets__12-15reps__(concetration curl, preacher curl)"
+            },
+            {
+              "id": "upper2-9",
+              "bodypart": "SHOULDERS",
+              "movement": "lateral raise",
+              "sets": 3,
+              "reps": "15-20reps",
+              "alternatives": [
+                "dumbbell lateral raise",
+                "cable lateral raise"
+              ],
+              "originalLine": "lateral raise__3sets__15-20reps__(dumbbell lateral raise, cable lateral raise)"
+            },
+            {
+              "id": "upper2-10",
+              "bodypart": "SHOULDERS",
+              "movement": "rear delt movement",
+              "sets": 3,
+              "reps": "15-20reps",
+              "alternatives": [
+                "rear delt fly",
+                "reverse peck deck",
+                "facepull"
+              ],
+              "originalLine": "rear delt movement__3sets__15-20reps__(rear delt fly, reverse peck deck, facepull)"
+            },
+            {
+              "id": "upper2-11",
+              "bodypart": "TRICEPS",
+              "movement": "overhead extension",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "skull crusher",
+                "overhead triceps extension with cables or dumbbells"
+              ],
+              "originalLine": "overhead extension__3sets__12-15reps__(skull crusher, overhead triceps extension with cables or dumbbells"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "human-4",
+      "days": 4,
+      "name": "4-day UPPER-LOWER",
+      "filename": "4-day UPPER-LOWER.pdf",
+      "sourceSha256": "c626a32b0c22bf35c168bf0d8d6a7d323f77ef8d36f94f3b20a733ae3ee5bf93",
+      "introAndHelp": "4-day UPPER-LOWER\nWelcome to the 4-day Upper-Lower split, here i will explain everything that you will need to know!\n\nFirst let me tell you, how i structured this training plan.\n\nThis one is very straight forward, 4 different days, and 4 different workouts. Each one is putting more\nemphasis on a different bodypart each time.\n\nNow let me show you when to take rest days, and in which order you should run this training plan.\n\nYou should run this training plan in this order: UPPER1->LOWER1->UPPER2->LOWER2\n\nYou got a couple of options when it comes to the rest days. But i would generally recommend to take\n1 or 2 rest days, after you finish the first UPPER1 and LOWER1 workouts. And then the same after\nUPPER2 and LOWER2, so it can look something like this:\n\nday1__UPPER1\n\nday2__LOWER1\n\nday3__rest\n\nday4__UPPER2\n\nday5__LOWER2\n\nday6__rest\n\nday7__rest\n\nHelp\nAlways follow the order that the exercises are written in.\n\nDefinitely use different weight for different rep ranges, you always have to adjust. For example, if you\nare doing a horizontal push for 5-8reps, you should always choose a heavier weight, than if you did it\nfor 8-12reps!\n\nBelow the name of every bodypart, you can see what type of exercise you are supposed to do, and in\nthe parentheses are example exercises that you should use, you can pick any of these exercises that i\nincluded there, its up to you what you like, and what you have access to!\n\nIf you need any further assistance, or if something is not clear to you, feel free to join my discord, and\ni will help you out!\n\n\nNote\nAlways write down the weight, sets, and reps of the exercises that you did, so you can keep track of\nyour progression, this is very important!",
+      "sequence": [
+        "UPPER1",
+        "LOWER1",
+        "UPPER2",
+        "LOWER2"
+      ],
+      "cycleWeeks": 1,
+      "sessions": [
+        {
+          "id": "UPPER1",
+          "title": "UPPER1",
+          "exercises": [
+            {
+              "id": "upper1-1",
+              "bodypart": "CHEST",
+              "movement": "incline push",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "barbell incline benchpress",
+                "dumbbel incline benchpress",
+                "weighted decline pushup"
+              ],
+              "originalLine": "incline push__3sets__5-8reps__(barbell incline benchpress, dumbbel incline benchpress,weighted decline pushup)"
+            },
+            {
+              "id": "upper1-2",
+              "bodypart": "CHEST",
+              "movement": "horizontal push",
+              "sets": 2,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell benchpress",
+                "dumbbell benchpress",
+                "weighted pushup"
+              ],
+              "originalLine": "horizontal push__2sets__8-12reps__(barbell benchpress, dumbbell benchpress, weighted pushup)"
+            },
+            {
+              "id": "upper1-3",
+              "bodypart": "CHEST",
+              "movement": "isolation",
+              "sets": 2,
+              "reps": "12-20reps",
+              "alternatives": [
+                "dumbbel flies",
+                "cable flies"
+              ],
+              "originalLine": "isolation__2sets__12-20reps__(dumbbel flies, cable flies)"
+            },
+            {
+              "id": "upper1-4",
+              "bodypart": "SHOULDERS",
+              "movement": "overhead press",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "standing or sitting overhead press, dumbbells or a barbell"
+              ],
+              "originalLine": "overhead press__3sets__8-12reps__(standing or sitting overhead press, dumbbells or a barbell)"
+            },
+            {
+              "id": "upper1-5",
+              "bodypart": "BACK",
+              "movement": "vertical pull",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "pull up",
+                "chin up",
+                "lat pulldown machine"
+              ],
+              "originalLine": "vertical pull__3sets__8-12reps__(pull up, chin up, lat pulldown machine)"
+            },
+            {
+              "id": "upper1-6",
+              "bodypart": "BACK",
+              "movement": "horizontal pull",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "barbell row",
+                "dumbbel row"
+              ],
+              "originalLine": "horizontal pull__3sets__12-15reps__(barbell row, dumbbel row)"
+            },
+            {
+              "id": "upper1-7",
+              "bodypart": "BICEPS",
+              "movement": "normal curl",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell strict curl",
+                "ez-bar curl",
+                "dumbbell curl"
+              ],
+              "originalLine": "normal curl__3sets__8-12reps__(barbell strict curl, ez-bar curl, dumbbell curl)"
+            },
+            {
+              "id": "upper1-8",
+              "bodypart": "BICEPS",
+              "movement": "brachialis & brachioradialis curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "hammer curl",
+                "any curl with overhand grip"
+              ],
+              "originalLine": "brachialis & brachioradialis curl__3sets__12-15reps __(hammer curl, any curl with overhand grip)"
+            },
+            {
+              "id": "upper1-9",
+              "bodypart": "SHOULDERS",
+              "movement": "lateral raise",
+              "sets": 3,
+              "reps": "15-20reps",
+              "alternatives": [
+                "dumbbell lateral raise",
+                "cable lateral raise"
+              ],
+              "originalLine": "lateral raise__3sets__15-20reps__(dumbbell lateral raise, cable lateral raise)"
+            },
+            {
+              "id": "upper1-10",
+              "bodypart": "SHOULDERS",
+              "movement": "rear delt movement",
+              "sets": 3,
+              "reps": "15-20reps",
+              "alternatives": [
+                "rear delt fly",
+                "reverse peck deck",
+                "facepull"
+              ],
+              "originalLine": "rear delt movement__3sets__15-20reps__(rear delt fly, reverse peck deck, facepull)"
+            },
+            {
+              "id": "upper1-11",
+              "bodypart": "TRICEPS",
+              "movement": "overhead extension",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "skull crusher",
+                "overhead triceps extension with cables or dumbbells"
+              ],
+              "originalLine": "overhead extension__3sets__12-15reps__(skull crusher, overhead triceps extension with cables or dumbbells"
+            }
+          ]
+        },
+        {
+          "id": "LOWER1",
+          "title": "LOWER1",
+          "exercises": [
+            {
+              "id": "lower1-1",
+              "bodypart": "QUADS",
+              "movement": "squat",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "back squat",
+                "front squat"
+              ],
+              "originalLine": "squat__3sets__5-8reps__(back squat, front squat)"
+            },
+            {
+              "id": "lower1-2",
+              "bodypart": "HAMSTRINGS",
+              "movement": "hip hinge movement",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "romanian deadlift",
+                "stiff leg deadlift",
+                "good mornings"
+              ],
+              "originalLine": "hip hinge movement__3sets__8-12reps__(romanian deadlift, stiff leg deadlift, good mornings)"
+            },
+            {
+              "id": "lower1-3",
+              "bodypart": "GLUTES",
+              "movement": "hip thrust",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "hip thrust with a barbell",
+                "hip thrust machine"
+              ],
+              "originalLine": "hip thrust__3sets__8-12reps__(hip thrust with a barbell, hip thrust machine)"
+            },
+            {
+              "id": "lower1-4",
+              "bodypart": "QUADS",
+              "movement": "isolation",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "legpress",
+                "hack squat",
+                "leg extensions"
+              ],
+              "originalLine": "isolation__3sets__12-15reps__(legpress, hack squat, leg extensions)"
+            },
+            {
+              "id": "lower1-5",
+              "bodypart": "HAMSTRINGS",
+              "movement": "hamstring curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "hamstring curls",
+                "nordic hamstring curls"
+              ],
+              "originalLine": "hamstring curl__3sets__12-15reps__(hamstring curls, nordic hamstring curls)"
+            },
+            {
+              "id": "lower1-6",
+              "bodypart": "CALVES",
+              "movement": "calf raise",
+              "sets": 3,
+              "reps": "15-30reps",
+              "alternatives": [
+                "calf raise machine",
+                "standing on a plate/stairs"
+              ],
+              "originalLine": "calf raise__3sets__15-30reps__(calf raise machine, standing on a plate/stairs)"
+            }
+          ]
+        },
+        {
+          "id": "UPPER2",
+          "title": "UPPER2",
+          "exercises": [
+            {
+              "id": "upper2-1",
+              "bodypart": "SHOULDERS",
+              "movement": "overhead press",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "standing or sitting overhead press, dumbbells or a barbell"
+              ],
+              "originalLine": "overhead press__3sets__5-8reps__(standing or sitting overhead press, dumbbells or a barbell)"
+            },
+            {
+              "id": "upper2-2",
+              "bodypart": "CHEST",
+              "movement": "horizontal push",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "barbell benchpress",
+                "dumbbell benchpress",
+                "weighted pushup"
+              ],
+              "originalLine": "horizontal push__3sets__5-8reps__(barbell benchpress, dumbbell benchpress, weighted pushup)"
+            },
+            {
+              "id": "upper2-3",
+              "bodypart": "CHEST",
+              "movement": "incline push",
+              "sets": 2,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell incline benchpress",
+                "dumbbel incline benchpress",
+                "weighted decline pushup"
+              ],
+              "originalLine": "incline push__2sets__8-12reps__(barbell incline benchpress, dumbbel incline benchpress,weighted decline pushup)"
+            },
+            {
+              "id": "upper2-4",
+              "bodypart": "CHEST",
+              "movement": "isolation",
+              "sets": 2,
+              "reps": "12-20reps",
+              "alternatives": [
+                "dumbbel flies",
+                "cable flies"
+              ],
+              "originalLine": "isolation__2sets__12-20reps__(dumbbel flies, cable flies)"
+            },
+            {
+              "id": "upper2-5",
+              "bodypart": "BACK",
+              "movement": "horizontal pull",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell row",
+                "dumbbel row"
+              ],
+              "originalLine": "horizontal pull__3sets__8-12reps__(barbell row, dumbbel row)"
+            },
+            {
+              "id": "upper2-6",
+              "bodypart": "BACK",
+              "movement": "vertical pull",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "pull up",
+                "chin up",
+                "lat pulldown machine"
+              ],
+              "originalLine": "vertical pull__3sets__12-15reps__(pull up, chin up, lat pulldown machine)"
+            },
+            {
+              "id": "upper2-7",
+              "bodypart": "BICEPS",
+              "movement": "normal curl",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell strict curl",
+                "ez-bar curl",
+                "dumbbell curl"
+              ],
+              "originalLine": "normal curl__3sets__8-12reps__(barbell strict curl, ez-bar curl, dumbbell curl)"
+            },
+            {
+              "id": "upper2-8",
+              "bodypart": "BICEPS",
+              "movement": "peak focused curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "concetration curl",
+                "preacher curl"
+              ],
+              "originalLine": "peak focused curl__3sets__12-15reps__(concetration curl, preacher curl)"
+            },
+            {
+              "id": "upper2-9",
+              "bodypart": "SHOULDERS",
+              "movement": "lateral raise",
+              "sets": 3,
+              "reps": "15-20reps",
+              "alternatives": [
+                "dumbbell lateral raise",
+                "cable lateral raise"
+              ],
+              "originalLine": "lateral raise__3sets__15-20reps__(dumbbell lateral raise, cable lateral raise)"
+            },
+            {
+              "id": "upper2-10",
+              "bodypart": "SHOULDERS",
+              "movement": "rear delt movement",
+              "sets": 3,
+              "reps": "15-20reps",
+              "alternatives": [
+                "rear delt fly",
+                "reverse peck deck",
+                "facepull"
+              ],
+              "originalLine": "rear delt movement__3sets__15-20reps__(rear delt fly, reverse peck deck, facepull)"
+            },
+            {
+              "id": "upper2-11",
+              "bodypart": "TRICEPS",
+              "movement": "overhead extension",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "skull crusher",
+                "overhead triceps extension with cables or dumbbells"
+              ],
+              "originalLine": "overhead extension__3sets__12-15reps__(skull crusher, overhead triceps extension with cables or dumbbells"
+            }
+          ]
+        },
+        {
+          "id": "LOWER2",
+          "title": "LOWER2",
+          "exercises": [
+            {
+              "id": "lower2-1",
+              "bodypart": "HAMSTRINGS",
+              "movement": "hip hinge movement",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "romanian deadlift",
+                "stiff leg deadlift",
+                "good mornings"
+              ],
+              "originalLine": "hip hinge movement__3sets__5-8reps__(romanian deadlift, stiff leg deadlift, good mornings)"
+            },
+            {
+              "id": "lower2-2",
+              "bodypart": "QUADS",
+              "movement": "squat",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "back squat",
+                "front squat"
+              ],
+              "originalLine": "squat__3sets__8-12reps__(back squat, front squat)"
+            },
+            {
+              "id": "lower2-3",
+              "bodypart": "GLUTES",
+              "movement": "lunges",
+              "sets": 3,
+              "reps": "15reps each leg",
+              "alternatives": [
+                "lunges",
+                "glute kickbacks"
+              ],
+              "originalLine": "lunges__3sets__15reps each leg__(lunges, glute kickbacks)"
+            },
+            {
+              "id": "lower2-4",
+              "bodypart": "HAMSTRINGS",
+              "movement": "hamstring curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "hamstring curls",
+                "nordic hamstring curls"
+              ],
+              "originalLine": "hamstring curl__3sets__12-15reps__(hamstring curls, nordic hamstring curls)"
+            },
+            {
+              "id": "lower2-5",
+              "bodypart": "QUADS",
+              "movement": "isolation",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "legpress",
+                "hack squat",
+                "leg extensions"
+              ],
+              "originalLine": "isolation__3sets__12-15reps__(legpress, hack squat, leg extensions)"
+            },
+            {
+              "id": "lower2-6",
+              "bodypart": "CALVES",
+              "movement": "calf raise",
+              "sets": 3,
+              "reps": "15-30reps",
+              "alternatives": [
+                "calf raise machine",
+                "standing on a plate/stairs"
+              ],
+              "originalLine": "calf raise__3sets__15-30reps__(calf raise machine, standing on a plate/stairs)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "human-5",
+      "days": 5,
+      "name": "5-day UPPER-LOWER",
+      "filename": "5-DAY UPPER-LOWER.pdf",
+      "sourceSha256": "16d50de646552e70fc968eff1a4796b1d0092745238ae2eda48113035f6de24b",
+      "introAndHelp": "5-day UPPER-LOWER\nWelcome to the 5-day Upper-Lower split, here i will explain everything that you will need to know!\n\nFirst let me tell you, how i structured this training plan.\n\nAs the name suggets, its 5 training days, 3upper body sessions and 2lower body sessions. There is\none more extra upper body session, to focus more on your arms!\n\nNow let me show you when to take rest days, and in which order you should run this training plan.\n\nYou should run this training plan in this order: UPPER1->LOWER1->UPPER2->LOWER2->UPPER3\n\nYou can either do all the 5days in a row, and take the whole weekend off, or you can do it like this:\n\nday1__UPPER1\n\nday2__LOWER1\n\nday3__rest\n\nday4__UPPER2\n\nday5__LOWER2\n\nday6__UPPER3\n\nday7__rest\n\n\nHelp\nAlways follow the order that the exercises are written in.\n\nDefinitely use different weight for different rep ranges, you always have to adjust. For example, if you\nare doing a horizontal push for 5-8reps, you should always choose a heavier weight, than if you did it\nfor 8-12reps!\n\nBelow the name of every bodypart, you can see what type of exercise you are supposed to do, and in\nthe parentheses are example exercises that you should use, you can pick any of these exercises that i\nincluded there, its up to you what you like, and what you have access to!\n\nIf you need any further assistance, or if something is not clear to you, feel free to join my discord, and\ni will help you out!\n\n\nNote\nAlways write down the weight, sets, and reps of the exercises that you did, so you can keep track of\nyour progression, this is very important!",
+      "sequence": [
+        "UPPER1",
+        "LOWER1",
+        "UPPER2",
+        "LOWER2",
+        "UPPER3"
+      ],
+      "cycleWeeks": 1,
+      "sessions": [
+        {
+          "id": "UPPER1",
+          "title": "UPPER1",
+          "exercises": [
+            {
+              "id": "upper1-1",
+              "bodypart": "CHEST",
+              "movement": "incline push",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "barbell incline benchpress",
+                "dumbbel incline benchpress",
+                "weighted decline pushup"
+              ],
+              "originalLine": "incline push__3sets__5-8reps__(barbell incline benchpress, dumbbel incline benchpress,weighted decline pushup)"
+            },
+            {
+              "id": "upper1-2",
+              "bodypart": "CHEST",
+              "movement": "horizontal push",
+              "sets": 2,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell benchpress",
+                "dumbbell benchpress",
+                "weighted pushup"
+              ],
+              "originalLine": "horizontal push__2sets__8-12reps__(barbell benchpress, dumbbell benchpress, weighted pushup)"
+            },
+            {
+              "id": "upper1-3",
+              "bodypart": "CHEST",
+              "movement": "isolation",
+              "sets": 2,
+              "reps": "12-20reps",
+              "alternatives": [
+                "dumbbel flies",
+                "cable flies"
+              ],
+              "originalLine": "isolation__2sets__12-20reps__(dumbbel flies, cable flies)"
+            },
+            {
+              "id": "upper1-4",
+              "bodypart": "SHOULDERS",
+              "movement": "overhead press",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "standing or sitting overhead press, dumbbells or a barbell"
+              ],
+              "originalLine": "overhead press__3sets__8-12reps__(standing or sitting overhead press, dumbbells or a barbell)"
+            },
+            {
+              "id": "upper1-5",
+              "bodypart": "BACK",
+              "movement": "vertical pull",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "pull up",
+                "chin up",
+                "lat pulldown machine"
+              ],
+              "originalLine": "vertical pull__3sets__8-12reps__(pull up, chin up, lat pulldown machine)"
+            },
+            {
+              "id": "upper1-6",
+              "bodypart": "BACK",
+              "movement": "horizontal pull",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "barbell row",
+                "dumbbel row"
+              ],
+              "originalLine": "horizontal pull__3sets__12-15reps__(barbell row, dumbbel row)"
+            },
+            {
+              "id": "upper1-7",
+              "bodypart": "BICEPS",
+              "movement": "normal curl",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell strict curl",
+                "ez-bar curl",
+                "dumbbell curl"
+              ],
+              "originalLine": "normal curl__3sets__8-12reps__(barbell strict curl, ez-bar curl, dumbbell curl)"
+            },
+            {
+              "id": "upper1-8",
+              "bodypart": "BICEPS",
+              "movement": "brachialis & brachioradialis curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "hammer curl",
+                "any curl with overhand grip"
+              ],
+              "originalLine": "brachialis & brachioradialis curl__3sets__12-15reps __(hammer curl, any curl with overhand grip)"
+            },
+            {
+              "id": "upper1-9",
+              "bodypart": "SHOULDERS",
+              "movement": "lateral raise",
+              "sets": 3,
+              "reps": "15-20reps",
+              "alternatives": [
+                "dumbbell lateral raise",
+                "cable lateral raise"
+              ],
+              "originalLine": "lateral raise__3sets__15-20reps__(dumbbell lateral raise, cable lateral raise)"
+            },
+            {
+              "id": "upper1-10",
+              "bodypart": "SHOULDERS",
+              "movement": "rear delt movement",
+              "sets": 3,
+              "reps": "15-20reps",
+              "alternatives": [
+                "rear delt fly",
+                "reverse peck deck",
+                "facepull"
+              ],
+              "originalLine": "rear delt movement__3sets__15-20reps__(rear delt fly, reverse peck deck, facepull)"
+            },
+            {
+              "id": "upper1-11",
+              "bodypart": "TRICEPS",
+              "movement": "overhead extension",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "skull crusher",
+                "overhead triceps extension with cables or dumbbells"
+              ],
+              "originalLine": "overhead extension__3sets__12-15reps__(skull crusher, overhead triceps extension with cables or dumbbells"
+            }
+          ]
+        },
+        {
+          "id": "LOWER1",
+          "title": "LOWER1",
+          "exercises": [
+            {
+              "id": "lower1-1",
+              "bodypart": "QUADS",
+              "movement": "squat",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "back squat",
+                "front squat"
+              ],
+              "originalLine": "squat__3sets__5-8reps__(back squat, front squat)"
+            },
+            {
+              "id": "lower1-2",
+              "bodypart": "HAMSTRINGS",
+              "movement": "hip hinge movement",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "romanian deadlift",
+                "stiff leg deadlift",
+                "good mornings"
+              ],
+              "originalLine": "hip hinge movement__3sets__8-12reps__(romanian deadlift, stiff leg deadlift, good mornings)"
+            },
+            {
+              "id": "lower1-3",
+              "bodypart": "GLUTES",
+              "movement": "hip thrust",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "hip thrust with a barbell",
+                "hip thrust machine"
+              ],
+              "originalLine": "hip thrust__3sets__8-12reps__(hip thrust with a barbell, hip thrust machine)"
+            },
+            {
+              "id": "lower1-4",
+              "bodypart": "QUADS",
+              "movement": "isolation",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "legpress",
+                "hack squat",
+                "leg extensions"
+              ],
+              "originalLine": "isolation__3sets__12-15reps__(legpress, hack squat, leg extensions)"
+            },
+            {
+              "id": "lower1-5",
+              "bodypart": "HAMSTRINGS",
+              "movement": "hamstring curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "hamstring curls",
+                "nordic hamstring curls"
+              ],
+              "originalLine": "hamstring curl__3sets__12-15reps__(hamstring curls, nordic hamstring curls)"
+            },
+            {
+              "id": "lower1-6",
+              "bodypart": "CALVES",
+              "movement": "calf raise",
+              "sets": 3,
+              "reps": "15-30reps",
+              "alternatives": [
+                "calf raise machine",
+                "standing on a plate/stairs"
+              ],
+              "originalLine": "calf raise__3sets__15-30reps__(calf raise machine, standing on a plate/stairs)"
+            }
+          ]
+        },
+        {
+          "id": "UPPER2",
+          "title": "UPPER2",
+          "exercises": [
+            {
+              "id": "upper2-1",
+              "bodypart": "SHOULDERS",
+              "movement": "overhead press",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "standing or sitting overhead press, dumbbells or a barbell"
+              ],
+              "originalLine": "overhead press__3sets__5-8reps__(standing or sitting overhead press, dumbbells or a barbell)"
+            },
+            {
+              "id": "upper2-2",
+              "bodypart": "CHEST",
+              "movement": "horizontal push",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "barbell benchpress",
+                "dumbbell benchpress",
+                "weighted pushup"
+              ],
+              "originalLine": "horizontal push__3sets__5-8reps__(barbell benchpress, dumbbell benchpress, weighted pushup)"
+            },
+            {
+              "id": "upper2-3",
+              "bodypart": "CHEST",
+              "movement": "incline push",
+              "sets": 2,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell incline benchpress",
+                "dumbbel incline benchpress",
+                "weighted decline pushup"
+              ],
+              "originalLine": "incline push__2sets__8-12reps__(barbell incline benchpress, dumbbel incline benchpress,weighted decline pushup)"
+            },
+            {
+              "id": "upper2-4",
+              "bodypart": "CHEST",
+              "movement": "isolation",
+              "sets": 2,
+              "reps": "12-20reps",
+              "alternatives": [
+                "dumbbel flies",
+                "cable flies"
+              ],
+              "originalLine": "isolation__2sets__12-20reps__(dumbbel flies, cable flies)"
+            },
+            {
+              "id": "upper2-5",
+              "bodypart": "BACK",
+              "movement": "horizontal pull",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell row",
+                "dumbbel row"
+              ],
+              "originalLine": "horizontal pull__3sets__8-12reps__(barbell row, dumbbel row)"
+            },
+            {
+              "id": "upper2-6",
+              "bodypart": "BACK",
+              "movement": "vertical pull",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "pull up",
+                "chin up",
+                "lat pulldown machine"
+              ],
+              "originalLine": "vertical pull__3sets__12-15reps__(pull up, chin up, lat pulldown machine)"
+            },
+            {
+              "id": "upper2-7",
+              "bodypart": "BICEPS",
+              "movement": "normal curl",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell strict curl",
+                "ez-bar curl",
+                "dumbbell curl"
+              ],
+              "originalLine": "normal curl__3sets__8-12reps__(barbell strict curl, ez-bar curl, dumbbell curl)"
+            },
+            {
+              "id": "upper2-8",
+              "bodypart": "BICEPS",
+              "movement": "peak focused curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "concetration curl",
+                "preacher curl"
+              ],
+              "originalLine": "peak focused curl__3sets__12-15reps__(concetration curl, preacher curl)"
+            },
+            {
+              "id": "upper2-9",
+              "bodypart": "SHOULDERS",
+              "movement": "lateral raise",
+              "sets": 3,
+              "reps": "15-20reps",
+              "alternatives": [
+                "dumbbell lateral raise",
+                "cable lateral raise"
+              ],
+              "originalLine": "lateral raise__3sets__15-20reps__(dumbbell lateral raise, cable lateral raise)"
+            },
+            {
+              "id": "upper2-10",
+              "bodypart": "SHOULDERS",
+              "movement": "rear delt movement",
+              "sets": 3,
+              "reps": "15-20reps",
+              "alternatives": [
+                "rear delt fly",
+                "reverse peck deck",
+                "facepull"
+              ],
+              "originalLine": "rear delt movement__3sets__15-20reps__(rear delt fly, reverse peck deck, facepull)"
+            },
+            {
+              "id": "upper2-11",
+              "bodypart": "TRICEPS",
+              "movement": "overhead extension",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "skull crusher",
+                "overhead triceps extension with cables or dumbbells"
+              ],
+              "originalLine": "overhead extension__3sets__12-15reps__(skull crusher, overhead triceps extension with cables or dumbbells"
+            }
+          ]
+        },
+        {
+          "id": "LOWER2",
+          "title": "LOWER2",
+          "exercises": [
+            {
+              "id": "lower2-1",
+              "bodypart": "HAMSTRINGS",
+              "movement": "hip hinge movement",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "romanian deadlift",
+                "stiff leg deadlift",
+                "good mornings"
+              ],
+              "originalLine": "hip hinge movement__3sets__5-8reps__(romanian deadlift, stiff leg deadlift, good mornings)"
+            },
+            {
+              "id": "lower2-2",
+              "bodypart": "QUADS",
+              "movement": "squat",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "back squat",
+                "front squat"
+              ],
+              "originalLine": "squat__3sets__8-12reps__(back squat, front squat)"
+            },
+            {
+              "id": "lower2-3",
+              "bodypart": "GLUTES",
+              "movement": "lunges",
+              "sets": 3,
+              "reps": "15reps each leg",
+              "alternatives": [
+                "lunges",
+                "glute kickbacks"
+              ],
+              "originalLine": "lunges__3sets__15reps each leg__(lunges, glute kickbacks)"
+            },
+            {
+              "id": "lower2-4",
+              "bodypart": "HAMSTRINGS",
+              "movement": "hamstring curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "hamstring curls",
+                "nordic hamstring curls"
+              ],
+              "originalLine": "hamstring curl__3sets__12-15reps__(hamstring curls, nordic hamstring curls)"
+            },
+            {
+              "id": "lower2-5",
+              "bodypart": "QUADS",
+              "movement": "isolation",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "legpress",
+                "hack squat",
+                "leg extensions"
+              ],
+              "originalLine": "isolation__3sets__12-15reps__(legpress, hack squat, leg extensions)"
+            },
+            {
+              "id": "lower2-6",
+              "bodypart": "CALVES",
+              "movement": "calf raise",
+              "sets": 3,
+              "reps": "15-30reps",
+              "alternatives": [
+                "calf raise machine",
+                "standing on a plate/stairs"
+              ],
+              "originalLine": "calf raise__3sets__15-30reps__(calf raise machine, standing on a plate/stairs)"
+            }
+          ]
+        },
+        {
+          "id": "UPPER3",
+          "title": "UPPER3",
+          "exercises": [
+            {
+              "id": "upper3-1",
+              "bodypart": "CHEST",
+              "movement": "horizontal push",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell benchpress",
+                "dumbbell benchpress",
+                "weighted pushup"
+              ],
+              "originalLine": "horizontal push__3sets__8-12reps__(barbell benchpress, dumbbell benchpress, weighted pushup)"
+            },
+            {
+              "id": "upper3-2",
+              "bodypart": "SHOULDERS",
+              "movement": "overhead press",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "standing or sitting overhead press, dumbbells or a barbell"
+              ],
+              "originalLine": "overhead press__3sets__8-12reps__(standing or sitting overhead press, dumbbells or a barbell)"
+            },
+            {
+              "id": "upper3-3",
+              "bodypart": "BACK",
+              "movement": "vertical pull",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "pull up",
+                "chin up",
+                "lat pulldown machine"
+              ],
+              "originalLine": "vertical pull__3sets__8-12reps__(pull up, chin up, lat pulldown machine)"
+            },
+            {
+              "id": "upper3-4",
+              "bodypart": "BICEPS",
+              "movement": "peak focused curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "concetration curl",
+                "preacher curl"
+              ],
+              "originalLine": "peak focused curl__3sets__12-15reps__(concetration curl, preacher curl)"
+            },
+            {
+              "id": "upper3-5",
+              "bodypart": "BICEPS",
+              "movement": "brachialis & brachioradialis curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "hammer curl",
+                "any curl with overhand grip"
+              ],
+              "originalLine": "brachialis & brachioradialis curl__3sets__12-15reps __(hammer curl, any curl with overhand grip)"
+            },
+            {
+              "id": "upper3-6",
+              "bodypart": "SHOULDERS",
+              "movement": "lateral raise",
+              "sets": 3,
+              "reps": "15-20reps",
+              "alternatives": [
+                "dumbbell lateral raise",
+                "cable lateral raise"
+              ],
+              "originalLine": "lateral raise__3sets__15-20reps__(dumbbell lateral raise, cable lateral raise)"
+            },
+            {
+              "id": "upper3-7",
+              "bodypart": "SHOULDERS",
+              "movement": "rear delt movement",
+              "sets": 3,
+              "reps": "15-20reps",
+              "alternatives": [
+                "rear delt fly",
+                "reverse peck deck",
+                "facepull"
+              ],
+              "originalLine": "rear delt movement__3sets__15-20reps__(rear delt fly, reverse peck deck, facepull)"
+            },
+            {
+              "id": "upper3-8",
+              "bodypart": "TRICEPS",
+              "movement": "lateral head isolation",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "triceps pushdown",
+                "pushups",
+                "dips"
+              ],
+              "originalLine": "lateral head isolation__3sets__12-15reps__(triceps pushdown, pushups, dips)"
+            },
+            {
+              "id": "upper3-9",
+              "bodypart": "TRICEPS",
+              "movement": "overhead extension",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "skull crusher",
+                "overhead triceps extension with cables or dumbbells"
+              ],
+              "originalLine": "overhead extension__3sets__12-15reps__(skull crusher, overhead triceps extension with cables or dumbbells"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "human-6",
+      "days": 6,
+      "name": "6-day UPPER-LOWER",
+      "filename": "6-DAY UPPER-LOWER.pdf",
+      "sourceSha256": "d47675b287032d89abbf4b3f6c34ff5add6d0d9c9ea2fd08ae703d1fcf1d8461",
+      "introAndHelp": "6-day UPPER-LOWER\nWelcome to the 6-day Upper-Lower split, here i will explain everything that you will need to know!\n\nFirst let me tell you, how i structured this training plan.\n\nThis is the ultimate 6-day version, that is desinged to push you to your limits. It consists of 3 upper\nbody days, and 3 lower body days.\n\nNow let me show you when to take rest days, and in which order you should run this training plan.\n\nYou should run this training plan in this order:\n\nUPPER1->LOWER1->UPPER2->LOWER2->UPPER3->LOWER3\n\nRest day is pretty simple, you get one rest day per week, so use it when you need to. Usually people\nrun 6 days in a row and then take Sunday off.\n\n\n\n\nHelp\nAlways follow the order that the exercises are written in.\n\nDefinitely use different weight for different rep ranges, you always have to adjust. For example, if you\nare doing a horizontal push for 5-8reps, you should always choose a heavier weight, than if you did it\nfor 8-12reps!\n\nBelow the name of every bodypart, you can see what type of exercise you are supposed to do, and in\nthe parentheses are example exercises that you should use, you can pick any of these exercises that i\nincluded there, its up to you what you like, and what you have access to!\n\nIf you need any further assistance, or if something is not clear to you, feel free to join my discord, and\ni will help you out!\n\n\nNote\nAlways write down the weight, sets, and reps of the exercises that you did, so you can keep track of\nyour progression, this is very important!",
+      "sequence": [
+        "UPPER1",
+        "LOWER1",
+        "UPPER2",
+        "LOWER2",
+        "UPPER3",
+        "LOWER3"
+      ],
+      "cycleWeeks": 1,
+      "sessions": [
+        {
+          "id": "UPPER1",
+          "title": "UPPER1",
+          "exercises": [
+            {
+              "id": "upper1-1",
+              "bodypart": "CHEST",
+              "movement": "horizontal push",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell benchpress",
+                "dumbbell benchpress",
+                "weighted pushup"
+              ],
+              "originalLine": "horizontal push__3sets__8-12reps__(barbell benchpress, dumbbell benchpress, weighted pushup)"
+            },
+            {
+              "id": "upper1-2",
+              "bodypart": "CHEST",
+              "movement": "incline push",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell incline benchpress",
+                "dumbbel incline benchpress",
+                "weighted decline pushup"
+              ],
+              "originalLine": "incline push__3sets__8-12reps__(barbell incline benchpress, dumbbel incline benchpress,weighted decline pushup)"
+            },
+            {
+              "id": "upper1-3",
+              "bodypart": "BACK",
+              "movement": "vertical pull",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "pull up",
+                "chin up",
+                "lat pulldown machine"
+              ],
+              "originalLine": "vertical pull__3sets__8-12reps__(pull up, chin up, lat pulldown machine)"
+            },
+            {
+              "id": "upper1-4",
+              "bodypart": "BACK",
+              "movement": "horizontal pull",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell row",
+                "dumbbel row"
+              ],
+              "originalLine": "horizontal pull__3sets__8-12reps__(barbell row, dumbbel row)"
+            },
+            {
+              "id": "upper1-5",
+              "bodypart": "SHOULDERS",
+              "movement": "overhead press",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "standing or sitting overhead press, dumbbells or a barbell"
+              ],
+              "originalLine": "overhead press__3sets__8-12reps__(standing or sitting overhead press, dumbbells or a barbell)"
+            },
+            {
+              "id": "upper1-6",
+              "bodypart": "SHOULDERS",
+              "movement": "lateral raise",
+              "sets": 3,
+              "reps": "15-20reps",
+              "alternatives": [
+                "dumbbell lateral raise",
+                "cable lateral raise"
+              ],
+              "originalLine": "lateral raise__3sets__15-20reps__(dumbbell lateral raise, cable lateral raise)"
+            },
+            {
+              "id": "upper1-7",
+              "bodypart": "BICEPS",
+              "movement": "normal curl",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell strict curl",
+                "ez-bar curl",
+                "dumbbell curl"
+              ],
+              "originalLine": "normal curl__3sets__8-12reps__(barbell strict curl, ez-bar curl, dumbbell curl)"
+            },
+            {
+              "id": "upper1-8",
+              "bodypart": "BICEPS",
+              "movement": "brachialis & brachioradialis curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "hammer curl",
+                "any curl with overhand grip"
+              ],
+              "originalLine": "brachialis & brachioradialis curl__3sets__12-15reps __(hammer curl, any curl with overhand grip)"
+            },
+            {
+              "id": "upper1-9",
+              "bodypart": "TRICEPS",
+              "movement": "overhead extension",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "skull crusher",
+                "overhead triceps extension with cables or dumbbells"
+              ],
+              "originalLine": "overhead extension__3sets__12-15reps__(skull crusher, overhead triceps extension with cables or dumbbells)"
+            }
+          ]
+        },
+        {
+          "id": "LOWER1",
+          "title": "LOWER1",
+          "exercises": [
+            {
+              "id": "lower1-1",
+              "bodypart": "QUADS",
+              "movement": "squat",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "back squat",
+                "front squat"
+              ],
+              "originalLine": "squat__3sets__5-8reps__(back squat, front squat)"
+            },
+            {
+              "id": "lower1-2",
+              "bodypart": "QUADS",
+              "movement": "isolation",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "legpress",
+                "hack squat",
+                "leg extensions"
+              ],
+              "originalLine": "isolation__3sets__12-15reps__(legpress, hack squat, leg extensions)"
+            },
+            {
+              "id": "lower1-3",
+              "bodypart": "GLUTES",
+              "movement": "lunges",
+              "sets": 3,
+              "reps": "15reps each leg",
+              "alternatives": [
+                "lunges",
+                "glute kickbacks"
+              ],
+              "originalLine": "lunges__3sets__15reps each leg__(lunges, glute kickbacks)"
+            },
+            {
+              "id": "lower1-4",
+              "bodypart": "HAMSTRINGS",
+              "movement": "hamstring curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "hamstring curls",
+                "nordic hamstring curls"
+              ],
+              "originalLine": "hamstring curl__3sets__12-15reps__(hamstring curls, nordic hamstring curls)"
+            },
+            {
+              "id": "lower1-5",
+              "bodypart": "CALVES",
+              "movement": "calf raise",
+              "sets": 3,
+              "reps": "15-30reps",
+              "alternatives": [
+                "calf raise machine",
+                "standing on a plate/stairs"
+              ],
+              "originalLine": "calf raise__3sets__15-30reps__(calf raise machine, standing on a plate/stairs)"
+            }
+          ]
+        },
+        {
+          "id": "UPPER2",
+          "title": "UPPER2",
+          "exercises": [
+            {
+              "id": "upper2-1",
+              "bodypart": "SHOULDERS",
+              "movement": "overhead press",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "standing or sitting overhead press, dumbbells or a barbell"
+              ],
+              "originalLine": "overhead press__3sets__5-8reps__(standing or sitting overhead press, dumbbells or a barbell)"
+            },
+            {
+              "id": "upper2-2",
+              "bodypart": "SHOULDERS",
+              "movement": "rear delt movement",
+              "sets": 5,
+              "reps": "15-20reps",
+              "alternatives": [
+                "rear delt fly",
+                "reverse peck deck",
+                "facepull"
+              ],
+              "originalLine": "rear delt movement__5sets__15-20reps__(rear delt fly, reverse peck deck, facepull)"
+            },
+            {
+              "id": "upper2-3",
+              "bodypart": "BACK",
+              "movement": "horizontal pull",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "barbell row",
+                "dumbbel row"
+              ],
+              "originalLine": "horizontal pull__3sets__5-8reps__(barbell row, dumbbel row)"
+            },
+            {
+              "id": "upper2-4",
+              "bodypart": "BACK",
+              "movement": "vertical pull",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "pull up",
+                "chin up",
+                "lat pulldown machine"
+              ],
+              "originalLine": "vertical pull__3sets__8-12reps__(pull up, chin up, lat pulldown machine)"
+            },
+            {
+              "id": "upper2-5",
+              "bodypart": "CHEST",
+              "movement": "horizontal push",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "barbell benchpress",
+                "dumbbell benchpress",
+                "weighted pushup"
+              ],
+              "originalLine": "horizontal push__3sets__5-8reps__(barbell benchpress, dumbbell benchpress, weighted pushup)"
+            },
+            {
+              "id": "upper2-6",
+              "bodypart": "CHEST",
+              "movement": "isolation",
+              "sets": 3,
+              "reps": "12-20reps",
+              "alternatives": [
+                "dumbbel flies",
+                "cable flies"
+              ],
+              "originalLine": "isolation__3sets__12-20reps__(dumbbel flies, cable flies)"
+            },
+            {
+              "id": "upper2-7",
+              "bodypart": "BICEPS",
+              "movement": "normal curl",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell strict curl",
+                "ez-bar curl",
+                "dumbbell curl"
+              ],
+              "originalLine": "normal curl__3sets__8-12reps__(barbell strict curl, ez-bar curl, dumbbell curl)"
+            },
+            {
+              "id": "upper2-8",
+              "bodypart": "BICEPS",
+              "movement": "peak focused curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "concetration curl",
+                "preacher curl"
+              ],
+              "originalLine": "peak focused curl__3sets__12-15reps__(concetration curl, preacher curl)"
+            },
+            {
+              "id": "upper2-9",
+              "bodypart": "TRICEPS",
+              "movement": "lateral head isolation",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "triceps pushdown",
+                "pushups",
+                "dips"
+              ],
+              "originalLine": "lateral head isolation__3sets__12-15reps__(triceps pushdown, pushups, dips)"
+            }
+          ]
+        },
+        {
+          "id": "LOWER2",
+          "title": "LOWER2",
+          "exercises": [
+            {
+              "id": "lower2-1",
+              "bodypart": "HAMSTRINGS",
+              "movement": "hip hinge movement",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "romanian deadlift",
+                "stiff leg deadlift",
+                "good mornings"
+              ],
+              "originalLine": "hip hinge movement__3sets__5-8reps__(romanian deadlift, stiff leg deadlift, good mornings)"
+            },
+            {
+              "id": "lower2-2",
+              "bodypart": "HAMSTRINGS",
+              "movement": "hamstring curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "hamstring curls",
+                "nordic hamstring curls"
+              ],
+              "originalLine": "hamstring curl__3sets__12-15reps__(hamstring curls, nordic hamstring curls)"
+            },
+            {
+              "id": "lower2-3",
+              "bodypart": "GLUTES",
+              "movement": "lunges",
+              "sets": 3,
+              "reps": "15reps each leg",
+              "alternatives": [
+                "lunges",
+                "glute kickbacks"
+              ],
+              "originalLine": "lunges__3sets__15reps each leg__(lunges, glute kickbacks)"
+            },
+            {
+              "id": "lower2-4",
+              "bodypart": "QUADS",
+              "movement": "isolation",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "legpress",
+                "hack squat",
+                "leg extensions"
+              ],
+              "originalLine": "isolation__3sets__12-15reps__(legpress, hack squat, leg extensions)"
+            },
+            {
+              "id": "lower2-5",
+              "bodypart": "CALVES",
+              "movement": "calf raise",
+              "sets": 3,
+              "reps": "15-30reps",
+              "alternatives": [
+                "calf raise machine",
+                "standing on a plate/stairs"
+              ],
+              "originalLine": "calf raise__3sets__15-30reps__(calf raise machine, standing on a plate/stairs)"
+            }
+          ]
+        },
+        {
+          "id": "UPPER3",
+          "title": "UPPER3",
+          "exercises": [
+            {
+              "id": "upper3-1",
+              "bodypart": "BACK",
+              "movement": "vertical pull",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "pull up",
+                "chin up",
+                "lat pulldown machine"
+              ],
+              "originalLine": "vertical pull__3sets__8-12reps__(pull up, chin up, lat pulldown machine)"
+            },
+            {
+              "id": "upper3-2",
+              "bodypart": "BACK",
+              "movement": "horizontal pull",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "barbell row",
+                "dumbbel row"
+              ],
+              "originalLine": "horizontal pull__3sets__8-12reps__(barbell row, dumbbel row)"
+            },
+            {
+              "id": "upper3-3",
+              "bodypart": "CHEST",
+              "movement": "incline push",
+              "sets": 3,
+              "reps": "5-8reps",
+              "alternatives": [
+                "barbell incline benchpress",
+                "dumbbel incline benchpress",
+                "weighted decline pushup"
+              ],
+              "originalLine": "incline push__3sets__5-8reps__(barbell incline benchpress, dumbbel incline benchpress,weighted decline pushup)"
+            },
+            {
+              "id": "upper3-4",
+              "bodypart": "CHEST",
+              "movement": "isolation",
+              "sets": 3,
+              "reps": "12-20reps",
+              "alternatives": [
+                "dumbbel flies",
+                "cable flies"
+              ],
+              "originalLine": "isolation__3sets__12-20reps__(dumbbel flies, cable flies)"
+            },
+            {
+              "id": "upper3-5",
+              "bodypart": "SHOULDERS",
+              "movement": "overhead press",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "standing or sitting overhead press, dumbbells or a barbell"
+              ],
+              "originalLine": "overhead press__3sets__8-12reps__(standing or sitting overhead press, dumbbells or a barbell)"
+            },
+            {
+              "id": "upper3-6",
+              "bodypart": "SHOULDERS",
+              "movement": "lateral raise",
+              "sets": 3,
+              "reps": "15-20reps",
+              "alternatives": [
+                "dumbbell lateral raise",
+                "cable lateral raise"
+              ],
+              "originalLine": "lateral raise__3sets__15-20reps__(dumbbell lateral raise, cable lateral raise)"
+            },
+            {
+              "id": "upper3-7",
+              "bodypart": "SHOULDERS",
+              "movement": "rear delt movement",
+              "sets": 5,
+              "reps": "15-20reps",
+              "alternatives": [
+                "rear delt fly",
+                "reverse peck deck",
+                "facepull"
+              ],
+              "originalLine": "rear delt movement__5sets__15-20reps__(rear delt fly, reverse peck deck, facepull)"
+            },
+            {
+              "id": "upper3-8",
+              "bodypart": "BICEPS",
+              "movement": "brachialis & brachioradialis curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "hammer curl",
+                "any curl with overhand grip"
+              ],
+              "originalLine": "brachialis & brachioradialis curl__3sets__12-15reps __(hammer curl, any curl with overhand grip)"
+            },
+            {
+              "id": "upper3-9",
+              "bodypart": "BICEPS",
+              "movement": "peak focused curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "concetration curl",
+                "preacher curl"
+              ],
+              "originalLine": "peak focused curl__3sets__12-15reps__(concetration curl, preacher curl)"
+            },
+            {
+              "id": "upper3-10",
+              "bodypart": "TRICEPS",
+              "movement": "overhead extension",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "skull crusher",
+                "overhead triceps extension with cables or dumbbells"
+              ],
+              "originalLine": "overhead extension__3sets__12-15reps__(skull crusher, overhead triceps extension with cables or dumbbells)"
+            }
+          ]
+        },
+        {
+          "id": "LOWER3",
+          "title": "LOWER3",
+          "exercises": [
+            {
+              "id": "lower3-1",
+              "bodypart": "GLUTES",
+              "movement": "hip thrust",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "hip thrust with a barbell",
+                "hip thrust machine"
+              ],
+              "originalLine": "hip thrust__3sets__8-12reps__(hip thrust with a barbell, hip thrust machine)"
+            },
+            {
+              "id": "lower3-2",
+              "bodypart": "GLUTES",
+              "movement": "lunges",
+              "sets": 3,
+              "reps": "15reps each leg",
+              "alternatives": [
+                "lunges",
+                "glute kickbacks"
+              ],
+              "originalLine": "lunges__3sets__15reps each leg__(lunges, glute kickbacks)"
+            },
+            {
+              "id": "lower3-3",
+              "bodypart": "QUADS",
+              "movement": "squat",
+              "sets": 3,
+              "reps": "8-12reps",
+              "alternatives": [
+                "back squat",
+                "front squat"
+              ],
+              "originalLine": "squat__3sets__8-12reps__(back squat, front squat)"
+            },
+            {
+              "id": "lower3-4",
+              "bodypart": "QUADS",
+              "movement": "isolation",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "legpress",
+                "hack squat",
+                "leg extensions"
+              ],
+              "originalLine": "isolation__3sets__12-15reps__(legpress, hack squat, leg extensions)"
+            },
+            {
+              "id": "lower3-5",
+              "bodypart": "HAMSTRINGS",
+              "movement": "hamstring curl",
+              "sets": 3,
+              "reps": "12-15reps",
+              "alternatives": [
+                "hamstring curls",
+                "nordic hamstring curls"
+              ],
+              "originalLine": "hamstring curl__3sets__12-15reps__(hamstring curls, nordic hamstring curls)"
+            },
+            {
+              "id": "lower3-6",
+              "bodypart": "CALVES",
+              "movement": "calf raise",
+              "sets": 3,
+              "reps": "15-30reps",
+              "alternatives": [
+                "calf raise machine",
+                "standing on a plate/stairs"
+              ],
+              "originalLine": "calf raise__3sets__15-30reps__(calf raise machine, standing on a plate/stairs)"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "supplements": [
+    {
+      "id": "cardio",
+      "filename": "Cardio.pdf",
+      "title": "Cardio",
+      "text": "Cardio\nYou should do 150minutes of cardio of moderate intensity per week. It doesnt really matter how you\ndecide to spread this time over the week, but i would NOT recommend doing all the 150minutes at\nonce, split it into at least 2 sessions minimum.\n\nDont do cardio before you go train with weights, doing it after your weight training is better, but\ndefinitely not ideal.\n\nI would recommend you to separate your cardio from lifting weights completely. Either do cardio on\nan off day, or if you for example lift weights in the morning, then do your cardio in the evening. So\nthat there is at least 6hours between your cardio and your lifting session.\n\nI recommend low impact exercises, like „fast“ walking. There is no need to do HIIT cardio, as it can be\nvery hard to recover from. LISS (Low intensity steady state cardio) is king.\n\nKeep in mind, that you shouldnt do excessive amounts of hard to recover from cardio. Like biking for\nhours and stuff like that. And if you do, always re-feed after your cardio session, to minimize the\nmuscle loss as much as possible!",
+      "sourceSha256": "92f0a36eb7d706cba799561ca2f38f6b07c48a501abfd03b8cddef6f6855fc4e"
+    },
+    {
+      "id": "choose-days",
+      "filename": "How many days is ideal for you.pdf",
+      "title": "Which one to pick?",
+      "text": "Which one to pick?\nIf you dont know which variation you should choose, you should always keep in mind, that you\nshould pick the one that fits your schedule the most. And also pick according to your experience\nlevel, if you are relatively new to the gym, dont immediately jump to the 6-day variation.\n\n2-day UPPER-LOWER\nIf you are very busy, but you still want to get the work done, this workout will give you a wide variety\nof exercises, that will hit every muscle that you need to, in just 2 days!\n\n3-day UPPER-LOWER\nThis training plan, is more focused on the upper body, so if thats your priority, and you only got 3\ndays to go to the gym, then this is the pick for you!\n\n4-day UPPER-LOWER\nA well balanced 4-day routine, i recommend it to people who just exited their beginner stage!\n\n5-day UPPER-LOWER\nThis routine has 3upper body days and 2lower body days, and the extra upper body day, is more\nfocused on your arms, so if you want to specifically focus on getting bigger arms, then pick this one!\n\n6-day UPPER-LOWER\nI recommend this routine to people who already have some experience with lifting, it brings the\nmaximum amount of volume, so its ideal if you want to take your training to the next level!",
+      "sourceSha256": "e39d850e5befa183e661133d60fe81a7e28b8436a9bb888dbc4861047730d074"
+    },
+    {
+      "id": "abs",
+      "filename": "How to add Abs to your routine.pdf",
+      "title": "How to add Abs to your routine",
+      "text": "How to add Abs to your routine\nI didnt include any ab exercises directly into any routine.\n\nHere, i will show you how to add them to your routine if you want.\n\nYou should train your abs atleast 2 timer per week, but you can go up to 4 times per week if you are\nable to recover between the sessions.\n\nI recommend you to add 3sets of machine/cable crunch in the 8-15rep range.\n\nAnd if you dont have access to the machine crunch or to the cables. Start doing weighted sit-ups,\neither put a plate or a dumbbel on your chest, and you can easily overload this way!\n\nIt doesnt really matter, which day you decide to do the abs on, its purely up to you, you can for\nexample add them to the days that take you the least time to complete!\n\nSo just do 3sets of either machine/cable crunch or weighted sit-ups, in the 8-15rep range, at the end\nof the workout of your choice!",
+      "sourceSha256": "1eb09eb9c00e79152993e08767ccfaac89d6d82b4548e2ca389d6b886225dbd8"
+    },
+    {
+      "id": "forearms",
+      "filename": "How to add Forearms to your routine.pdf",
+      "title": "How to add Forearms to your routine",
+      "text": "How to add Forearms to your routine\nThere are 3 methods that i recommend.\n\n1.You can add 3sets of wrist curls at the end of each workout, in the 8-12rep range, i like doing this\nwith the barbell, you roll the bar all the way to your fingertips and back, really trying to feel the\nstretch at both ends. But keep in mind, that if you add both abs and wrist curls at the end of every\nworkout, it might take a little bit longer!\n\n2.If you have access to grippers, you can do them instead of wrist curls, or you can do both wrist curls\nand grippers. In the best case scenario, you own a pair of grippers yourself, and you can just do them\nat home, whenever you find it convenient, but dont do them before your workout, as it might\nnegatively impact your workout. Use the same technique and rep range as for the wrist curls.\n\n3.Start doing rice bucket training, not a lot of people know about this technique. This is really going\nto blow-up your forearms and hand muscles. All you need is a bucket and like 10lbs of rice. Then you\ncan do it at the comfort of your home! If you want to try it out, i recommend this follow-along\nroutine: https://www.youtube.com/watch?v=iVum3vWlh4Q\n\nYou might get very sore when trying it out for the first time, so always wait until you are not sore\nanymore, and then you can go again! Eventually you might be able to do this everyday.",
+      "sourceSha256": "663750335d7c6cc95cfe72b9ccee7f065981ce2b21c3d578e53cac2f9aae77fa"
+    },
+    {
+      "id": "warmup",
+      "filename": "How to warm-up.pdf",
+      "title": "How to warm up",
+      "text": "How to warm up\nAlways warm-up properly before you start working out. Do some stretches for the most important\njoints, like shoulders, wrists, elbows, knees, hips and ankles. It doesnt need to be anything fancy, just\nsome basic stretches that you used to do in school. You will know that you are ready, when your\njoints dont feel stiff and cold anymore. You can also do like 5-10minutes on the treadmill or elliptical,\nto get your blood going so you feel ready for action!\n\nAfter that, you should always slowly build up on the first exercise that you are doing.\n\nLets say you are doing bench press as your first exercise of the day.\n\nStart with doing couple of reps with an empty bar, then put on roughly 50% of your working weight\non the bar – and do like 3-4reps with it. Then put on 75% of your working weight on the bar, and do\n2-3reps with it. Then you are ready to start your actual working sets!",
+      "sourceSha256": "9d9d32deba16e854eda2f1e9abd059bd03248ac52b3a1b8f2745bd4a9c8ab692"
+    }
+  ]
+}

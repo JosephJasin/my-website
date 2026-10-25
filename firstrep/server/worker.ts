@@ -2,6 +2,7 @@ import { drizzle } from 'drizzle-orm/d1';
 import { authenticate, configured, type AccessConfig } from './auth';
 import { json, progressService } from './progress';
 import * as schema from './schema';
+import { workoutService, documentService, ensureWorkoutTables } from './workouts';
 
 export interface Env extends AccessConfig { ASSETS:Fetcher; FIRSTREP_DB?:D1Database }
 const isFirstRep=(path:string)=>path==='/firstrep'||path.startsWith('/firstrep/');
@@ -41,8 +42,11 @@ export default {
     if(!user)return unavailable('Please sign in with your approved email address. If your session expired, open First Rep again to sign in.',401,isApi);
     if(url.pathname==='/firstrep')return Response.redirect(`${url.origin}/firstrep/`,308);
     if(isApi){
+      const progress=progressService(drizzle(env.FIRSTREP_DB,{schema}),async userId=>{await ensureWorkoutTables(env.FIRSTREP_DB!);return !!await env.FIRSTREP_DB!.prepare("SELECT id FROM workout_sessions WHERE user_id=? AND status='active'").bind(userId).first()});
+      if(['/firstrep/api/workouts','/firstrep/api/workouts/export'].includes(url.pathname))return workoutService(env.FIRSTREP_DB,progress.state).handle(request,user.userId);
+      if(url.pathname==='/firstrep/api/documents'||/^\/firstrep\/api\/documents\/[a-z0-9-]+$/.test(url.pathname))return documentService(request,user.userId,env.FIRSTREP_DB);
       if(!['/firstrep/api/progress','/firstrep/api/export'].includes(url.pathname))return json({error:'Not found.'},404);
-      return progressService(drizzle(env.FIRSTREP_DB,{schema})).handle(request,user.userId);
+      return progress.handle(request,user.userId);
     }
     const response=await env.ASSETS.fetch(request),headers=new Headers(response.headers);
     for(const [name,value]of Object.entries(securityHeaders))headers.set(name,value);

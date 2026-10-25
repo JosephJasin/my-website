@@ -12,7 +12,7 @@ const patch = z.object({
   availability: z.enum(['unknown','available','missing']).optional(),
   seat: z.string().max(80).optional(), weight: z.string().max(40).optional(), notes: z.string().max(1200).optional(),
 }).strict();
-const prefs = z.object({pace:z.number().int().min(1).max(2),visitsPerWeek:z.number().int().min(2).max(3)}).strict();
+const prefs = z.object({pace:z.number().int().min(1).max(2),visitsPerWeek:z.number().int().min(2).max(4)}).strict();
 const profileData = z.object({age:z.number().int().min(18).max(120).nullable(),heightCm:z.number().min(80).max(250).nullable(),startingWeightKg:z.number().min(20).max(500).nullable()}).strict();
 const savedMachine = patch.required().extend({machineId,updatedAt:z.string().datetime()}).strict();
 const savedVisit = z.object({id:z.string().uuid(),machineIds:z.array(machineId).max(machines.length),startedAt:z.string().datetime(),finishedAt:z.string().datetime().nullable()}).strict();
@@ -39,7 +39,7 @@ async function scopedUuid(seed:string){
   return `${hash.slice(0,8)}-${hash.slice(8,12)}-4${hash.slice(13,16)}-a${hash.slice(17,20)}-${hash.slice(20,32)}`;
 }
 
-export function progressService(db:DrizzleD1Database<typeof schema>){
+export function progressService(db:DrizzleD1Database<typeof schema>,hasWorkout?:(userId:string)=>Promise<boolean>){
   async function state(userId:string){
     const [rows,prefs,history,profiles]=await Promise.all([
       db.select().from(progress).where(eq(progress.userId,userId)),
@@ -72,12 +72,14 @@ export function progressService(db:DrizzleD1Database<typeof schema>){
       if(c.type==='machine')await db.insert(progress).values({userId,machineId:c.id,updatedAt:now,...c.patch}).onConflictDoUpdate({target:[progress.userId,progress.machineId],set:{...c.patch,updatedAt:now}});
       if(c.type==='preferences')await db.insert(preferences).values({userId,pace:c.pace,visitsPerWeek:c.visitsPerWeek}).onConflictDoUpdate({target:preferences.userId,set:{pace:c.pace,visitsPerWeek:c.visitsPerWeek}});
       if(c.type==='start'){
+        if(hasWorkout&&await hasWorkout(userId))return json({error:'Finish your active workout before starting an equipment-only visit.'},409);
         const s=await state(userId);
         if(!s.visits.some(v=>!v.finishedAt)){
           const next=suggestGuides(machines,s.machines,s.preferences.pace).map(m=>m.id);
           if(!next.length&&!machines.some(m=>s.machines[m.id]?.status==='learned'&&s.machines[m.id]?.availability==='available'))return json({error:'Mark a suitable setup as found at your gym before starting a visit.'},409);
           const id=await scopedUuid(userId+':'+s.visits.filter(v=>v.finishedAt).map(v=>v.id).sort().join(','));
           await db.insert(visits).values({id,userId,machineIds:JSON.stringify(next),startedAt:now}).onConflictDoNothing();
+          if(hasWorkout&&await hasWorkout(userId))return json({error:'A workout was started on another device. Continue that workout first.'},409);
         }
       }
       if(c.type==='finish')await db.update(visits).set({finishedAt:now}).where(and(eq(visits.id,c.id),eq(visits.userId,userId),isNull(visits.finishedAt)));
