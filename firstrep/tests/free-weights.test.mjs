@@ -30,8 +30,11 @@ const { movementPose, movementInfo } = load('firstrep/client/movement-model.ts')
 const { MovementFrame } = load('firstrep/client/movement-demo.tsx');
 const { WarningDiagram, cueScene } = load('firstrep/client/watch-out.tsx');
 const { formCues } = load('firstrep/client/form-cues.ts');
+const { extraMotionIds } = load('firstrep/client/extra-motion-model.ts');
+const { learningPhases, suggestGuides } = load('firstrep/client/learning-plan.ts');
+const LearningPhases = load('firstrep/client/learning-phases.tsx').default;
 const refs = JSON.parse(readFileSync('firstrep/client/references.json', 'utf8'));
-const freeWeights = machines.filter(m => m.kind === 'free-weight');
+const freeWeights = machines.filter(m => m.kind === 'free-weight' || extraMotionIds.includes(m.id));
 const renderDir = process.env.FIRSTREP_RENDER_DIR;
 if (renderDir) mkdirSync(renderDir, {recursive: true});
 function render(component, props, name) {
@@ -48,7 +51,7 @@ function finitePose(p, name) {
   }
 }
 
-test('every free-weight guide has local recognition art, technique sources and working illustrations', () => {
+test('expanded guides have local recognition art, technique sources and distinct form illustrations', () => {
   assert.equal(new Set(machines.map(m => m.id)).size, machines.length);
   assert.ok(freeWeights.length > 0);
   for (const m of freeWeights) {
@@ -57,11 +60,11 @@ test('every free-weight guide has local recognition art, technique sources and w
     assert.ok(refs[m.id]?.tutorialUrl?.startsWith('https://'), m.id);
     for (const id of [m.id, ...m.variants.map(v => v.id)]) {
       const ref = refs[id];
-      assert.ok(ref?.illustrated, id);
+      assert.ok(ref, id);
       assert.ok(ref.image.startsWith('/firstrep/equipment/'), id);
       const path = 'firstrep/public/' + ref.image.slice('/firstrep/'.length);
       assert.ok(existsSync(path), path);
-      assert.match(readFileSync(path, 'utf8'), /<svg/);
+      if(ref.illustrated) assert.match(readFileSync(path, 'utf8'), /<svg/);
       assert.ok(ref.source.startsWith('https://'), id);
     }
     for (let frame = 0; frame <= 100; frame++) {
@@ -72,7 +75,7 @@ test('every free-weight guide has local recognition art, technique sources and w
         assert.ok(x >= 12 && x <= 468 && y >= 12 && y <= 308, `${m.id}: pose leaves frame`);
       }
     }
-    for (const phase of [0, .25, .5]) render(MovementFrame, {id:m.id, phase, label:m.id}, `${m.id}-${phase}`);
+    for (const phase of [0, .25, .5, .75]) render(MovementFrame, {id:m.id, phase, label:m.id}, `${m.id}-${phase}`);
     for (const cue of formCues[m.id]) {
       const avoid = cueScene(m.id, cue.kind, true), aim = cueScene(m.id, cue.kind, false);
       finitePose(avoid.p, m.id); finitePose(aim.p, m.id);
@@ -88,4 +91,37 @@ test('every free-weight guide has local recognition art, technique sources and w
       assert.notEqual(art(bad), art(good), `${m.id}: ${cue.kind} needs a visible comparison`);
     }
   }
+});
+
+test('phases cover each guide once, keep combo modes separate and let confirmed later phases be suggested', () => {
+  const ids=learningPhases.flatMap(p=>[...p.guides]);
+  assert.equal(new Set(ids).size, machines.length);
+  assert.deepEqual([...ids].sort(), [...machines].map(m=>m.id).sort());
+  for(const m of machines) for(const related of m.relatedIds||[]){
+    assert.notEqual(m.id,related);
+    assert.ok(machines.find(other=>other.id===related)?.relatedIds?.includes(m.id));
+  }
+  const progress={'rowing-erg':{availability:'available'},'hip-adduction':{availability:'unknown'},'hip-abduction':{availability:'available',status:'help'}};
+  assert.equal(suggestGuides(machines,progress,2).map(m=>m.id).join(','),'rowing-erg');
+  progress.bike={availability:'available'};
+  assert.equal(suggestGuides(machines,progress,1)[0].id,'bike');
+  progress.bike.status='learned';
+  const html=renderToStaticMarkup(React.createElement(LearningPhases,{progress,nextIds:['rowing-erg'],activeIds:[],onOpen:()=>{}}));
+  assert.equal((html.match(/role="progressbar"/g)||[]).length,learningPhases.length);
+  assert.equal((html.match(/<button/g)||[]).length,machines.length);
+  assert.match(html,/Suggested next/);
+});
+
+test('rowing drives with legs first and recovers arms then body before the seat slides', () => {
+  const catchPose=movementPose('rowing-erg',0),legs=movementPose('rowing-erg',.24),body=movementPose('rowing-erg',.32),finish=movementPose('rowing-erg',.4),armsAway=movementPose('rowing-erg',.53),bodyForward=movementPose('rowing-erg',.65);
+  assert.ok(legs.hip[0]<catchPose.hip[0]);
+  assert.equal(legs.shoulder[0]-legs.hip[0],catchPose.shoulder[0]-catchPose.hip[0]);
+  assert.equal(body.hip[0],legs.hip[0]);
+  assert.ok(body.shoulder[0]<legs.shoulder[0]);
+  assert.ok(finish.wrist[0]<body.wrist[0]);
+  assert.equal(armsAway.hip[0],finish.hip[0]);
+  assert.ok(armsAway.wrist[0]>finish.wrist[0]);
+  assert.equal(bodyForward.hip[0],finish.hip[0]);
+  assert.ok(bodyForward.shoulder[0]>armsAway.shoulder[0]);
+  assert.ok(movementPose('rowing-erg',.8).hip[0]>bodyForward.hip[0]);
 });

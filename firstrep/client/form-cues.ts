@@ -1,4 +1,4 @@
-export type CueKind='knee-lock'|'hip-lift'|'depth'|'wrist'|'shrug'|'torso-swing'|'neck'|'behind-neck'|'control'|'back-arch'|'crunch-range'|'upper-arm'|'bike-seat'|'treadmill-start'|'treadmill-exit'|'rounded-back'|'load-away'|'heel-lift'|'bench-hips';
+export type CueKind='knee-lock'|'hip-lift'|'depth'|'wrist'|'shrug'|'torso-swing'|'neck'|'behind-neck'|'control'|'back-arch'|'crunch-range'|'upper-arm'|'bike-seat'|'treadmill-start'|'treadmill-exit'|'rounded-back'|'load-away'|'heel-lift'|'bench-hips'|'fly-range'|'elbow-lock'|'fly-row'|'hip-width'|'row-arms'|'row-recovery';
 export type FormCue={kind:CueKind;label:string;avoid:string;aim:string;tip:string};
 export const formCues:Record<string,FormCue[]>={
  'bike':[
@@ -53,4 +53,17 @@ Object.assign(formCues,{
  'dumbbell-rdl':[back,close],
  'barbell-rdl':[back,close],
  'kettlebell-deadlift':[back,{...close,tip:'Keep the kettlebell close as you stand and lower it. If the floor is hard to reach, ask staff for a stable raised start.'}],
+} satisfies Record<string,FormCue[]>);
+
+const hipStill:FormCue={kind:'torso-swing',label:'Torso',avoid:'Rocking your torso to move the pads',aim:'Keep your torso supported and still',tip:'Choose a lighter setting if you need to rock. Hold the handles and keep your hips on the seat.'};
+const hipWidth:FormCue={kind:'hip-width',label:'Comfortable width',avoid:'Forcing the legs too far apart',aim:'Stay inside a comfortable range',tip:'Use the model’s start-position control. A wider stretch is not a goal; ask staff to show the adjustment and release lever.'};
+const flyRange:FormCue={kind:'fly-range',label:'Arm range',avoid:'Forcing arms far behind your torso',aim:'Use a comfortable arm path',tip:'Adjust the starting range before lifting. The overhead sketch shows direction, not a prescribed angle.'};
+Object.assign(formCues,{
+ 'dumbbell-lateral-raise':[{kind:'shrug',label:'Shoulders',avoid:'Shoulders hiked toward your ears',aim:'Relaxed neck, controlled raise',tip:'Keep the load light and stop at a comfortable height. Do not force the arms higher by shrugging.'},{kind:'torso-swing',label:'Torso',avoid:'Leaning or swinging to raise the weights',aim:'Steady torso as your arms move',tip:'Lower the weight if you need momentum. Practise slowly with a small elbow bend.'}],
+ 'face-pull':[{kind:'torso-swing',label:'Torso',avoid:'Leaning back to pull the rope',aim:'Stay upright as the arms move',tip:'Start light. A balanced stance should let you pull without rocking or arching your lower back.'},{kind:'neck',label:'Head position',avoid:'Reaching your head toward the rope',aim:'Bring the rope toward a steady head',tip:'Keep your head aligned with your torso. Let the rope ends separate beside your face.'}],
+ 'pec-fly':[flyRange,{kind:'elbow-lock',label:'Elbows',avoid:'Rigid, fully straight arms',aim:'A small, steady elbow bend',tip:'Keep the elbow bend comfortable and consistent. Follow the pad or handle position on your exact model.'}],
+ 'rear-delt-fly':[flyRange,{kind:'fly-row',label:'Arm path',avoid:'Bending the elbows into a row',aim:'Open the arms with a steady soft bend',tip:'This is a reverse fly. If the elbows bend a lot to move the weight, reduce the load.'}],
+ 'hip-abduction':[hipStill,hipWidth],
+ 'hip-adduction':[hipStill,hipWidth],
+ 'rowing-erg':[{kind:'row-arms',label:'Start the drive',avoid:'Pulling with bent arms straight away',aim:'Legs start while arms stay long',tip:'Push with your legs first, then open your torso, then finish with the arm pull. Keep the stroke easy while learning.'},{kind:'row-recovery',label:'Return sequence',avoid:'Knees rising before your hands clear',aim:'Arms away, body forward, then legs',tip:'Let the handle pass your knees before bending them and sliding forward. The return can be unhurried.'}],
 } satisfies Record<string,FormCue[]>);

@@ -4,10 +4,13 @@ import { Check, CircleHelp, Maximize2, Minimize2, X } from 'lucide-react';
 import { Equipment, Figure } from './movement-demo';
 import { isFreeWeight, joint, movementPose, type Point, type Pose } from './movement-model';
 import { formCues, type CueKind, type FormCue } from './form-cues';
+import { isExtraMotion } from './extra-motion-model';
+import { extraCueScene } from './extra-form-scenes';
 const plus=(p:Point,dx:number,dy:number):Point=>[p[0]+dx,p[1]+dy];
 const copy=(p:Pose):Pose=>JSON.parse(JSON.stringify(p));
 function turn(p:Point,center:Point,degrees:number):Point{const a=degrees*Math.PI/180,x=p[0]-center[0],y=p[1]-center[1];return [center[0]+x*Math.cos(a)-y*Math.sin(a),center[1]+x*Math.sin(a)+y*Math.cos(a)]}
 export function cueScene(id:string,kind:CueKind,bad:boolean){
+ if(isExtraMotion(id))return extraCueScene(id,kind,bad);
  const phase=id==='kettlebell-deadlift'?.08:kind==='shrug'?0:kind==='hip-lift'||kind==='depth'?.12:kind==='knee-lock'?.5:.35;
  const base=movementPose(id,phase),p=copy(base);let focus:Point=[220,170],view='90 45 270 250';
  if(kind==='knee-lock'){

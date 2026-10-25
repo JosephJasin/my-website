@@ -3,6 +3,7 @@ import type { DrizzleD1Database } from 'drizzle-orm/d1';
 import type { BatchItem } from 'drizzle-orm/batch';
 import { z } from 'zod';
 import { machines } from '../client/equipment';
+import { suggestGuides } from '../client/learning-plan';
 import * as schema from './schema';
 const { progress, preferences, visits, profile } = schema;
 const machineId = z.string().refine(id => machines.some(m => m.id === id));
@@ -73,7 +74,8 @@ export function progressService(db:DrizzleD1Database<typeof schema>){
       if(c.type==='start'){
         const s=await state(userId);
         if(!s.visits.some(v=>!v.finishedAt)){
-          const next=machines.filter(m=>!['learned','help'].includes(s.machines[m.id]?.status)&&s.machines[m.id]?.availability!=='missing').slice(0,s.preferences.pace).map(m=>m.id);
+          const next=suggestGuides(machines,s.machines,s.preferences.pace).map(m=>m.id);
+          if(!next.length&&!machines.some(m=>s.machines[m.id]?.status==='learned'&&s.machines[m.id]?.availability==='available'))return json({error:'Mark a suitable setup as found at your gym before starting a visit.'},409);
           const id=await scopedUuid(userId+':'+s.visits.filter(v=>v.finishedAt).map(v=>v.id).sort().join(','));
           await db.insert(visits).values({id,userId,machineIds:JSON.stringify(next),startedAt:now}).onConflictDoNothing();
         }

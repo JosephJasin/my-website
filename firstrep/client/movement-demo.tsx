@@ -2,9 +2,12 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { Pause, Play, RotateCcw } from 'lucide-react';
 import { isFreeWeight, movementInfo, movementPose, type Point, type Pose } from './movement-model';
+import { isExtraMotion, isFrontMotion, isFlyMotion, rowingStage } from './extra-motion-model';
+import { ExtraEquipment, ExtraFigure } from './extra-motion-art';
 const points=(ps:Point[])=>ps.map(p=>p.join(',')).join(' ');
 function Line({from,to,...props}:{from:Point;to:Point}&Omit<React.SVGProps<SVGLineElement>,'from'|'to'>){return <line x1={from[0]} y1={from[1]} x2={to[0]} y2={to[1]} {...props}/>}
 export function Equipment({id,p,phase}:{id:string;p:Pose;phase:number}){
+ if(isExtraMotion(id))return <ExtraEquipment id={id} p={p}/>;
  if(isFreeWeight(id))return <FreeWeightEquipment id={id} p={p}/>;
  const stack=<g><rect x="351" y="87" width="51" height="193" rx="7" fill="#293426" strokeWidth="3"/><path d="M364 100V264M389 100V264" strokeWidth="2"/>{[0,1,2,3,4,5,6].map(i=><rect key={i} x="360" y={210+i*8} width="34" height="6" rx="2" fill="#53634b" stroke="none"/>)}</g>;
  const seat=(x:number,y:number)=><g><path d={`M${x+10} ${y+8}V280M${x-12} 280H${x+72}`} strokeWidth="7"/><rect x={x} y={y} width="68" height="12" rx="5" fill="#526249" stroke="none"/></g>;
@@ -36,6 +39,7 @@ function FreeWeightEquipment({id,p}:{id:string;p:Pose}){
  </g>;
 }
 export function Figure({id,p,tint}:{id:string;p:Pose;tint?:string}){
+ if(isFrontMotion(id)||isFlyMotion(id))return <ExtraFigure id={id} p={p} tint={tint}/>;
  const info=movementInfo[id],tone='#e7eddf',accent=tint??'#c3ee74';
  const far=(pnt:Point):Point=>[pnt[0]-8,pnt[1]+1];
  const neck:Point=[p.shoulder[0]+(p.head[0]-p.shoulder[0])*.4,p.shoulder[1]+(p.head[1]-p.shoulder[1])*.4];
@@ -60,13 +64,13 @@ export default function MovementDemo({id,name,compact=false,autoPlay=true}:{id:s
  const container=useRef<HTMLDivElement>(null),position=useRef(0),label=useId(),info=movementInfo[id];
  useEffect(()=>{const media=window.matchMedia('(prefers-reduced-motion: reduce)');setPlaying(!media.matches&&(compact?autoPlay:true));const update=()=>setPlaying(!media.matches&&(compact?autoPlay:true));media.addEventListener('change',update);return()=>media.removeEventListener('change',update)},[autoPlay,compact]);
  useEffect(()=>{const io=new IntersectionObserver(([entry])=>setVisible(entry.isIntersecting),{threshold:.15});if(container.current)io.observe(container.current);return()=>io.disconnect()},[]);
- useEffect(()=>{if(!playing||!visible)return;let handle=0,last=0,lastPaint=0;const cycle=(id==='treadmill'||id==='bike'?2600:4800)/speed;
+ useEffect(()=>{if(!playing||!visible)return;let handle=0,last=0,lastPaint=0;const cycle=(id==='treadmill'||id==='bike'?2600:id==='rowing-erg'?6500:4800)/speed;
  const frame=(now:number)=>{if(!last)last=now;const elapsed=Math.min(now-last,80);last=now;if(document.visibilityState==='visible'){position.current=(position.current+elapsed/cycle)%1;if(now-lastPaint>40){setPhase(position.current);lastPaint=now;}}handle=requestAnimationFrame(frame)};
  handle=requestAnimationFrame(frame);return()=>cancelAnimationFrame(handle);
  },[playing,visible,speed,id]);
  function scrub(value:number){setPlaying(false);position.current=value;setPhase(value)}
  return <div ref={container} className={'movement-demo '+(compact?'compact':'full')} aria-label={`${name} movement illustration`}>
- <div className="motion-stage"><MovementFrame id={id} phase={phase} label={label}/><span className="motion-badge">{compact?'MOVEMENT PREVIEW':'MOVEMENT SKETCH'}</span>{!compact&&<span className="motion-phase">{phase<.5?info.out:info.back}</span>}</div>
+ <div className="motion-stage"><MovementFrame id={id} phase={phase} label={label}/><span className="motion-badge">{compact?'MOVEMENT PREVIEW':isFlyMotion(id)?'OVERHEAD VIEW · FACING UP':'MOVEMENT SKETCH'}</span>{!compact&&<span className="motion-phase">{id==='rowing-erg'?rowingStage(phase):phase<.5?info.out:info.back}</span>}</div>
  {!compact&&<><div className="motion-controls"><button type="button" className="button secondary small" onClick={()=>setPlaying(v=>!v)} aria-label={playing?'Pause animation':'Play animation'}>{playing?<Pause size={15}/>:<Play size={15}/>} {playing?'Pause':'Play'}</button><button type="button" className="motion-restart" aria-label="Restart animation" onClick={()=>{position.current=0;setPhase(0)}}><RotateCcw size={17}/></button><label className="motion-speed">Speed<select aria-label="Animation speed" value={speed} onChange={e=>setSpeed(Number(e.target.value))}><option value={.5}>0.5× · Slow</option><option value={1}>1× · Normal</option></select></label></div><label className="motion-scrubber">Inspect the movement<input type="range" aria-label="Movement position" min="0" max="100" step="1" value={Math.round(phase*100)} onChange={e=>scrub(Number(e.target.value)/100)}/></label><div className="motion-caption"><strong>{info.example}</strong><p>{info.cue}</p><small>Simplified motion, not exact joint angles or a prescribed range. Follow the setup below and the equipment instructions.</small></div></>}
  </div>
 }

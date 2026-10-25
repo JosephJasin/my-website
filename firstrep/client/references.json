@@ -266,5 +266,121 @@
     "illustrated": true,
     "tutorialUrl": "https://www.nsca.com/education/articles/kinetic-select/romanian-deadlift-rdl/",
     "tutorialLabel": "NSCA Romanian deadlift"
+  },
+  "fly-combo": {
+    "title": "Pec fly and rear-delt combo",
+    "source": "https://www.precor.com/en-GB/products/VSL015BP",
+    "image": "/firstrep/equipment/fly-combo.svg",
+    "illustrated": true
+  },
+  "pec-deck-pads": {
+    "title": "Dedicated pec deck with forearm pads",
+    "source": "https://support.lifefitness.com/hc/en-us/articles/360043013933-Life-Fitness-Insignia-Series-Strength-Owner-s-Manual",
+    "image": "/firstrep/equipment/pec-deck-pads.svg",
+    "illustrated": true
+  },
+  "rear-delt-machine": {
+    "title": "Rear-delt machine",
+    "source": "https://www.precor.com/en-GB/products/VSL015BP",
+    "image": "/firstrep/equipment/rear-delt-machine.svg",
+    "illustrated": true
+  },
+  "hip-combo": {
+    "title": "Hip abductor and adductor combo",
+    "source": "https://www.lifefitness.com/en-eu/catalog/strength-training/selectorized/axiom-series-hip-abductor-adductor",
+    "image": "/firstrep/equipment/hip-combo.svg",
+    "illustrated": true
+  },
+  "hip-abductor-machine": {
+    "title": "Dedicated hip abductor",
+    "source": "https://www.lifefitness.com/en-eu/catalog/strength-training/selectorized/axiom-series-hip-abductor-adductor",
+    "image": "/firstrep/equipment/hip-abductor-machine.svg",
+    "illustrated": true
+  },
+  "hip-adductor-machine": {
+    "title": "Dedicated hip adductor",
+    "source": "https://www.lifefitness.com/en-eu/catalog/strength-training/selectorized/axiom-series-hip-abductor-adductor",
+    "image": "/firstrep/equipment/hip-adductor-machine.svg",
+    "illustrated": true
+  },
+  "high-cable-rope": {
+    "title": "High cable with rope attachment",
+    "source": "https://shop.lifefitness.com/products/axiom-dual-adjustable-pulley",
+    "image": "/firstrep/equipment/high-cable-rope.svg",
+    "illustrated": true
+  },
+  "air-rower": {
+    "title": "Air-resistance rowing machine",
+    "source": "https://www.concept2.com/ergs/rowerg",
+    "image": "/firstrep/equipment/air-rower.svg",
+    "illustrated": true
+  },
+  "water-rower": {
+    "title": "Water-resistance rowing machine",
+    "source": "https://www.waterrower.com/",
+    "image": "/firstrep/equipment/water-rower.svg",
+    "illustrated": true
+  },
+  "magnetic-rower": {
+    "title": "Magnetic or electronic rowing machine",
+    "source": "https://support.lifefitness.com/hc/en-us/articles/1500000346921-Life-Fitness-Heat-Rowers-Introduction",
+    "image": "/firstrep/equipment/magnetic-rower.svg",
+    "illustrated": true
+  },
+  "dumbbell-lateral-raise": {
+    "title": "Fixed dumbbells",
+    "source": "https://www.lifefitness.com/de-de/produkte/accessories/dumbbells-fixed-barbells",
+    "image": "/firstrep/equipment/dumbbells-fixed.svg",
+    "illustrated": true,
+    "tutorialUrl": "https://www.acefitness.org/resources/everyone/exercise-library/26/lateral-raise/",
+    "tutorialLabel": "ACE dumbbell lateral raise"
+  },
+  "face-pull": {
+    "title": "High cable with rope attachment",
+    "source": "https://shop.lifefitness.com/products/axiom-dual-adjustable-pulley",
+    "image": "/firstrep/equipment/high-cable-rope.svg",
+    "illustrated": true,
+    "tutorialUrl": "https://www.nsca.com/education/articles/kinetic-select/face-pull-machine/",
+    "tutorialLabel": "NSCA cable face pull"
+  },
+  "pec-fly": {
+    "title": "Pec fly and rear-delt combo",
+    "source": "https://www.precor.com/en-GB/products/VSL015BP",
+    "image": "/firstrep/equipment/fly-combo.svg",
+    "illustrated": true,
+    "tutorialUrl": "https://support.lifefitness.com/hc/en-us/articles/360043013933-Life-Fitness-Insignia-Series-Strength-Owner-s-Manual",
+    "tutorialLabel": "Manufacturer manual · pec-fly setup"
+  },
+  "rear-delt-fly": {
+    "title": "Pec fly and rear-delt combo",
+    "source": "https://www.precor.com/en-GB/products/VSL015BP",
+    "image": "/firstrep/equipment/fly-combo.svg",
+    "illustrated": true,
+    "tutorialUrl": "https://support.lifefitness.com/hc/en-us/articles/360043013933-Life-Fitness-Insignia-Series-Strength-Owner-s-Manual",
+    "tutorialLabel": "Manufacturer manual · rear-delt setup"
+  },
+  "hip-abduction": {
+    "title": "Dedicated hip abductor",
+    "source": "https://www.lifefitness.com/en-eu/catalog/strength-training/selectorized/axiom-series-hip-abductor-adductor",
+    "image": "/firstrep/equipment/hip-abductor-machine.svg",
+    "illustrated": true,
+    "tutorialUrl": "https://support.lifefitness.com/hc/en-us/articles/360043013933-Life-Fitness-Insignia-Series-Strength-Owner-s-Manual",
+    "tutorialLabel": "Manufacturer manual · hip abduction"
+  },
+  "hip-adduction": {
+    "title": "Dedicated hip adductor",
+    "source": "https://www.lifefitness.com/en-eu/catalog/strength-training/selectorized/axiom-series-hip-abductor-adductor",
+    "image": "/firstrep/equipment/hip-adductor-machine.svg",
+    "illustrated": true,
+    "tutorialUrl": "https://support.lifefitness.com/hc/en-us/articles/360043013933-Life-Fitness-Insignia-Series-Strength-Owner-s-Manual",
+    "tutorialLabel": "Manufacturer manual · hip adduction"
+  },
+  "rowing-erg": {
+    "title": "Air-resistance rowing machine",
+    "source": "https://www.concept2.com/ergs/rowerg",
+    "image": "/firstrep/equipment/air-rower.svg",
+    "illustrated": true,
+    "tutorialUrl": "https://www.concept2.com/training/rowing-technique",
+    "tutorialLabel": "Concept2 rowing sequence"
   }
 }

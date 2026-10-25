@@ -14,7 +14,9 @@ const modules=new Map([['drizzle-orm',synthetic('orm',orm)],['drizzle-orm/sqlite
 async function source(file){const code=ts.transpileModule(readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022}}).outputText;const m=new SourceTextModule(code,{context,identifier:file});await m.link(async n=>{if(modules.has(n))return modules.get(n);throw Error(n)});await m.evaluate();return m;}
 modules.set('./schema',await source('firstrep/server/schema.ts'));
 modules.set('./free-weights',await source('firstrep/client/free-weights.ts'));
+modules.set('./extra-guides',await source('firstrep/client/extra-guides.ts'));
 modules.set('../client/equipment',await source('firstrep/client/equipment.ts'));
+modules.set('../client/learning-plan',await source('firstrep/client/learning-plan.ts'));
 const store=await source('firstrep/server/progress.ts');modules.set('./progress',store);
 const sqlite=new DatabaseSync(':memory:');sqlite.exec(readFileSync('firstrep/migrations/0001_firstrep.sql','utf8'));
 const query=async(sql,params,method)=>{const stmt=sqlite.prepare(sql);if(method==='run'){stmt.run(...params);return{rows:[]}}stmt.setReturnArrays(true);return {rows:method==='get'?stmt.get(...params):stmt.all(...params)}};
@@ -29,6 +31,8 @@ assert.equal((await post({type:'preferences',pace:8,visitsPerWeek:2})).status,40
 await post({type:'machine',id:'bike',patch:{status:'learned',notes:'Keep this note'}});
 await post({type:'machine',id:'chest-press',patch:{status:'help'}});
 await post({type:'machine',id:'leg-press',patch:{availability:'missing'}});
+await post({type:'machine',id:'seated-row',patch:{availability:'available'}});
+await post({type:'machine',id:'lat-pulldown',patch:{availability:'available'}});
 await Promise.all([post({type:'start'}),post({type:'start'})]);
 let data=(await get()).data;assert.equal(data.visits.length,1);assert.deepEqual(data.visits[0].machineIds,['seated-row','lat-pulldown']);
 assert.deepEqual((await get('bob')).data.machines,{});
@@ -48,6 +52,7 @@ const profileBackup=structuredClone(backup);profileBackup.data.profile={age:30,h
 // Existing learners reach the new guides without losing their previous progress.
 const catalog=modules.get('../client/equipment').namespace.machines;
 for(const m of catalog.filter(m=>m.kind!=='free-weight'))await post({type:'machine',id:m.id,patch:{status:'learned',notes:'Existing progress'}},'expanded');
+for(const m of catalog.filter(m=>m.kind==='free-weight'))await post({type:'machine',id:m.id,patch:{availability:'available'}},'expanded');
 await post({type:'preferences',pace:1,visitsPerWeek:2},'expanded');
 await post({type:'start'},'expanded');
 let expanded=(await get('expanded')).data;
@@ -71,6 +76,36 @@ assert.equal(expanded.machines.bike.notes,'Existing progress');
 assert.equal(expanded.machines['dumbbell-curl'].weight,'4 kg each');
 assert.equal(expanded.machines['dumbbell-curl'].seat,'Standing, hammer grip');
 assert.equal((await post({type:'machine',id:'not-real-equipment',patch:{status:'learned'}},'expanded')).status,400);
+// Only confirmed setups enter suggestions; later phases are usable without unlocking earlier phases.
+assert.equal((await post({type:'start'},'gym-check')).status,409);
+assert.equal((await get('gym-check')).data.visits.length,0);
+await post({type:'machine',id:'rowing-erg',patch:{availability:'available'}},'gym-check');
+await post({type:'machine',id:'pec-fly',patch:{availability:'missing'}},'gym-check');
+await post({type:'machine',id:'hip-abduction',patch:{availability:'available',status:'help'}},'gym-check');
+await post({type:'start'},'gym-check');
+let gym=(await get('gym-check')).data;
+assert.deepEqual(gym.visits[0].machineIds,['rowing-erg']);
+const gymVisit=gym.visits[0].id;
+await post({type:'machine',id:'bike',patch:{availability:'available'}},'gym-check');
+await post({type:'machine',id:'rowing-erg',patch:{availability:'unknown'}},'gym-check');
+await post({type:'start'},'gym-check');
+assert.deepEqual((await get('gym-check')).data.visits[0].machineIds,['rowing-erg'],'An active visit keeps its guide IDs');
+await post({type:'finish',id:gymVisit},'gym-check');
+await post({type:'start'},'gym-check');
+assert.deepEqual((await get('gym-check')).data.visits.find(v=>!v.finishedAt).machineIds,['bike']);
+// A combo mode has its own confidence, availability, load and notes; confirming one does not confirm the other.
+await post({type:'machine',id:'pec-fly',patch:{status:'learned',availability:'available',weight:'10 kg',notes:'Back to pad'}},'combo');
+assert.equal((await get('combo')).data.machines['rear-delt-fly'],undefined);
+await post({type:'machine',id:'rear-delt-fly',patch:{status:'learning',availability:'available',weight:'5 kg',notes:'Chest to pad'}},'combo');
+await post({type:'start'},'combo');
+assert.deepEqual((await get('combo')).data.visits[0].machineIds,['rear-delt-fly']);
+assert.equal((await get('combo')).data.machines['pec-fly'].weight,'10 kg');
+assert.equal((await get('combo')).data.machines['pec-fly'].status,'learned');
+await post({type:'machine',id:'rear-delt-fly',patch:{status:'learned'}},'combo');
+const comboVisit=(await get('combo')).data.visits[0].id;
+await post({type:'finish',id:comboVisit},'combo');
+assert.equal((await post({type:'start'},'combo')).status,200,'Familiar-equipment practice is still possible');
+assert.deepEqual((await get('combo')).data.visits.find(v=>!v.finishedAt).machineIds,[]);
 const auth=(await source('firstrep/server/auth.ts')).namespace;
 const config={FIRSTREP_ACCESS_TEAM_DOMAIN:'firstrep-test.cloudflareaccess.com',FIRSTREP_ACCESS_AUD:'test-audience',FIRSTREP_OWNER_EMAIL:'owner@example.test'};
 const {publicKey,privateKey}=await jose.generateKeyPair('RS256');

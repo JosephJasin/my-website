@@ -1,6 +1,7 @@
 // Schematic side-view poses, not model-specific setup or prescribed joint angles.
 export type Point=[number,number];
-export type Pose={hip:Point;shoulder:Point;head:Point;elbow:Point;wrist:Point;knee:Point;ankle:Point;toe?:Point;farKnee?:Point;farAnkle?:Point;farElbow?:Point;farWrist?:Point;spine?:Point[];pedal?:Point};
+export type Pose={hip:Point;shoulder:Point;head:Point;elbow:Point;wrist:Point;knee:Point;ankle:Point;toe?:Point;farKnee?:Point;farAnkle?:Point;farElbow?:Point;farWrist?:Point;spine?:Point[];pedal?:Point;otherShoulder?:Point;otherHip?:Point};
+import { extraMovementPose, isExtraMotion } from './extra-motion-model';
 export type MovementInfo={out:string;back:string;example:string;cue:string;muscle:'legs'|'arms'|'back'|'chest'|'shoulders'|'core'|'cardio'};
 export const movementInfo:Record<string,MovementInfo>={
  'bike':{out:'Pedal smoothly',back:'Pedal smoothly',example:'Upright bike',cue:'Stay relaxed; keep a slight knee bend at the bottom.',muscle:'cardio'},
@@ -23,6 +24,13 @@ export const movementInfo:Record<string,MovementInfo>={
  'barbell-curl':{out:'Curl upward',back:'Lower slowly',example:'Light barbell curl',cue:'Keep your upper arms close and count the bar in your total weight.',muscle:'arms'},
  'kettlebell-deadlift':{out:'Stand up with the bell',back:'Lower and reset',example:'Two-hand kettlebell deadlift',cue:'Keep the bell close and move through your hips. This is not a swing.',muscle:'legs'},
  'barbell-rdl':{out:'Hinge your hips back',back:'Return to standing',example:'Light barbell Romanian deadlift',cue:'Practise the hinge first; ask for a demonstration of bar setup and handling.',muscle:'legs'},
+ 'dumbbell-lateral-raise':{out:'Raise out to the sides',back:'Lower slowly',example:'Dumbbell lateral raise · front view',cue:'Keep a soft elbow bend and a quiet torso. Shoulder height is a limit, not a target you must reach.',muscle:'shoulders'},
+ 'face-pull':{out:'Pull the rope toward your face',back:'Reach forward slowly',example:'High cable face pull · side view',cue:'Separate the rope ends beside your head. Keep your torso and neck steady.',muscle:'back'},
+ 'pec-fly':{out:'Bring arms together',back:'Open comfortably',example:'Chest fly · overhead view, facing the top',cue:'Back against the pad. This view shows the arm path; use the setup guide for seat height.',muscle:'chest'},
+ 'rear-delt-fly':{out:'Open your arms outward',back:'Return forward slowly',example:'Rear-delt fly · overhead view, facing the top',cue:'Chest against the pad. Keep a small elbow bend and avoid forcing your arms behind you.',muscle:'shoulders'},
+ 'hip-abduction':{out:'Push outward',back:'Return inward slowly',example:'Hip abduction · front view',cue:'Pads on the outside of your thighs. Push OUT with your torso supported.',muscle:'legs'},
+ 'hip-adduction':{out:'Bring inward',back:'Return outward slowly',example:'Hip adduction · front view',cue:'Pads on the inside of your thighs. Bring IN from a comfortable starting width.',muscle:'legs'},
+ 'rowing-erg':{out:'Legs → body → arms',back:'Arms → body → legs',example:'Rowing ergometer · side view',cue:'Drive with your legs first. On the return, let your hands clear your knees before the seat slides forward.',muscle:'cardio'},
 };
 export const isFreeWeight=(id:string)=>id.startsWith('dumbbell-')||id.startsWith('barbell-')||id==='goblet-squat'||id==='kettlebell-deadlift';
 const mix=(a:number,b:number,t:number)=>a+(b-a)*t;
@@ -35,6 +43,7 @@ export function joint(a:Point,b:Point,l1:number,l2:number,bend=1):Point{
  return [a[0]+dx/d*along-dy/d*height*bend,a[1]+dy/d*along+dx/d*height*bend];
 }
 export function movementPose(id:string,phase:number):Pose{
+ if(isExtraMotion(id))return extraMovementPose(id,phase);
  const a=phase*Math.PI*2,t=(1-Math.cos(a))/2;
  if(isFreeWeight(id)){
   let hip:Point=[225,184],shoulder:Point=[225,108],head:Point=[225,78],knee:Point=[230,230],ankle:Point=[225,274];
