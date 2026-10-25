@@ -1,15 +1,32 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "my-website",
+  "keep_vars": true,
   "compatibility_date": "2026-10-13",
   "assets": {
-    "directory": "./_site"
+    "directory": "./_site",
+    "binding": "ASSETS",
+    "run_worker_first": true
   },
   "routes": [
-    { "pattern": "josephjasin.com", "custom_domain": true },
-    { "pattern": "www.josephjasin.com", "custom_domain": true }
+    {
+      "pattern": "josephjasin.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.josephjasin.com",
+      "custom_domain": true
+    }
   ],
   "build": {
     "command": "npm run build"
-  }
+  },
+  "main": "firstrep/server/worker.ts",
+  "d1_databases": [
+    {
+      "binding": "FIRSTREP_DB",
+      "database_name": "firstrep",
+      "migrations_dir": "firstrep/migrations"
+    }
+  ]
 }

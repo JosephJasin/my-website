@@ -15,13 +15,35 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "npx @11ty/eleventy",
-    "start": "npx @11ty/eleventy --serve"
+    "build": "npm run build:site && npm run build:firstrep",
+    "start": "npx @11ty/eleventy --serve",
+    "build:site": "eleventy",
+    "build:firstrep": "vite build --config firstrep/vite.config.ts",
+    "dev": "npm run build && wrangler dev",
+    "check": "tsc --noEmit && node --experimental-vm-modules --test firstrep/tests/*.test.mjs",
+    "deploy": "wrangler deploy",
+    "db:migrate": "wrangler d1 migrations apply FIRSTREP_DB --remote"
   },
   "dependencies": {
-    "@11ty/eleventy": "^3.1.6"
+    "@11ty/eleventy": "^3.1.6",
+    "drizzle-orm": "0.45.2",
+    "jose": "^6.1.0",
+    "lucide-react": "1.31.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "zod": "3.25.76"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "5.20261025.1",
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.2",
+    "typescript": "5.9.3",
+    "vite": "8.0.13",
     "wrangler": "^4.149.0"
+  },
+  "engines": {
+    "node": ">=22.13.0"
   }
 }
