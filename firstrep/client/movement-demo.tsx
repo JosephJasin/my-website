@@ -1,10 +1,11 @@
 'use client';
 import { useEffect, useId, useRef, useState } from 'react';
 import { Pause, Play, RotateCcw } from 'lucide-react';
-import { movementInfo, movementPose, type Point, type Pose } from './movement-model';
+import { isFreeWeight, movementInfo, movementPose, type Point, type Pose } from './movement-model';
 const points=(ps:Point[])=>ps.map(p=>p.join(',')).join(' ');
 function Line({from,to,...props}:{from:Point;to:Point}&Omit<React.SVGProps<SVGLineElement>,'from'|'to'>){return <line x1={from[0]} y1={from[1]} x2={to[0]} y2={to[1]} {...props}/>}
 export function Equipment({id,p,phase}:{id:string;p:Pose;phase:number}){
+ if(isFreeWeight(id))return <FreeWeightEquipment id={id} p={p}/>;
  const stack=<g><rect x="351" y="87" width="51" height="193" rx="7" fill="#293426" strokeWidth="3"/><path d="M364 100V264M389 100V264" strokeWidth="2"/>{[0,1,2,3,4,5,6].map(i=><rect key={i} x="360" y={210+i*8} width="34" height="6" rx="2" fill="#53634b" stroke="none"/>)}</g>;
  const seat=(x:number,y:number)=><g><path d={`M${x+10} ${y+8}V280M${x-12} 280H${x+72}`} strokeWidth="7"/><rect x={x} y={y} width="68" height="12" rx="5" fill="#526249" stroke="none"/></g>;
  return <g className="motion-machine" stroke="#506047" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="6">
@@ -23,22 +24,33 @@ export function Equipment({id,p,phase}:{id:string;p:Pose;phase:number}){
  </g>}
  </g>
 }
+function FreeWeightEquipment({id,p}:{id:string;p:Pose}){
+ const dumbbell=(at:Point,angle=0,opacity=1)=><g transform={`translate(${at[0]} ${at[1]}) rotate(${angle})`} opacity={opacity}><path d="M-15 0H15" stroke="#a8b79a" strokeWidth="5"/><rect x="-21" y="-11" width="9" height="22" rx="3"/><rect x="12" y="-11" width="9" height="22" rx="3"/></g>;
+ return <g fill="#526449" stroke="#81956e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <path d="M70 284H423" stroke="#3d4b36"/>
+  {id==='dumbbell-row'&&<g><path d="M298 210V279M367 210V279M286 279H312M354 279H380" stroke="#506047" strokeWidth="7"/><rect x="278" y="201" width="106" height="12" rx="5"/></g>}
+  {id==='dumbbell-bench-press'&&<g><path d="M164 218V279M270 218V279M150 279H179M255 279H285" stroke="#506047" strokeWidth="7"/><rect x="132" y="207" width="158" height="13" rx="5"/></g>}
+  {id.startsWith('barbell-')?<g><Line from={[p.wrist[0]-75,p.wrist[1]]} to={[p.wrist[0]+75,p.wrist[1]]} stroke="#b3c3a4" strokeWidth="5"/>{[-57,51].map(x=><g key={x}><rect x={p.wrist[0]+x} y={p.wrist[1]-17} width="8" height="34" rx="3"/><rect x={p.wrist[0]+x+(x<0?-5:9)} y={p.wrist[1]-6} width="4" height="12" fill="#c3ee74" stroke="none"/></g>)}</g>:
+  id==='kettlebell-deadlift'?<g><path d={`M${p.wrist[0]-10} ${p.wrist[1]+13}q-6-22 10-22t10 22`} fill="none" strokeWidth="5"/><ellipse cx={p.wrist[0]} cy={p.wrist[1]+18} rx="18" ry="16"/></g>:
+  id==='goblet-squat'?dumbbell([p.wrist[0],p.wrist[1]+9],90):<>{id!=='dumbbell-row'&&dumbbell(p.farWrist??[p.wrist[0]-8,p.wrist[1]+1],0,.55)}{dumbbell(p.wrist)}</>}
+ </g>;
+}
 export function Figure({id,p,tint}:{id:string;p:Pose;tint?:string}){
  const info=movementInfo[id],tone='#e7eddf',accent=tint??'#c3ee74';
  const far=(pnt:Point):Point=>[pnt[0]-8,pnt[1]+1];
- const neck:Point=[p.shoulder[0]+(p.head[0]-p.shoulder[0])*.4,p.shoulder[1]-13];
+ const neck:Point=[p.shoulder[0]+(p.head[0]-p.shoulder[0])*.4,p.shoulder[1]+(p.head[1]-p.shoulder[1])*.4];
  return <g fill="none" strokeLinecap="round" strokeLinejoin="round">
  <polyline points={points([p.hip,p.farKnee??far(p.knee),p.farAnkle??far(p.ankle)])} stroke="#73856b" strokeWidth="8"/>
  <polyline points={points([p.shoulder,p.farElbow??far(p.elbow),p.farWrist??far(p.wrist)])} stroke="#73856b" strokeWidth="7"/>
  <polyline points={points([...(p.spine??[p.hip,p.shoulder]),neck])} stroke={tone} strokeWidth="10"/>
  <polyline points={points([p.hip,p.knee,p.ankle])} stroke={tone} strokeWidth="8"/>
  <polyline points={points([p.shoulder,p.elbow,p.wrist])} stroke={tone} strokeWidth="8"/>
- <Line from={p.ankle} to={[p.ankle[0]+14,p.ankle[1]+2]} stroke={tone} strokeWidth="7"/>
+ <Line from={p.ankle} to={p.toe??[p.ankle[0]+14,p.ankle[1]+2]} stroke={tone} strokeWidth="7"/>
  {p.farAnkle&&<Line from={p.farAnkle} to={[p.farAnkle[0]+13,p.farAnkle[1]+2]} stroke="#73856b" strokeWidth="7"/>}
  <circle cx={p.head[0]} cy={p.head[1]} r="12" fill={tone} stroke="none"/>
  {info.muscle==='legs'&&<Line from={[p.hip[0]*.75+p.knee[0]*.25,p.hip[1]*.75+p.knee[1]*.25]} to={[p.hip[0]*.2+p.knee[0]*.8,p.hip[1]*.2+p.knee[1]*.8]} stroke={accent} strokeWidth="9"/>}
  {['arms','shoulders','chest'].includes(info.muscle)&&<Line from={p.shoulder} to={[p.shoulder[0]*.25+p.elbow[0]*.75,p.shoulder[1]*.25+p.elbow[1]*.75]} stroke={accent} strokeWidth="9"/>}
- {['back','core'].includes(info.muscle)&&<polyline points={points(info.muscle==='core'?(p.spine??[p.hip,p.shoulder]).slice(0,3):[p.shoulder,[p.shoulder[0]*.4+p.hip[0]*.6,p.shoulder[1]*.4+p.hip[1]*.6]])} stroke={accent} strokeWidth="10"/>}
+ {['back','core'].includes(info.muscle)&&<polyline points={points(info.muscle==='core'?(p.spine??[p.hip,p.shoulder]).slice(0,3):(p.spine??[p.shoulder,[p.shoulder[0]*.4+p.hip[0]*.6,p.shoulder[1]*.4+p.hip[1]*.6]]))} stroke={accent} strokeWidth="10"/>}
  {[p.hip,p.shoulder,p.elbow,p.knee].map((pt,i)=><circle key={i} cx={pt[0]} cy={pt[1]} r="3" fill="#25321f" stroke="none"/>)}
  </g>
 }
@@ -55,6 +67,6 @@ export default function MovementDemo({id,name,compact=false,autoPlay=true}:{id:s
  function scrub(value:number){setPlaying(false);position.current=value;setPhase(value)}
  return <div ref={container} className={'movement-demo '+(compact?'compact':'full')} aria-label={`${name} movement illustration`}>
  <div className="motion-stage"><MovementFrame id={id} phase={phase} label={label}/><span className="motion-badge">{compact?'MOVEMENT PREVIEW':'MOVEMENT SKETCH'}</span>{!compact&&<span className="motion-phase">{phase<.5?info.out:info.back}</span>}</div>
- {!compact&&<><div className="motion-controls"><button type="button" className="button secondary small" onClick={()=>setPlaying(v=>!v)} aria-label={playing?'Pause animation':'Play animation'}>{playing?<Pause size={15}/>:<Play size={15}/>} {playing?'Pause':'Play'}</button><button type="button" className="motion-restart" aria-label="Restart animation" onClick={()=>{position.current=0;setPhase(0)}}><RotateCcw size={17}/></button><label className="motion-speed">Speed<select aria-label="Animation speed" value={speed} onChange={e=>setSpeed(Number(e.target.value))}><option value={.5}>0.5× · Slow</option><option value={1}>1× · Normal</option></select></label></div><label className="motion-scrubber">Inspect the movement<input type="range" aria-label="Movement position" min="0" max="100" step="1" value={Math.round(phase*100)} onChange={e=>scrub(Number(e.target.value)/100)}/></label><div className="motion-caption"><strong>{info.example}</strong><p>{info.cue}</p><small>Simplified motion, not exact joint angles or a prescribed range. Follow the setup below and your machine’s instructions.</small></div></>}
+ {!compact&&<><div className="motion-controls"><button type="button" className="button secondary small" onClick={()=>setPlaying(v=>!v)} aria-label={playing?'Pause animation':'Play animation'}>{playing?<Pause size={15}/>:<Play size={15}/>} {playing?'Pause':'Play'}</button><button type="button" className="motion-restart" aria-label="Restart animation" onClick={()=>{position.current=0;setPhase(0)}}><RotateCcw size={17}/></button><label className="motion-speed">Speed<select aria-label="Animation speed" value={speed} onChange={e=>setSpeed(Number(e.target.value))}><option value={.5}>0.5× · Slow</option><option value={1}>1× · Normal</option></select></label></div><label className="motion-scrubber">Inspect the movement<input type="range" aria-label="Movement position" min="0" max="100" step="1" value={Math.round(phase*100)} onChange={e=>scrub(Number(e.target.value)/100)}/></label><div className="motion-caption"><strong>{info.example}</strong><p>{info.cue}</p><small>Simplified motion, not exact joint angles or a prescribed range. Follow the setup below and the equipment instructions.</small></div></>}
  </div>
 }

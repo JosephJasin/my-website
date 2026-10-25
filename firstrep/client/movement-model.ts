@@ -1,6 +1,6 @@
 // Schematic side-view poses, not model-specific setup or prescribed joint angles.
 export type Point=[number,number];
-export type Pose={hip:Point;shoulder:Point;head:Point;elbow:Point;wrist:Point;knee:Point;ankle:Point;farKnee?:Point;farAnkle?:Point;farElbow?:Point;farWrist?:Point;spine?:Point[];pedal?:Point};
+export type Pose={hip:Point;shoulder:Point;head:Point;elbow:Point;wrist:Point;knee:Point;ankle:Point;toe?:Point;farKnee?:Point;farAnkle?:Point;farElbow?:Point;farWrist?:Point;spine?:Point[];pedal?:Point};
 export type MovementInfo={out:string;back:string;example:string;cue:string;muscle:'legs'|'arms'|'back'|'chest'|'shoulders'|'core'|'cardio'};
 export const movementInfo:Record<string,MovementInfo>={
  'bike':{out:'Pedal smoothly',back:'Pedal smoothly',example:'Upright bike',cue:'Stay relaxed; keep a slight knee bend at the bottom.',muscle:'cardio'},
@@ -15,7 +15,16 @@ export const movementInfo:Record<string,MovementInfo>={
  'cable-triceps':{out:'Press down',back:'Return slowly',example:'High cable · triceps pushdown',cue:'Keep your upper arms still beside your torso.',muscle:'arms'},
  'cable-curl':{out:'Curl upward',back:'Lower slowly',example:'Low cable · biceps curl',cue:'Keep your elbows close and avoid leaning back.',muscle:'arms'},
  'treadmill':{out:'Walk at an easy pace',back:'Walk at an easy pace',example:'Flat treadmill walking',cue:'Start slowly and stop the belt before stepping off.',muscle:'cardio'},
+ 'dumbbell-curl':{out:'Curl upward',back:'Lower slowly',example:'Standing dumbbell curl',cue:'Move at the elbows while your torso and wrists stay steady.',muscle:'arms'},
+ 'dumbbell-row':{out:'Row toward your hip',back:'Lower with control',example:'One-hand-supported dumbbell row',cue:'Both feet stay on the floor; one hand supports you on a stable bench.',muscle:'back'},
+ 'dumbbell-bench-press':{out:'Press upward',back:'Lower comfortably',example:'Flat dumbbell bench press',cue:'Keep head, shoulders and hips supported. Learn the entry and exit with help.',muscle:'chest'},
+ 'goblet-squat':{out:'Lower comfortably',back:'Stand tall',example:'Dumbbell goblet squat',cue:'Hold the weight close; keep your whole feet planted. Depth is individual.',muscle:'legs'},
+ 'dumbbell-rdl':{out:'Hinge your hips back',back:'Return to standing',example:'Dumbbell Romanian deadlift',cue:'Keep weights near your legs. Stop the hinge before your back shape changes.',muscle:'legs'},
+ 'barbell-curl':{out:'Curl upward',back:'Lower slowly',example:'Light barbell curl',cue:'Keep your upper arms close and count the bar in your total weight.',muscle:'arms'},
+ 'kettlebell-deadlift':{out:'Stand up with the bell',back:'Lower and reset',example:'Two-hand kettlebell deadlift',cue:'Keep the bell close and move through your hips. This is not a swing.',muscle:'legs'},
+ 'barbell-rdl':{out:'Hinge your hips back',back:'Return to standing',example:'Light barbell Romanian deadlift',cue:'Practise the hinge first; ask for a demonstration of bar setup and handling.',muscle:'legs'},
 };
+export const isFreeWeight=(id:string)=>id.startsWith('dumbbell-')||id.startsWith('barbell-')||id==='goblet-squat'||id==='kettlebell-deadlift';
 const mix=(a:number,b:number,t:number)=>a+(b-a)*t;
 const polar=(p:Point,length:number,angle:number):Point=>[p[0]+length*Math.cos(angle),p[1]+length*Math.sin(angle)];
 export function joint(a:Point,b:Point,l1:number,l2:number,bend=1):Point{
@@ -27,6 +36,36 @@ export function joint(a:Point,b:Point,l1:number,l2:number,bend=1):Point{
 }
 export function movementPose(id:string,phase:number):Pose{
  const a=phase*Math.PI*2,t=(1-Math.cos(a))/2;
+ if(isFreeWeight(id)){
+  let hip:Point=[225,184],shoulder:Point=[225,108],head:Point=[225,78],knee:Point=[230,230],ankle:Point=[225,274];
+  let elbow:Point=[232,153],wrist:Point=polar(elbow,45,mix(80,-65,t)*Math.PI/180);
+  let extra:Partial<Pose>={farKnee:[214,230],farAnkle:[208,274]};
+  if(id==='dumbbell-row'){
+   hip=[174,188];shoulder=[258,140];head=[284,125];knee=[190,233];ankle=[186,274];
+   wrist=[mix(264,217,t),mix(234,199,t)];elbow=joint(shoulder,wrist,50,50,1);
+   extra={farKnee:[217,229],farAnkle:[228,274],farWrist:[294,198],farElbow:joint(shoulder,[294,198],40,40,-1)};
+  }
+  if(id==='dumbbell-bench-press'){
+   hip=[270,196];shoulder=[190,196];head=[155,196];knee=[316,229];ankle=[309,274];
+   wrist=[205,mix(158,99,t)];elbow=joint(shoulder,wrist,51,51,1);
+   extra={farKnee:[302,231],farAnkle:[290,274],farWrist:[wrist[0]-9,wrist[1]+2],farElbow:[elbow[0]-9,elbow[1]+2]};
+  }
+  if(id==='goblet-squat'){
+   hip=[mix(225,190,t),mix(184,230,t)];shoulder=[mix(225,218,t),mix(108,160,t)];head=[mix(225,229,t),mix(78,132,t)];
+   knee=[mix(230,245,t),mix(230,238,t)];wrist=[shoulder[0]+28,shoulder[1]+28];elbow=[shoulder[0]+19,shoulder[1]+53];
+   extra={farKnee:[knee[0]-14,knee[1]+1],farAnkle:[208,274],farWrist:[wrist[0]-7,wrist[1]+2],farElbow:[elbow[0]-8,elbow[1]+1]};
+  }
+  if(id==='dumbbell-rdl'||id==='barbell-rdl'||id==='kettlebell-deadlift'){
+   const h=id==='kettlebell-deadlift'?1-t:t,kettle=id==='kettlebell-deadlift';
+   hip=[mix(225,190,h),mix(184,kettle?212:196,h)];shoulder=[mix(225,245,h),mix(108,kettle?172:148,h)];
+   const dx=shoulder[0]-hip[0],dy=shoulder[1]-hip[1],length=Math.hypot(dx,dy);
+   head=[shoulder[0]+dx/length*30,shoulder[1]+dy/length*30];
+   knee=[mix(230,kettle?243:230,h),mix(230,kettle?243:232,h)];
+   wrist=[shoulder[0],mix(198,kettle?249:238,h)];elbow=[shoulder[0],(shoulder[1]+wrist[1])/2];
+   extra={farKnee:[knee[0]-14,knee[1]+1],farAnkle:[208,274],farWrist:[wrist[0]-8,wrist[1]+1],farElbow:[elbow[0]-8,elbow[1]+1]};
+  }
+  return {hip,shoulder,head,knee,ankle,elbow,wrist,...extra};
+ }
  let hip:Point=[210,216],shoulder:Point=[210,139],head:Point=[210,108],wrist:Point=[245,145],knee:Point=[265,216],ankle:Point=[265,272];
  let elbow:Point|undefined,extras:Partial<Pose>={};
  if(id==='chest-press')wrist=[mix(247,309,t),145];

@@ -14,13 +14,13 @@ const patch = z.object({
 const prefs = z.object({pace:z.number().int().min(1).max(2),visitsPerWeek:z.number().int().min(2).max(3)}).strict();
 const profileData = z.object({age:z.number().int().min(18).max(120).nullable(),heightCm:z.number().min(80).max(250).nullable(),startingWeightKg:z.number().min(20).max(500).nullable()}).strict();
 const savedMachine = patch.required().extend({machineId,updatedAt:z.string().datetime()}).strict();
-const savedVisit = z.object({id:z.string().uuid(),machineIds:z.array(machineId).max(12),startedAt:z.string().datetime(),finishedAt:z.string().datetime().nullable()}).strict();
+const savedVisit = z.object({id:z.string().uuid(),machineIds:z.array(machineId).max(machines.length),startedAt:z.string().datetime(),finishedAt:z.string().datetime().nullable()}).strict();
 export const backupSchema = z.object({
   format:z.literal('firstrep-backup'),version:z.literal(1),exportedAt:z.string().datetime(),
   data:z.object({machines:z.record(savedMachine),preferences:prefs,visits:z.array(savedVisit).max(2000),profile:profileData.nullable().optional()}).strict(),
 }).strict().superRefine((backup,ctx) => {
   const entries=Object.entries(backup.data.machines);
-  if(entries.length>12 || entries.some(([id,m])=>id!==m.machineId))ctx.addIssue({code:'custom',message:'Invalid equipment records.'});
+  if(entries.length>machines.length || entries.some(([id,m])=>id!==m.machineId))ctx.addIssue({code:'custom',message:'Invalid equipment records.'});
   if(backup.data.visits.filter(v=>!v.finishedAt).length>1)ctx.addIssue({code:'custom',message:'Only one visit may be in progress.'});
   if(new Set(backup.data.visits.map(v=>v.id)).size!==backup.data.visits.length)ctx.addIssue({code:'custom',message:'Duplicate visit identifiers.'});
 });

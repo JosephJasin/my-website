@@ -142,5 +142,129 @@
     "title": "Axiom Dual Adjustable Pulley",
     "source": "https://shop.lifefitness.com/products/axiom-dual-adjustable-pulley",
     "image": "/firstrep/equipment/dual-cable.jpg"
+  },
+  "dumbbells-fixed": {
+    "title": "Fixed dumbbells",
+    "source": "https://www.lifefitness.com/de-de/produkte/accessories/dumbbells-fixed-barbells",
+    "image": "/firstrep/equipment/dumbbells-fixed.svg",
+    "illustrated": true
+  },
+  "dumbbells-adjustable": {
+    "title": "Adjustable dumbbells",
+    "source": "https://www.lifefitness.com/en-us/catalog/accessories/dumbbells-fixed-barbells/pro-100-adjustable-dumbbells",
+    "image": "/firstrep/equipment/dumbbells-adjustable.svg",
+    "illustrated": true
+  },
+  "barbell-straight": {
+    "title": "Loadable straight barbell",
+    "source": "https://shop.lifefitness.com/collections/hammer-strength",
+    "image": "/firstrep/equipment/barbell-straight.svg",
+    "illustrated": true
+  },
+  "barbell-fixed": {
+    "title": "Fixed-weight barbell",
+    "source": "https://www.lifefitness.com/de-de/produkte/accessories/dumbbells-fixed-barbells",
+    "image": "/firstrep/equipment/barbell-fixed.svg",
+    "illustrated": true
+  },
+  "barbell-ez": {
+    "title": "EZ curl bar",
+    "source": "https://www.lifefitness.com/de-de/produkte/accessories/dumbbells-fixed-barbells",
+    "image": "/firstrep/equipment/barbell-ez.svg",
+    "illustrated": true
+  },
+  "plates-collars": {
+    "title": "Weight plates and collars",
+    "source": "https://shop.lifefitness.com/collections/hammer-strength",
+    "image": "/firstrep/equipment/plates-collars.svg",
+    "illustrated": true
+  },
+  "kettlebell": {
+    "title": "Kettlebell",
+    "source": "https://shop.lifefitness.com/collections/hammer-strength",
+    "image": "/firstrep/equipment/kettlebell.svg",
+    "illustrated": true
+  },
+  "bench-flat": {
+    "title": "Flat bench",
+    "source": "https://www.lifefitness.com/en-eu/catalog/strength-training/benches",
+    "image": "/firstrep/equipment/bench-flat.svg",
+    "illustrated": true
+  },
+  "bench-adjustable": {
+    "title": "Adjustable bench",
+    "source": "https://www.lifefitness.com/en-eu/catalog/strength-training/benches",
+    "image": "/firstrep/equipment/bench-adjustable.svg",
+    "illustrated": true
+  },
+  "dumbbell-bench": {
+    "title": "Dumbbells and flat bench",
+    "source": "https://www.lifefitness.com/de-de/produkte/accessories/dumbbells-fixed-barbells",
+    "image": "/firstrep/equipment/dumbbell-bench.svg",
+    "illustrated": true
+  },
+  "dumbbell-curl": {
+    "title": "Fixed dumbbells",
+    "source": "https://www.lifefitness.com/de-de/produkte/accessories/dumbbells-fixed-barbells",
+    "image": "/firstrep/equipment/dumbbells-fixed.svg",
+    "illustrated": true,
+    "tutorialUrl": "https://www.acefitness.org/resources/everyone/exercise-library/44/seated-biceps-curl/",
+    "tutorialLabel": "ACE curl technique · seated example"
+  },
+  "dumbbell-row": {
+    "title": "Dumbbells and flat bench",
+    "source": "https://www.lifefitness.com/de-de/produkte/accessories/dumbbells-fixed-barbells",
+    "image": "/firstrep/equipment/dumbbell-bench.svg",
+    "illustrated": true,
+    "tutorialUrl": "https://www.acefitness.org/resources/everyone/exercise-library/126/single-arm-row/",
+    "tutorialLabel": "ACE single-arm row · hand-and-knee support example"
+  },
+  "dumbbell-bench-press": {
+    "title": "Dumbbells and flat bench",
+    "source": "https://www.lifefitness.com/de-de/produkte/accessories/dumbbells-fixed-barbells",
+    "image": "/firstrep/equipment/dumbbell-bench.svg",
+    "illustrated": true,
+    "tutorialUrl": "https://www.acefitness.org/resources/everyone/exercise-library/19/chest-press/",
+    "tutorialLabel": "ACE dumbbell chest press"
+  },
+  "goblet-squat": {
+    "title": "Fixed dumbbells",
+    "source": "https://www.lifefitness.com/de-de/produkte/accessories/dumbbells-fixed-barbells",
+    "image": "/firstrep/equipment/dumbbells-fixed.svg",
+    "illustrated": true,
+    "tutorialUrl": "https://www.acefitness.org/resources/everyone/exercise-library/362/goblet-squat/",
+    "tutorialLabel": "ACE goblet squat · choose a comfortable depth"
+  },
+  "dumbbell-rdl": {
+    "title": "Fixed dumbbells",
+    "source": "https://www.lifefitness.com/de-de/produkte/accessories/dumbbells-fixed-barbells",
+    "image": "/firstrep/equipment/dumbbells-fixed.svg",
+    "illustrated": true,
+    "tutorialUrl": "https://www.acefitness.org/resources/pros/expert-articles/7073/4-deadlift-variations-to-spice-up-your-programming/",
+    "tutorialLabel": "ACE hip-hinge and deadlift variations"
+  },
+  "barbell-curl": {
+    "title": "Fixed-weight barbell",
+    "source": "https://www.lifefitness.com/de-de/produkte/accessories/dumbbells-fixed-barbells",
+    "image": "/firstrep/equipment/barbell-fixed.svg",
+    "illustrated": true,
+    "tutorialUrl": "https://www.acefitness.org/resources/everyone/exercise-library/70/bicep-curl/",
+    "tutorialLabel": "ACE barbell curl"
+  },
+  "kettlebell-deadlift": {
+    "title": "Kettlebell",
+    "source": "https://shop.lifefitness.com/collections/hammer-strength",
+    "image": "/firstrep/equipment/kettlebell.svg",
+    "illustrated": true,
+    "tutorialUrl": "https://www.acefitness.org/resources/pros/expert-articles/5269/how-to-get-started-with-kettlebells/",
+    "tutorialLabel": "ACE kettlebell deadlift"
+  },
+  "barbell-rdl": {
+    "title": "Loadable straight barbell",
+    "source": "https://shop.lifefitness.com/collections/hammer-strength",
+    "image": "/firstrep/equipment/barbell-straight.svg",
+    "illustrated": true,
+    "tutorialUrl": "https://www.nsca.com/education/articles/kinetic-select/romanian-deadlift-rdl/",
+    "tutorialLabel": "NSCA Romanian deadlift"
   }
 }

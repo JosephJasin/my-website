@@ -1,4 +1,4 @@
-export type CueKind='knee-lock'|'hip-lift'|'depth'|'wrist'|'shrug'|'torso-swing'|'neck'|'behind-neck'|'control'|'back-arch'|'crunch-range'|'upper-arm'|'bike-seat'|'treadmill-start'|'treadmill-exit';
+export type CueKind='knee-lock'|'hip-lift'|'depth'|'wrist'|'shrug'|'torso-swing'|'neck'|'behind-neck'|'control'|'back-arch'|'crunch-range'|'upper-arm'|'bike-seat'|'treadmill-start'|'treadmill-exit'|'rounded-back'|'load-away'|'heel-lift'|'bench-hips';
 export type FormCue={kind:CueKind;label:string;avoid:string;aim:string;tip:string};
 export const formCues:Record<string,FormCue[]>={
  'bike':[
@@ -39,3 +39,18 @@ export const formCues:Record<string,FormCue[]>={
  {kind:'treadmill-start',label:'Starting pace',avoid:'Starting the belt fast',aim:'Start at an easy pace',tip:'Find the stop control and attach the safety clip if provided. Start slowly and build time before speed or incline.'},
  {kind:'treadmill-exit',label:'Getting off',avoid:'Stepping off a moving belt',aim:'Stop the belt before getting off',tip:'Slow down, stop the belt completely, and then step off carefully. Keep the stop control within reach.'}],
 };
+
+const wrists:FormCue={kind:'wrist',label:'Wrists',avoid:'Wrist folded under the weight',aim:'Hand and forearm stay aligned',tip:'Choose a grip that feels comfortable. Reduce the load if you cannot hold your wrist steady.'};
+const swing:FormCue={kind:'torso-swing',label:'Torso',avoid:'Leaning back to lift the weight',aim:'Quiet torso while elbows bend',tip:'Use a lighter weight if you need to rock or throw your hips forward to finish the curl.'};
+const back:FormCue={kind:'rounded-back',label:'Back shape',avoid:'Rounding to reach farther',aim:'A steady, comfortable spine',tip:'Shorten the reach before your back shape changes. Practise the hinge without weights and ask a trainer to check it.'};
+const close:FormCue={kind:'load-away',label:'Weight path',avoid:'Weight drifting away from you',aim:'Weight travels close to your legs',tip:'Keep the load near you with long arms. Move through your hips rather than reaching your hands forward.'};
+Object.assign(formCues,{
+ 'dumbbell-curl':[swing,wrists],
+ 'barbell-curl':[swing,wrists],
+ 'dumbbell-row':[back,{kind:'neck',label:'Head position',avoid:'Looking up and craning the neck',aim:'Head follows the line of your back',tip:'Look toward the floor ahead of the bench. Keep your torso steady instead of twisting to finish the row.'}],
+ 'dumbbell-bench-press':[wrists,{kind:'bench-hips',label:'Bench contact',avoid:'Lifting your hips off the bench',aim:'Head, shoulders and hips supported',tip:'Keep your feet firmly supported and use a manageable load. A comfortable natural lower-back curve is fine.'}],
+ 'goblet-squat':[{kind:'heel-lift',label:'Feet',avoid:'Heels lifting as you lower',aim:'Your whole feet stay planted',tip:'Choose a comfortable stance and reduce depth if your heels rise. A stable bench can help you practise a controlled range.'},{kind:'load-away',label:'Weight position',avoid:'Reaching the weight forward',aim:'Hold the weight close to your chest',tip:'Keep a secure two-hand hold near your body. Start without a weight if balancing is difficult.'}],
+ 'dumbbell-rdl':[back,close],
+ 'barbell-rdl':[back,close],
+ 'kettlebell-deadlift':[back,{...close,tip:'Keep the kettlebell close as you stand and lower it. If the floor is hard to reach, ask staff for a stable raised start.'}],
+} satisfies Record<string,FormCue[]>);

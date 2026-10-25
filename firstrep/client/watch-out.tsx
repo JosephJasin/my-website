@@ -2,13 +2,13 @@
 import { useId, useState } from 'react';
 import { Check, CircleHelp, Maximize2, Minimize2, X } from 'lucide-react';
 import { Equipment, Figure } from './movement-demo';
-import { joint, movementPose, type Point, type Pose } from './movement-model';
+import { isFreeWeight, joint, movementPose, type Point, type Pose } from './movement-model';
 import { formCues, type CueKind, type FormCue } from './form-cues';
 const plus=(p:Point,dx:number,dy:number):Point=>[p[0]+dx,p[1]+dy];
 const copy=(p:Pose):Pose=>JSON.parse(JSON.stringify(p));
 function turn(p:Point,center:Point,degrees:number):Point{const a=degrees*Math.PI/180,x=p[0]-center[0],y=p[1]-center[1];return [center[0]+x*Math.cos(a)-y*Math.sin(a),center[1]+x*Math.sin(a)+y*Math.cos(a)]}
 export function cueScene(id:string,kind:CueKind,bad:boolean){
- const phase=kind==='shrug'?0:kind==='hip-lift'||kind==='depth'?.12:kind==='knee-lock'?.5:.35;
+ const phase=id==='kettlebell-deadlift'?.08:kind==='shrug'?0:kind==='hip-lift'||kind==='depth'?.12:kind==='knee-lock'?.5:.35;
  const base=movementPose(id,phase),p=copy(base);let focus:Point=[220,170],view='90 45 270 250';
  if(kind==='knee-lock'){
   if(id==='bike'){
@@ -66,8 +66,33 @@ export function cueScene(id:string,kind:CueKind,bad:boolean){
   p.farKnee=joint(p.hip,p.farAnkle!,62,65,-1);
   p.elbow=joint(p.shoulder,p.wrist,51,51,1);
  }
+ if(isFreeWeight(id)){
+  view=id==='dumbbell-bench-press'?'120 65 245 230':id==='dumbbell-row'?'135 75 255 220':'120 45 265 250';
+  if(kind==='wrist')view=`${p.wrist[0]-70} ${p.wrist[1]-60} 160 145`;
+  if(kind==='torso-swing'&&bad){p.farElbow=plus(p.elbow,-8,1);p.farWrist=plus(p.wrist,-8,1)}
+  if(id==='dumbbell-row'&&kind==='neck'){
+   if(bad)p.head=plus(base.head,-8,-22);
+   focus=p.head;
+  }
+  if(kind==='rounded-back'){
+   if(bad)p.spine=[p.hip,plus(p.hip,-3,-27),plus(p.shoulder,-20,-15),p.shoulder];
+   focus=[(p.hip[0]+p.shoulder[0])/2-(bad?12:0),(p.hip[1]+p.shoulder[1])/2-(bad?17:0)];
+  }
+  if(kind==='load-away'){
+   if(bad){p.wrist=plus(p.wrist,43,0);p.elbow=joint(p.shoulder,p.wrist,50,50,1);p.farWrist=plus(p.wrist,-8,1);p.farElbow=plus(p.elbow,-8,1)}
+   focus=p.wrist;
+  }
+  if(kind==='heel-lift'){
+   if(bad){p.toe=plus(p.ankle,14,2);p.ankle=plus(p.ankle,0,-16)}
+   focus=plus(p.ankle,4,2);view='160 175 145 125';
+  }
+  if(kind==='bench-hips'){
+   if(bad){p.hip=plus(p.hip,0,-27);p.spine=[p.hip,[230,168],p.shoulder]}
+   focus=p.hip;
+  }
+ }
  // Connect cable/lever handles to the illustrated hand while keeping the seat and back pad stationary.
- const machine={...base,wrist:p.wrist,ankle:p.ankle,...(id==='bike'?{hip:p.hip}:{})};
+ const machine=isFreeWeight(id)?p:{...base,wrist:p.wrist,ankle:p.ankle,...(id==='bike'?{hip:p.hip}:{})};
  return {base,p,machine,focus,view,phase};
 }
 function TreadmillDiagram({kind,bad,tone}:{kind:CueKind;bad:boolean;tone:string}){
@@ -90,10 +115,11 @@ export function WarningDiagram({id,cue,bad,label}:{id:string;cue:FormCue;bad:boo
  const special=cue.kind.startsWith('treadmill-');
  const wristAngle=Math.atan2(p.wrist[1]-p.elbow[1],p.wrist[0]-p.elbow[0])+(bad?Math.PI/2:0);
  const hand:Point=[p.wrist[0]+17*Math.cos(wristAngle),p.wrist[1]+17*Math.sin(wristAngle)];
+ const heldEquipment=isFreeWeight(id)&&cue.kind==='wrist'?{...machine,wrist:hand,farWrist:plus(hand,-8,1)}:machine;
  return <svg xmlns="http://www.w3.org/2000/svg" viewBox={special?'0 0 280 230':view} role="img" aria-labelledby={label+'-title '+label+'-desc'}>
- <title id={label+'-title'}>{(bad?'Avoid: ':'Aim for: ')+(bad?cue.avoid:cue.aim)}</title><desc id={label+'-desc'}>{cue.tip+' Simplified illustration; exact setup varies by machine.'}</desc>
+ <title id={label+'-title'}>{(bad?'Avoid: ':'Aim for: ')+(bad?cue.avoid:cue.aim)}</title><desc id={label+'-desc'}>{cue.tip+' Simplified illustration; exact setup varies by equipment.'}</desc>
  {special?<TreadmillDiagram kind={cue.kind} bad={bad} tone={tone}/>:<>
- <Equipment id={id} p={machine} phase={phase}/>
+ <Equipment id={id} p={heldEquipment} phase={phase}/>
  <Figure id={id} p={p} tint="#c8d1bd"/>
  {cue.kind==='wrist'&&<path d={`M${p.wrist.join(' ')}L${hand.join(' ')}`} stroke={tone} strokeWidth="8" strokeLinecap="round"/>}
  <circle cx={focus[0]} cy={focus[1]} r={cue.kind==='depth'?28:cue.kind==='wrist'?24:21} fill={bad?'#ffad8c0b':'#c3ee740b'} stroke={tone} strokeWidth="2" strokeDasharray="5 4"/>
