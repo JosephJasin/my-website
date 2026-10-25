@@ -63,12 +63,16 @@ let signedIn=null;modules.set('./auth',synthetic('routeAuth',{configured:auth.co
 const worker=(await source('firstrep/server/worker.ts')).namespace.default;
 const assets=[];const env={...config,FIRSTREP_DB:{},ASSETS:{fetch:async request=>{assets.push(new URL(request.url).pathname);return new Response('asset')}}};
 assert.equal((await worker.fetch(new Request(origin+'/'),env)).status,200);
+const installAssets=['/firstrep-install/manifest.webmanifest','/firstrep-install/icon-192.png','/firstrep-install/icon-512.png'];
+for(const path of installAssets)assert.equal((await worker.fetch(new Request(origin+path),{ASSETS:env.ASSETS})).status,200);
 assert.equal((await worker.fetch(new Request(origin+'/firstrep/'),env)).status,401);
 assert.equal((await worker.fetch(new Request(origin+'/firstrep/assets/app.js'),env)).status,401);
 assert.equal((await worker.fetch(new Request(origin+'/firstrep/api/progress'),env)).status,401);
+assert.equal((await worker.fetch(new Request(origin+'/firstrep/api/export'),env)).status,401);
+assert.equal((await worker.fetch(new Request(origin+'/firstrep/manifest.webmanifest'),env)).status,401);
 assert.equal((await worker.fetch(new Request(origin+'/firstrep/'),{...env,FIRSTREP_ACCESS_AUD:''})).status,503);
 for(const path of ['/firstrep%2Fassets/app.js','/%66irstrep/assets/app.js','//firstrep/index.html']){const r=await worker.fetch(new Request(origin+path),env);assert.equal(r.status,308);assert.ok(r.headers.get('location').startsWith(origin+'/firstrep/'));}
-assert.deepEqual(assets,['/']);
+assert.deepEqual(assets,['/',...installAssets]);
 signedIn={userId:'alice',email:config.FIRSTREP_OWNER_EMAIL};
 assert.equal((await worker.fetch(new Request(origin+'/firstrep'),env)).headers.get('location'),origin+'/firstrep/');
 assert.equal((await worker.fetch(new Request(origin+'/firstrep/'),env)).headers.get('cache-control'),'private, no-store');
