@@ -23,6 +23,8 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.wear.compose.foundation.lazy.TransformingLazyColumn
 import androidx.wear.compose.foundation.lazy.rememberTransformingLazyColumnState
@@ -38,7 +40,7 @@ class MainActivity : ComponentActivity() {
         val repo = (application as FirstRepApp).repository
         setContent {
             val ui by repo.state.collectAsStateWithLifecycle()
-            LaunchedEffect(Unit) { while (true) { repo.refresh(); delay(15_000) } }
+            LaunchedEffect(Unit) { lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) { while (true) { repo.refresh(); delay(15_000) } } }
             LaunchedEffect(ui.journal.snapshot?.active?.id, ui.journal.pending.isNotEmpty()) {
                 if (ui.journal.snapshot?.active != null || ui.journal.pending.isNotEmpty()) startForegroundService(Intent(this@MainActivity, WorkoutService::class.java))
             }

@@ -72,6 +72,8 @@ export function watchService(db:D1Database,getLearning:(id:string)=>Promise<Lear
    if(!['pair','workout','command'].includes(path))return json({error:'Not found.'},404);
    // Native HTTPS only. Browser requests cannot use these endpoints through CORS.
    if(request.headers.has('origin'))return json({error:'Use the paired watch app.'},403);
+   const token=request.headers.get('authorization')?.match(/^Bearer ([a-f0-9]{64})$/)?.[1];
+   if(!(path==='pair'&&request.method==='POST')&&!token)return json({error:'Pair your watch in First Rep settings.'},401);
    await ensureWatchTables(db);
    if(path==='pair'&&request.method==='POST'){
     let parsed;try{parsed=pairSchema.safeParse(await body(request))}catch{return json({error:'Invalid request.'},400)}
@@ -89,7 +91,6 @@ export function watchService(db:D1Database,getLearning:(id:string)=>Promise<Lear
     await db.prepare('INSERT INTO watch_devices(id,token_hash,code_hash,name,created_at,expires_at) VALUES(?,?,?,?,?,?)').bind(id,await hash(token),await hash(code),parsed.data.name,now,now+10*minute).run();
     return json({token,code,expiresAt:now+10*minute},201);
    }
-   const token=request.headers.get('authorization')?.match(/^Bearer ([a-f0-9]{64})$/)?.[1];
    if(!token)return json({error:'Pair your watch in First Rep settings.'},401);
    const device=await db.prepare('SELECT id,user_id,name,expires_at,created_at,last_seen FROM watch_devices WHERE token_hash=? AND expires_at>?').bind(await hash(token),Date.now()).first<Device>();
    if(!device)return json({error:'Pairing expired or this watch was revoked. Pair again.'},401);

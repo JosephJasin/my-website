@@ -138,6 +138,10 @@ for(const path of installAssets)assert.equal((await worker.fetch(new Request(ori
 assert.equal((await worker.fetch(new Request(origin+'/firstrep/'),env)).status,401);
 assert.equal((await worker.fetch(new Request(origin+'/firstrep/assets/app.js'),env)).status,401);
 assert.equal((await worker.fetch(new Request(origin+'/firstrep/api/progress'),env)).status,401);
+assert.equal((await worker.fetch(new Request(origin+'/firstrep/api/watch'),env)).status,401);
+assert.equal((await worker.fetch(new Request(origin+'/firstrep-watch-api/workout'),env)).status,401);
+assert.equal((await worker.fetch(new Request(origin+'/firstrep-watch-api/command',{method:'POST'}),env)).status,401);
+assert.equal((await worker.fetch(new Request(origin+'/firstrep-watch-api/export'),env)).status,404);
 for(const path of ['/firstrep/api/workouts','/firstrep/api/workouts/export','/firstrep/api/documents','/firstrep/api/documents/human-4'])assert.equal((await worker.fetch(new Request(origin+path),env)).status,401);
 assert.equal((await worker.fetch(new Request(origin+'/firstrep/api/export'),env)).status,401);
 assert.equal((await worker.fetch(new Request(origin+'/firstrep/manifest.webmanifest'),env)).status,401);
