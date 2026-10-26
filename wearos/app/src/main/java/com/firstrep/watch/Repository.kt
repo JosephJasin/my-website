@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.*
 import java.net.HttpURLConnection
 import java.net.URL
@@ -61,14 +60,14 @@ class Repository(context: Application) {
             while (_state.value.journal.pending.isNotEmpty()) {
                 j = _state.value.journal
                 val op = j.pending.first()
-                val response = wire.decodeFromString<Snapshot>(api("command", "POST", wire.encodeToString(op)))
+                val response = wire.decodeFromString<Snapshot>(api("command", "POST", buildJsonObject { put("operationId", op.operationId); put("command", op.command) }.toString()))
                 save(acknowledge(_state.value.journal, op.operationId, response))
             }
             val response = wire.decodeFromString<Snapshot>(api("workout"))
             check(response.protocol == 1) { "Please update the watch app." }
             // UI can enqueue an entry while a GET is in flight. Never replace those local entries.
             val latest = _state.value.journal
-            if (latest.pending.isEmpty()) save(latest.copy(snapshot = response, undo = latest.undo?.takeIf { it.sessionId == response.active?.id && it.revision == response.active.revision }))
+            if (latest.pending.isEmpty()) save(latest.copy(snapshot = response, restUntil = if (response.active != null && response.active.id == latest.snapshot?.active?.id) latest.restUntil else 0, undo = latest.undo?.takeIf { it.sessionId == response.active?.id && it.revision == response.active?.revision }))
             _state.value = _state.value.copy(message = "")
         } catch (e: ApiFailure) {
             val j = _state.value.journal
@@ -89,7 +88,7 @@ class Repository(context: Application) {
         check(j.blocked.isEmpty()) { "Resolve the sync issue first." }
         check(j.pending.size < 200) { "Sync your pending entries before logging more." }
         val s = j.snapshot ?: error("Load the workout first")
-        save(j.copy(snapshot = applyCommand(s, c), pending = j.pending + Operation(command = c), restUntil = rest, undo = undo))
+        save(j.copy(snapshot = applyCommand(s, c), pending = j.pending + Operation(command = c, label = s.active?.slots?.find { it.id == c["slotId"]?.jsonPrimitive?.content }?.option?.label ?: s.active?.title.orEmpty(), unit = s.active?.slots?.find { it.id == c["slotId"]?.jsonPrimitive?.content }?.unit ?: "reps"), restUntil = rest, undo = undo))
         task { sync() }
     }
     fun log(reps: Int, load: String) = task {

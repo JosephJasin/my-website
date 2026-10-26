@@ -33,7 +33,7 @@ class WorkoutService : Service() {
                 if (ticks++ % 15 == 0) launch { repo.sync() }
                 val j = repo.state.value.journal
                 if (j.snapshot?.active == null) inactive++ else inactive = 0
-                if (j.snapshot?.active == null && (j.pending.isEmpty() || inactive > 60)) {
+                if (j.blocked.isNotEmpty() || (j.snapshot?.active == null && (j.pending.isEmpty() || inactive > 60))) {
                     stopForeground(STOP_FOREGROUND_REMOVE); stopSelf(); break
                 }
                 delay(1000)

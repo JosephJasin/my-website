@@ -26,7 +26,11 @@ export async function ensureWatchTables(db:D1Database){
 async function body(request:Request){
  if(!request.headers.get('content-type')?.startsWith('application/json'))throw Error('Use JSON.');
  if(Number(request.headers.get('content-length'))>8_000)throw Error('Request too large.');
- const text=await request.text();if(text.length>8_000)throw Error('Request too large.');return JSON.parse(text);
+ const reader=request.body?.getReader();if(!reader)throw Error('Missing body.');
+ const chunks:Uint8Array[]=[];let length=0;
+ try{while(true){const {done,value}=await reader.read();if(done)break;length+=value.byteLength;if(length>8_000){await reader.cancel();throw Error('Request too large.')}chunks.push(value)}}finally{reader.releaseLock()}
+ const bytes=new Uint8Array(length);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length}
+ return JSON.parse(new TextDecoder().decode(bytes));
 }
 
 export function watchService(db:D1Database,getLearning:(id:string)=>Promise<LearningState>){

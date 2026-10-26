@@ -1,6 +1,8 @@
 package com.firstrep.watch
 
-import androidx.wear.tiles.*
+import androidx.wear.tiles.TileService
+import androidx.wear.tiles.RequestBuilders
+import androidx.wear.tiles.TileBuilders
 import androidx.wear.protolayout.*
 import androidx.wear.protolayout.DimensionBuilders.dp
 import androidx.wear.protolayout.DimensionBuilders.expand

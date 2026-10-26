@@ -15,7 +15,7 @@ function load(file){
  if(path.endsWith('.json'))return JSON.parse(readFileSync(path,'utf8'));
  const module={exports:{}};cache.set(path,module);
  const code=ts.transpileModule(readFileSync(path,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true}}).outputText;
- runInNewContext(code,{module,exports:module.exports,Response,Request,URL,Headers,TextEncoder,crypto,console,setTimeout,clearTimeout,require:name=>{
+ runInNewContext(code,{module,exports:module.exports,Response,Request,URL,Headers,TextEncoder,TextDecoder,crypto,console,setTimeout,clearTimeout,require:name=>{
   if(!name.startsWith('.'))return require(name);const base=resolve(dirname(path),name);return load([base,base+'.ts',base+'.tsx',base+'.json'].find(existsSync));
  }},{filename:path});return module.exports;
 }
@@ -203,6 +203,7 @@ test('watch pairing requires owner approval, blocks browser origins, expires and
  assert.equal((await native('workout')).status,401);
  assert.equal((await native('pair','POST',{name:'Watch'},undefined,{origin:'https://bad.example'})).status,403);
  assert.equal((await native('export')).status,404);
+ assert.equal((await native('pair','POST',{name:'x'.repeat(9000)})).status,400);
  const p=await pair();assert.match(p.code,/^[A-Z2-9]{8}$/);assert.match(p.token,/^[a-f0-9]{64}$/);
  assert.equal((await native('pair','GET',undefined,p.token)).data.approved,false);
  assert.equal((await native('workout','GET',undefined,p.token)).status,403);

@@ -8,7 +8,7 @@ import * as core from 'drizzle-orm/sqlite-core';
 import * as orm from 'drizzle-orm';
 import * as jose from 'jose';
 import {z} from 'zod';
-const context=createContext({Response,Request,URL,Headers,TextEncoder,crypto,console});
+const context=createContext({Response,Request,URL,Headers,TextEncoder,TextDecoder,crypto,console});
 const synthetic=(name,values)=>new SyntheticModule(Object.keys(values),function(){for(const [k,v]of Object.entries(values))this.setExport(k,v)},{context,identifier:name});
 const modules=new Map([['drizzle-orm',synthetic('orm',orm)],['drizzle-orm/sqlite-core',synthetic('core',core)],['zod',synthetic('zod',{z})],['jose',synthetic('jose',jose)]]);
 async function source(file){const code=ts.transpileModule(readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022}}).outputText;const m=new SourceTextModule(code,{context,identifier:file});await m.link(async n=>{if(modules.has(n))return modules.get(n);throw Error(n)});await m.evaluate();return m;}

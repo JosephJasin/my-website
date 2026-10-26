@@ -73,7 +73,8 @@ class MainActivity : ComponentActivity() {
     val current = currentSet(session)
     val slot = current?.first
     val index = current?.second ?: 0
-    val previous = slot?.option?.let { j.snapshot?.previous?.get(it.guideId ?: it.id) }
+    val previous = slot?.logs?.lastOrNull { it.done }?.let { Previous(it.reps, it.load) }
+        ?: slot?.option?.let { j.snapshot?.previous?.get(it.guideId ?: it.id) }
     val setKey = "${session?.id}:${slot?.id}:$index"
     var reps by rememberSaveable(setKey) { mutableIntStateOf(previous?.reps?.toDoubleOrNull()?.toInt()?.coerceIn(1, 1000) ?: Regex("\\d+").find(slot?.reps.orEmpty())?.value?.toIntOrNull()?.coerceIn(1, 1000) ?: 10) }
     var load by rememberSaveable(setKey) { mutableStateOf(previous?.load.orEmpty()) }
@@ -206,8 +207,8 @@ class MainActivity : ComponentActivity() {
 private fun describe(op: Operation): String {
     val c = op.command; val type = c["type"]?.jsonPrimitive?.content.orEmpty()
     val log = c["log"]?.jsonObject
-    return "${c["slotId"]?.jsonPrimitive?.content ?: "Workout"} · $type" +
+    return "${op.label.ifEmpty { c["slotId"]?.jsonPrimitive?.content ?: "Workout" }} · $type" +
         (c["index"]?.jsonPrimitive?.intOrNull?.let { " · set ${it + 1}" } ?: "") +
-        (log?.let { "\n${it["reps"]?.jsonPrimitive?.content.orEmpty()} reps/min · ${it["load"]?.jsonPrimitive?.content.orEmpty()} · ${if (it["done"]?.jsonPrimitive?.boolean == true) "done" else "undone"}" } ?: "") +
+        (log?.let { "\n${it["reps"]?.jsonPrimitive?.content.orEmpty()} ${op.unit} · ${it["load"]?.jsonPrimitive?.content.orEmpty()} · ${if (it["done"]?.jsonPrimitive?.boolean == true) "done" else "undone"}" } ?: "") +
         "\nSession ${c["id"]?.jsonPrimitive?.content.orEmpty().take(8)}"
 }

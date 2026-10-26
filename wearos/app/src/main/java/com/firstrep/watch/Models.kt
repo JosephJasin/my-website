@@ -12,7 +12,7 @@ val wire = Json { ignoreUnknownKeys = true; encodeDefaults = true }
 @Serializable data class NextWorkout(val title: String = "", val slots: List<Slot> = emptyList())
 @Serializable data class Previous(val reps: String = "", val load: String = "")
 @Serializable data class Snapshot(val protocol: Int = 1, val planName: String = "", val settingsRevision: Int = 0, val active: Session? = null, val next: NextWorkout = NextWorkout(), val previous: Map<String, Previous> = emptyMap())
-@Serializable data class Operation(val operationId: String = UUID.randomUUID().toString(), val command: JsonObject)
+@Serializable data class Operation(val operationId: String = UUID.randomUUID().toString(), val command: JsonObject, val label: String = "", val unit: String = "reps", val createdAt: Long = System.currentTimeMillis())
 @Serializable data class Undo(val sessionId: String, val slotId: String, val index: Int, val log: SetLog, val revision: Int)
 @Serializable data class Journal(
     val token: String = "", val code: String = "", val approved: Boolean = false,
