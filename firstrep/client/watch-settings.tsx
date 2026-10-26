@@ -1,0 +1,16 @@
+import {useEffect,useState} from 'react';
+type Device={id:string;name:string;created_at:number;expires_at:number;last_seen:number|null};
+export default function WatchSettings({disabled}:{disabled:boolean}){
+ const [devices,setDevices]=useState<Device[]>([]),[code,setCode]=useState(''),[busy,setBusy]=useState(false),[message,setMessage]=useState(''),[revoke,setRevoke]=useState('');
+ async function request(command?:object){
+  setBusy(true);setMessage('');
+  try{
+   const r=await fetch('/firstrep/api/watch',{method:command?'POST':'GET',cache:'no-store',redirect:'manual',...(command?{headers:{'content-type':'application/json'},body:JSON.stringify(command)}:{})});
+   if(r.type==='opaqueredirect'||r.status===401)throw Error('Sign in again to manage your watch.');
+   const data=await r.json() as {devices:Device[];error?:string};if(!r.ok)throw Error(data.error||'Please retry.');
+   setDevices(data.devices);if(command){setCode('');setRevoke('');setMessage('Watch settings saved.');}
+  }catch(e){setMessage((e as Error).message)}finally{setBusy(false)}
+ }
+ useEffect(()=>{if(!disabled)void request()},[disabled]);
+ return <section className="panel" aria-labelledby="watch-title"><div className="section-title"><h2 id="watch-title">First Rep on your watch</h2><span className="mini-badge">Wear OS beta</span></div><p>Follow your workout, log sets with taps or the crown, and time your rests. Your Google Health app stays separate.</p><p><a className="text-button" href="https://github.com/JosephJasin/my-website/blob/main/wearos/README.md" target="_blank" rel="noreferrer">Install the watch beta ↗</a></p><form onSubmit={e=>{e.preventDefault();void request({type:'approve',code})}}><label className="field-label" htmlFor="watch-code">Code shown on your watch</label><div style={{display:'flex',gap:12,flexWrap:'wrap'}}><input id="watch-code" value={code} placeholder="ABCD 2345" maxLength={9} autoCapitalize="characters" autoComplete="off" spellCheck={false} onChange={e=>setCode(e.target.value.toUpperCase().replace(/[^A-Z2-9]/g,'').slice(0,8))} style={{background:'#151a16',color:'#f3f5eb',border:'1px solid #46513e',borderRadius:12,padding:14,letterSpacing:3,width:210}}/><button className="button primary" disabled={disabled||busy||code.length!==8}>Approve this watch</button></div></form><p className="muted">Approve only the code on your own watch. Pairing lasts 90 days; revoke access here at any time. Start workouts while connected. During a workout, set entries wait safely on your watch until they sync. If another device edits the same session, review the pending entries before continuing.</p>{message&&<p role="status">{message}</p>}<div>{devices.map(d=><div key={d.id} className="settings-note" style={{display:'block'}}><strong>{d.name}</strong><p>Last connected: {d.last_seen?new Date(d.last_seen).toLocaleString():'Waiting for the watch'} · Access until {new Date(d.expires_at).toLocaleDateString()}</p>{revoke===d.id?<><p>Disconnect this watch? Sync its pending sets first.</p><button disabled={busy} className="button secondary small" onClick={()=>void request({type:'revoke',id:d.id})}>Revoke access</button> <button className="text-button" onClick={()=>setRevoke('')}>Cancel</button></>:<button className="text-button" disabled={busy||disabled} onClick={()=>setRevoke(d.id)}>Disconnect watch</button>}</div>)}</div></section>;
+}

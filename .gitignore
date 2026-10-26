@@ -7,3 +7,10 @@ _site/
 !firstrep/.env.example
 outputs/
 *.tsbuildinfo
+
+wearos/.gradle/
+wearos/.kotlin/
+wearos/local.properties
+wearos/**/build/
+wearos/*.jks
+wearos/*.keystore

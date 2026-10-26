@@ -8,6 +8,7 @@ const ddl=[
  'CREATE TABLE IF NOT EXISTS workout_settings (user_id TEXT PRIMARY KEY, revision INTEGER NOT NULL DEFAULT 0, data TEXT NOT NULL)',
  'CREATE TABLE IF NOT EXISTS workout_sessions (user_id TEXT NOT NULL, id TEXT NOT NULL, plan_id TEXT NOT NULL, status TEXT NOT NULL, started_at TEXT NOT NULL, revision INTEGER NOT NULL DEFAULT 0, data TEXT NOT NULL, PRIMARY KEY(user_id,id))',
  "CREATE UNIQUE INDEX IF NOT EXISTS one_active_workout ON workout_sessions(user_id) WHERE status='active'",
+ 'CREATE TABLE IF NOT EXISTS watch_receipts (user_id TEXT NOT NULL, device_id TEXT NOT NULL, operation_id TEXT NOT NULL, body_hash TEXT NOT NULL, created_at INTEGER NOT NULL, PRIMARY KEY(user_id,device_id,operation_id))',
  "CREATE TRIGGER IF NOT EXISTS learning_blocks_workout BEFORE INSERT ON workout_sessions WHEN NEW.status='active' AND EXISTS(SELECT 1 FROM visits WHERE user_id=NEW.user_id AND finished_at IS NULL) BEGIN SELECT RAISE(IGNORE); END",
  "CREATE TRIGGER IF NOT EXISTS workout_blocks_learning BEFORE INSERT ON visits WHEN NEW.finished_at IS NULL AND EXISTS(SELECT 1 FROM workout_sessions WHERE user_id=NEW.user_id AND status='active') BEGIN SELECT RAISE(IGNORE); END",
 
@@ -53,7 +54,7 @@ export function workoutService(db:D1Database,getLearning:(userId:string)=>Promis
   ]);
   return {settings:JSON.parse(settings!.data),settingsRevision:settings!.revision,sessions:history.results.map(r=>({...JSON.parse(r.data),revision:r.revision}))};
  }
- async function handle(request:Request,userId:string):Promise<Response>{
+ async function handle(request:Request,userId:string,receipt?:{deviceId:string;operationId:string;bodyHash:string}):Promise<Response>{
   try{
    await ensureWorkoutTables(db);
    const url=new URL(request.url);
@@ -68,7 +69,16 @@ export function workoutService(db:D1Database,getLearning:(userId:string)=>Promis
    const body=await request.text();if(body.length>8_000_000)return json({error:'Request too large.'},413);
    let parsed;try{parsed=command.safeParse(JSON.parse(body))}catch{return json({error:'Invalid JSON.'},400)}
    if(!parsed.success)return json({error:'Please check your workout entries.'},400);
-   const c=parsed.data,s=await state(userId),now=new Date().toISOString();
+   const c=parsed.data;
+   // The native gateway supplies this context after authenticating a paired device.
+   // A receipt and its write commit in one D1 transaction, so lost responses are safe to retry.
+   const savedReceipt=async()=>receipt?await db.prepare('SELECT body_hash FROM watch_receipts WHERE user_id=? AND device_id=? AND operation_id=?').bind(userId,receipt.deviceId,receipt.operationId).first<{body_hash:string}>():null;
+   if(receipt){
+    if(!['start','set','skip','finish','swap'].includes(c.type))return json({error:'Unsupported watch action.'},403);
+    const saved=await savedReceipt();
+    if(saved)return saved.body_hash===receipt.bodyHash?json(await state(userId)):json({error:'Operation identifier was reused.'},409);
+   }
+   const s=await state(userId),now=new Date().toISOString();
    if(c.type==='settings'){
     if(c.revision!==s.settingsRevision)return conflict();
     const next:WorkoutSettings={...s.settings,choices:{...s.settings.choices}};
@@ -140,8 +150,9 @@ export function workoutService(db:D1Database,getLearning:(userId:string)=>Promis
       if(session.planId==='starter'&&slot.learning)session.introductory=true;
      }
     }
-    const r=await db.prepare('UPDATE workout_sessions SET data=?,status=?,revision=revision+1 WHERE user_id=? AND id=? AND revision=? AND status=\'active\'').bind(JSON.stringify(session),session.status,userId,c.id,c.revision).run();
-    if(!r.meta.changes)return conflict();
+    const update=db.prepare('UPDATE workout_sessions SET data=?,status=?,revision=revision+1 WHERE user_id=? AND id=? AND revision=? AND status=\'active\'').bind(JSON.stringify(session),session.status,userId,c.id,c.revision);
+    const r=receipt?(await db.batch([update,db.prepare('INSERT INTO watch_receipts(user_id,device_id,operation_id,body_hash,created_at) SELECT ?,?,?,?,? WHERE changes()>0').bind(userId,receipt.deviceId,receipt.operationId,receipt.bodyHash,Date.now())]))[0]:await update.run();
+    if(!r.meta.changes){const saved=await savedReceipt();if(!saved||saved.body_hash!==receipt?.bodyHash)return conflict();}
    }
    return json(await state(userId));
   }catch{return json({error:'Your workout could not be saved or loaded. Please retry.'},503)}

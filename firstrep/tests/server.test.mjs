@@ -129,6 +129,7 @@ modules.set('./equipment',modules.get('../client/equipment'));
 modules.set('./human-coach.json',synthetic('human',{default:JSON.parse(readFileSync('firstrep/client/human-coach.json','utf8'))}));
 modules.set('../client/workout-model',await source('firstrep/client/workout-model.ts'));
 modules.set('./workouts',await source('firstrep/server/workouts.ts'));
+modules.set('./watch',await source('firstrep/server/watch.ts'));
 const worker=(await source('firstrep/server/worker.ts')).namespace.default;
 const assets=[];const env={...config,FIRSTREP_DB:{},ASSETS:{fetch:async request=>{assets.push(new URL(request.url).pathname);return new Response('asset')}}};
 assert.equal((await worker.fetch(new Request(origin+'/'),env)).status,200);

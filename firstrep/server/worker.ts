@@ -3,6 +3,7 @@ import { authenticate, configured, type AccessConfig } from './auth';
 import { json, progressService } from './progress';
 import * as schema from './schema';
 import { workoutService, ensureWorkoutTables } from './workouts';
+import {watchPrefix,watchService} from './watch';
 
 export interface Env extends AccessConfig { ASSETS:Fetcher; FIRSTREP_DB?:D1Database }
 const isFirstRep=(path:string)=>path==='/firstrep'||path.startsWith('/firstrep/');
@@ -32,6 +33,11 @@ export default {
       const canonical=new URL(url.origin+path).pathname;
       if(canonical!==url.pathname){url.pathname=canonical;return Response.redirect(url.toString(),308);}
     }catch{return new Response('Invalid path.',{status:400});}
+    if(url.pathname.startsWith(watchPrefix)){
+      if(!env.FIRSTREP_DB)return json({error:'Watch sync is being configured.'},503);
+      const progress=progressService(drizzle(env.FIRSTREP_DB,{schema}));
+      return watchService(env.FIRSTREP_DB,progress.state).native(request);
+    }
     if(!isFirstRep(url.pathname))return env.ASSETS.fetch(request);
     if(url.hostname==='www.josephjasin.com'){
       url.hostname='josephjasin.com';return Response.redirect(url.toString(),308);
@@ -43,6 +49,7 @@ export default {
     if(url.pathname==='/firstrep')return Response.redirect(`${url.origin}/firstrep/`,308);
     if(isApi){
       const progress=progressService(drizzle(env.FIRSTREP_DB,{schema}),async userId=>{await ensureWorkoutTables(env.FIRSTREP_DB!);return !!await env.FIRSTREP_DB!.prepare("SELECT id FROM workout_sessions WHERE user_id=? AND status='active'").bind(userId).first()});
+      if(url.pathname==='/firstrep/api/watch')return watchService(env.FIRSTREP_DB,progress.state).owner(request,user.userId);
       if(['/firstrep/api/workouts','/firstrep/api/workouts/export'].includes(url.pathname))return workoutService(env.FIRSTREP_DB,progress.state).handle(request,user.userId);
       if(!['/firstrep/api/progress','/firstrep/api/export'].includes(url.pathname))return json({error:'Not found.'},404);
       return progress.handle(request,user.userId);
