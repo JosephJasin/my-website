@@ -1,6 +1,6 @@
-import {ArrowRight,CheckCircle2,MapPin} from 'lucide-react';
+import {ArrowRight,CheckCircle2} from 'lucide-react';
 import {families} from './exercise-families';
-import {machines,type Machine} from './equipment';
+import {type Machine} from './equipment';
 import type {Learning} from './workout-model';
 export default function ExerciseGroups({visible,learning,onOpen}:{visible:Machine[];learning:Learning;onOpen:(m:Machine)=>void}){
  const learned=families.filter(f=>f.ids.some(id=>learning[id]?.status==='learned')).length;

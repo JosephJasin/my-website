@@ -6,7 +6,7 @@ export type Learning = Record<string,{status?:string;availability?:string;weight
 export type Option = {id:string;label:string;guideId?:string};
 export type Slot = {id:string;label:string;bodypart:string;sets:number;reps:string;options:Option[];optional?:boolean;originalLine?:string;unit?:'reps'|'minutes'};
 export type Template = {id:string;title:string;slots:Slot[];estimatedMinutes:[number,number];note?:string};
-export type WorkoutPlan = {id:string;name:string;days:number;sequence:string[];templates:Template[];sourceText?:string;documentId?:string;cycleWeeks?:number};
+export type WorkoutPlan = {id:string;name:string;days:number;sequence:string[];templates:Template[];sourceText?:string;cycleWeeks?:number};
 export type SetLog = {reps:string;load:string;done:boolean};
 export type SessionSlot = Slot & {option:Option|null;learning:boolean;skipped:boolean;skipReason:string;logs:SetLog[]};
 export type WorkoutSession = {id:string;planId:string;title:string;templateId:string;startedAt:string;finishedAt:string|null;status:'active'|'finished'|'abandoned';revision:number;learningLimit:number;slots:SessionSlot[];notes:string;custom:boolean;introductory:boolean};
@@ -23,10 +23,9 @@ const starter:WorkoutPlan={id:'starter',name:'First Rep Starter',days:3,sequence
 const exactGuides:Record<string,string>={
  'lat pulldown machine':'lat-pulldown','dumbbel row':'dumbbell-row','dumbbell row':'dumbbell-row','dumbbell benchpress':'dumbbell-bench-press','dumbbell lateral raise':'dumbbell-lateral-raise','rear delt fly':'rear-delt-fly','reverse peck deck':'rear-delt-fly','facepull':'face-pull','barbell strict curl':'barbell-curl','ez-bar curl':'barbell-curl','dumbbell curl':'dumbbell-curl','romanian deadlift':'barbell-rdl','legpress':'leg-press','leg extensions':'leg-extension','hamstring curls':'leg-curl','triceps pushdown':'cable-triceps',
 };
-const originals:WorkoutPlan[]=human.plans.map(p=>({id:p.id,name:`Human Coach Guide · ${p.days} days`,days:p.days,sequence:p.sequence,cycleWeeks:p.cycleWeeks,sourceText:p.introAndHelp,documentId:p.id,templates:p.sessions.map(s=>({id:s.id,title:s.title,estimatedMinutes:(s.id.startsWith('UPPER')?[75,105]:p.days===3?[65,90]:[50,75]) as [number,number],slots:s.exercises.map(e=>({id:e.id,label:e.movement,bodypart:e.bodypart,sets:e.sets,reps:e.reps,originalLine:e.originalLine,options:e.alternatives.map((name,i)=>({id:`${e.id}-${i}`,label:name,guideId:exactGuides[name.toLowerCase()]}))}))}))}));
+const originals:WorkoutPlan[]=human.plans.map(p=>({id:p.id,name:`Human Coach Guide · ${p.days} days`,days:p.days,sequence:p.sequence,cycleWeeks:p.cycleWeeks,sourceText:p.introAndHelp,templates:p.sessions.map(s=>({id:s.id,title:s.title,estimatedMinutes:(s.id.startsWith('UPPER')?[75,105]:p.days===3?[65,90]:[50,75]) as [number,number],slots:s.exercises.map(e=>({id:e.id,label:e.movement,bodypart:e.bodypart,sets:e.sets,reps:e.reps,originalLine:e.originalLine,options:e.alternatives.map((name,i)=>({id:`${e.id}-${i}`,label:name,guideId:exactGuides[name.toLowerCase()]}))}))}))}));
 export const workoutPlans:WorkoutPlan[]=[starter,...originals];
 export const planById=(id:string)=>workoutPlans.find(p=>p.id===id);
-export const documents=[...human.plans.map(p=>({id:p.id,name:p.filename,sha256:p.sourceSha256})),...human.supplements.map(s=>({id:s.id,name:s.filename,sha256:s.sourceSha256}))];
 export const supplements=human.supplements;
 export const preferenceKey=(planId:string,templateId:string,slotId:string)=>`${planId}:${templateId}:${slotId}`;
 export const eligible=(o:Option,learning:Learning)=>!!o.guideId&&learning[o.guideId]?.availability==='available'&&learning[o.guideId]?.status!=='help';

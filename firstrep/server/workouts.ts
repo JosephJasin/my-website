@@ -1,14 +1,13 @@
 import {z} from 'zod';
 import {machines} from '../client/equipment';
 import {familyFor} from '../client/exercise-families';
-import {defaultWorkoutSettings,documents,eligible,isNew,nextTemplate,optionFor,planById,prepareSlots,preferenceKey,type Learning,type WorkoutSession,type WorkoutSettings,type WorkoutState} from '../client/workout-model';
+import {defaultWorkoutSettings,eligible,isNew,nextTemplate,optionFor,planById,prepareSlots,type Learning,type Option,type SessionSlot,type WorkoutSession,type WorkoutSettings,type WorkoutState} from '../client/workout-model';
 import {json} from './progress';
 
 const ddl=[
  'CREATE TABLE IF NOT EXISTS workout_settings (user_id TEXT PRIMARY KEY, revision INTEGER NOT NULL DEFAULT 0, data TEXT NOT NULL)',
  'CREATE TABLE IF NOT EXISTS workout_sessions (user_id TEXT NOT NULL, id TEXT NOT NULL, plan_id TEXT NOT NULL, status TEXT NOT NULL, started_at TEXT NOT NULL, revision INTEGER NOT NULL DEFAULT 0, data TEXT NOT NULL, PRIMARY KEY(user_id,id))',
  "CREATE UNIQUE INDEX IF NOT EXISTS one_active_workout ON workout_sessions(user_id) WHERE status='active'",
- 'CREATE TABLE IF NOT EXISTS private_documents (user_id TEXT NOT NULL, id TEXT NOT NULL, name TEXT NOT NULL, data BLOB NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY(user_id,id))',
  "CREATE TRIGGER IF NOT EXISTS learning_blocks_workout BEFORE INSERT ON workout_sessions WHEN NEW.status='active' AND EXISTS(SELECT 1 FROM visits WHERE user_id=NEW.user_id AND finished_at IS NULL) BEGIN SELECT RAISE(IGNORE); END",
  "CREATE TRIGGER IF NOT EXISTS workout_blocks_learning BEFORE INSERT ON visits WHEN NEW.finished_at IS NULL AND EXISTS(SELECT 1 FROM workout_sessions WHERE user_id=NEW.user_id AND status='active') BEGIN SELECT RAISE(IGNORE); END",
 
@@ -36,6 +35,14 @@ const command=z.discriminatedUnion('type',[
 ]);
 function requestAllowed(request:Request,type:string){return request.headers.get('origin')===new URL(request.url).origin&&request.headers.get('content-type')?.toLowerCase().startsWith(type)}
 const conflict=()=>json({error:'This workout changed on another device. Refresh and try your change again.'},409);
+function starterSelectionError(session:WorkoutSession,slot:SessionSlot,option:Option,learning:Learning,learningNow:boolean){
+ if(!eligible(option,learning))return 'Mark this setup found and resolve any “Need help” status first.';
+ // A skipped exercise still counts if its practice set was already completed.
+ const others=session.slots.filter(x=>x.id!==slot.id&&x.option&&(!x.skipped||x.logs.some(l=>l.done)));
+ if(others.some(x=>x.option?.guideId===option.guideId))return 'That exercise is already in this session.';
+ if(learningNow&&others.filter(x=>x.learning).length>=session.learningLimit)return 'This would exceed your new-guide limit. Choose a learned alternative or save it for another visit.';
+ return null;
+}
 
 export function workoutService(db:D1Database,getLearning:(userId:string)=>Promise<{machines:Learning;preferences:{pace:number};visits?:{finishedAt:string|null}[]}> ) {
  async function state(userId:string):Promise<WorkoutState>{
@@ -95,7 +102,9 @@ export function workoutService(db:D1Database,getLearning:(userId:string)=>Promis
     if(!session)return json({error:'Workout not found.'},404);
     if(session.status!=='active'||session.revision!==c.revision)return conflict();
     if(c.type==='finish'){
-     if(!c.abandon&&!session.slots.some(x=>!x.skipped&&x.logs.some(l=>l.done)))return json({error:'Log at least one set, or discard this empty workout.'},400);
+     const hasLoggedSets=session.slots.some(x=>x.logs.some(l=>l.done));
+     if(!c.abandon&&!hasLoggedSets)return json({error:'Log at least one set, or discard this empty workout.'},400);
+     if(c.abandon&&hasLoggedSets)return json({error:'This workout has logged sets. Finish and save it to keep your record.'},400);
      session.status=c.abandon?'abandoned':'finished';session.finishedAt=now;session.notes=c.notes||'';
     }else{
      const slot=session.slots.find(x=>x.id===c.slotId);if(!slot)return json({error:'Exercise not found.'},400);
@@ -106,7 +115,12 @@ export function workoutService(db:D1Database,getLearning:(userId:string)=>Promis
      }
      if(c.type==='skip'){
       if(!c.skipped&&!slot.option)return json({error:'Choose a suitable exercise first.'},400);
-      slot.skipped=c.skipped;slot.skipReason=c.skipped?'Skipped this visit':'';
+      if(!c.skipped&&slot.option&&session.planId==='starter'){
+       const learning=await getLearning(userId);
+       const issue=starterSelectionError(session,slot,slot.option,learning.machines,slot.learning);
+       if(issue)return json({error:issue},409);
+      }
+      slot.skipped=c.skipped;slot.skipReason=c.skipped?(slot.logs.some(l=>l.done)?'Remaining sets skipped. Logged sets are kept.':'Skipped this visit'):'';
      }
      if(c.type==='swap'){
       if(slot.logs.some(l=>l.done))return json({error:'This exercise already has completed sets. Keep its record and choose another variant next visit.'},409);
@@ -118,10 +132,8 @@ export function workoutService(db:D1Database,getLearning:(userId:string)=>Promis
       if(!option)return json({error:'Choose a listed alternative for this movement.'},400);
       const learning=await getLearning(userId);
       if(session.planId==='starter'){
-       if(!eligible(option,learning.machines))return json({error:'Mark this setup found and resolve any “Need help” status first.'},409);
-       const others=session.slots.filter(x=>x.id!==slot.id&&!x.skipped&&x.option);
-       if(others.some(x=>x.option?.guideId===option!.guideId))return json({error:'That exercise is already in this session.'},409);
-       if(isNew(option,learning.machines)&&others.filter(x=>x.learning).length>=session.learningLimit)return json({error:'This would exceed your new-guide limit. Choose a learned alternative or save it for another visit.'},409);
+       const issue=starterSelectionError(session,slot,option,learning.machines,isNew(option,learning.machines));
+       if(issue)return json({error:issue},409);
       }
       slot.option=option;slot.learning=isNew(option,learning.machines);slot.skipped=false;slot.skipReason='';
       slot.logs=Array.from({length:session.planId==='starter'&&slot.learning?1:slot.sets},()=>({reps:'',load:'',done:false}));
@@ -135,28 +147,4 @@ export function workoutService(db:D1Database,getLearning:(userId:string)=>Promis
   }catch{return json({error:'Your workout could not be saved or loaded. Please retry.'},503)}
  }
  return {state,handle};
-}
-
-export async function documentService(request:Request,userId:string,db:D1Database):Promise<Response>{
- try{
-  await ensureWorkoutTables(db);
-  const path=new URL(request.url).pathname.split('/'),id=path[4];
-  if(!id&&request.method==='GET'){
-   const result=await db.prepare('SELECT id,name,updated_at FROM private_documents WHERE user_id=?').bind(userId).all();return json(result.results);
-  }
-  const doc=documents.find(x=>x.id===id);if(!doc)return json({error:'Document not found.'},404);
-  if(request.method==='GET'){
-   const row=await db.prepare('SELECT data FROM private_documents WHERE user_id=? AND id=?').bind(userId,id).first<{data:number[]}>();
-   if(!row)return json({error:'Upload this original PDF once from Human Coach Guide.'},404);
-   return new Response(new Uint8Array(row.data),{headers:{'Content-Type':'application/pdf','Content-Disposition':`inline; filename="${doc.name}"`,'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'none'; frame-ancestors 'self'",'X-Robots-Tag':'noindex, nofollow'}});
-  }
-  if(request.method!=='PUT')return json({error:'Method not allowed.'},405);
-  if(!requestAllowed(request,'application/pdf'))return json({error:'Invalid request origin or content type.'},403);
-  if(Number(request.headers.get('content-length'))>200_000)return json({error:'Please use the original supplied PDF (under 200 KB).'},413);
-  const bytes=await request.arrayBuffer();if(bytes.byteLength>200_000)return json({error:'PDF too large.'},413);
-  const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))).map(x=>x.toString(16).padStart(2,'0')).join('');
-  if(hash!==doc.sha256)return json({error:'This is not the original PDF for this guide. Choose the file supplied with these routines.'},400);
-  await db.prepare('INSERT INTO private_documents(user_id,id,name,data,updated_at) VALUES(?,?,?,?,?) ON CONFLICT(user_id,id) DO UPDATE SET data=excluded.data,updated_at=excluded.updated_at').bind(userId,id,doc.name,bytes,new Date().toISOString()).run();
-  return json({saved:true,id});
- }catch{return json({error:'The private PDF could not be loaded or saved. Please retry.'},503)}
 }

@@ -147,5 +147,6 @@ signedIn={userId:'alice',email:config.FIRSTREP_OWNER_EMAIL};
 assert.equal((await worker.fetch(new Request(origin+'/firstrep'),env)).headers.get('location'),origin+'/firstrep/');
 assert.equal((await worker.fetch(new Request(origin+'/firstrep/'),env)).headers.get('cache-control'),'private, no-store');
 assert.equal((await worker.fetch(new Request(origin+'/firstrep/api/no-such-route'),env)).status,404);
+for(const path of ['/firstrep/api/documents','/firstrep/api/documents/human-4'])for(const method of ['GET','PUT'])assert.equal((await worker.fetch(new Request(origin+path,{method}),env)).status,404,'Retired PDF routes stay unavailable');
 assert.equal((await worker.fetch(new Request('https://www.josephjasin.com/firstrep/'),env)).headers.get('location'),origin+'/firstrep/');
 console.log('PASS: signed JWT validation, owner restriction, expired/forged token rejection, private assets, public homepage, API isolation, CSRF, concurrent visits, cross-device persistence, idempotent backup restore, and personal profile storage.');

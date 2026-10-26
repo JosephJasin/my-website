@@ -2,7 +2,7 @@ import { drizzle } from 'drizzle-orm/d1';
 import { authenticate, configured, type AccessConfig } from './auth';
 import { json, progressService } from './progress';
 import * as schema from './schema';
-import { workoutService, documentService, ensureWorkoutTables } from './workouts';
+import { workoutService, ensureWorkoutTables } from './workouts';
 
 export interface Env extends AccessConfig { ASSETS:Fetcher; FIRSTREP_DB?:D1Database }
 const isFirstRep=(path:string)=>path==='/firstrep'||path.startsWith('/firstrep/');
@@ -44,7 +44,6 @@ export default {
     if(isApi){
       const progress=progressService(drizzle(env.FIRSTREP_DB,{schema}),async userId=>{await ensureWorkoutTables(env.FIRSTREP_DB!);return !!await env.FIRSTREP_DB!.prepare("SELECT id FROM workout_sessions WHERE user_id=? AND status='active'").bind(userId).first()});
       if(['/firstrep/api/workouts','/firstrep/api/workouts/export'].includes(url.pathname))return workoutService(env.FIRSTREP_DB,progress.state).handle(request,user.userId);
-      if(url.pathname==='/firstrep/api/documents'||/^\/firstrep\/api\/documents\/[a-z0-9-]+$/.test(url.pathname))return documentService(request,user.userId,env.FIRSTREP_DB);
       if(!['/firstrep/api/progress','/firstrep/api/export'].includes(url.pathname))return json({error:'Not found.'},404);
       return progress.handle(request,user.userId);
     }
