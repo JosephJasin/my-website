@@ -17,9 +17,9 @@ class WorkoutService : Service() {
         val manager = getSystemService(NotificationManager::class.java)
         manager.createNotificationChannel(NotificationChannel("workout", "Active workout", NotificationManager.IMPORTANCE_LOW))
         val open = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
-        val notification = NotificationCompat.Builder(this, "workout").setSmallIcon(R.drawable.ic_firstrep).setContentTitle("First Rep workout")
+        val notification = NotificationCompat.Builder(this, "workout").setSmallIcon(R.drawable.ic_workout_status).setContentTitle("First Rep workout")
             .setContentText("Tap to return to your sets").setContentIntent(open).setOngoing(true).setCategory(NotificationCompat.CATEGORY_SERVICE)
-        OngoingActivity.Builder(this, 1, notification).setStaticIcon(R.drawable.ic_firstrep).setTouchIntent(open)
+        OngoingActivity.Builder(this, 1, notification).setStaticIcon(R.drawable.ic_workout_status).setTouchIntent(open)
             .setStatus(Status.Builder().addTemplate("Workout in progress").build()).build().apply(this)
         startForeground(1, notification.build())
         if (loop == null) loop = scope.launch {
