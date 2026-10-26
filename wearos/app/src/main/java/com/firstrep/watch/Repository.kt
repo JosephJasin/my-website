@@ -33,7 +33,13 @@ class Repository(context: Application) {
             if (payload != null) { connection.setRequestProperty("Content-Type", "application/json"); connection.doOutput = true; connection.outputStream.use { it.write(payload.toByteArray(Charsets.UTF_8)) } }
             val status = connection.responseCode
             val text = (if (status in 200..299) connection.inputStream else connection.errorStream)?.bufferedReader()?.use { it.readText() }.orEmpty()
-            if (status !in 200..299) throw ApiFailure(status, runCatching { wire.parseToJsonElement(text).jsonObject["error"]?.jsonPrimitive?.content }.getOrNull() ?: "Connection unavailable ($status). Retry when connected.")
+            if (status !in 200..299) {
+                val error = runCatching { wire.parseToJsonElement(text).jsonObject["error"]?.jsonPrimitive?.content }.getOrNull()
+                // Edge login/challenge pages are connection failures, not rejected set commands.
+                // Keep the queue retryable instead of treating a Cloudflare block as a conflict.
+                if (error == null) throw ApiFailure(503, if (status in listOf(301, 302, 303, 307, 308, 403)) "Cloudflare is blocking the watch connection. Check the native API path in your site settings. Your entries stay saved." else "Connection unavailable ($status). Retry when connected.")
+                throw ApiFailure(status, error)
+            }
             text
         } finally { connection.disconnect() }
     }

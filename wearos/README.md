@@ -56,3 +56,9 @@ CI uploads the debug APK and reports. The web server creates watch tables idempo
 The native gateway `/firstrep-watch-api/` is separate from the Cloudflare Access browser path `/firstrep/`. It authenticates per-device 256-bit bearer tokens, stored only as hashes on the server, with a short-lived pairing code approved through the existing owner-verified browser session. It cannot export profile data, edit settings or import backups. Browser-origin requests are rejected and CORS is not enabled. Do not put a Cloudflare service token or owner credential in the APK.
 
 Physical-watch checks before relying on the beta: round-screen layout and font scaling; crown direction and increments; notifications and haptic timing with the screen off; Wi-Fi/Bluetooth network handover; airplane-mode logging followed by reconnect; phone/watch concurrent edits; restart with pending sets; revoke and re-pair. Automated tests cannot establish those hardware behaviours.
+
+## If Cloudflare blocks pairing
+
+If the watch shows a Cloudflare connection warning, check Cloudflare's security events for the request to `/firstrep-watch-api/`. Browser challenges or a browser-only Access rule cannot be completed inside this native app. Any exception should apply **only to the native API path and only to the protection identified in the event**, while retaining its bearer-token authentication. Keep `/firstrep/` and its browser APIs behind your existing owner-only Access policy. Do not disable site-wide protection or add a shared service token to the watch app.
+
+The development environment's automated HTTP client was blocked by Cloudflare's browser-signature check during deployment verification. This does not establish whether the real watch will be blocked; pairing on the watch is still a required beta check.
