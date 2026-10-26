@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.wear.compose.foundation.lazy.TransformingLazyColumn
 import androidx.wear.compose.foundation.lazy.rememberTransformingLazyColumnState
 import androidx.wear.compose.material3.*
@@ -70,7 +71,11 @@ class MainActivity : ComponentActivity() {
     var picker by remember { mutableStateOf("") }
     var confirm by remember { mutableStateOf("") }
     var now by remember { mutableLongStateOf(System.currentTimeMillis()) }
-    LaunchedEffect(Unit) { while (true) { now = System.currentTimeMillis(); delay(500) } }
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
+    LaunchedEffect(j.restUntil, lifecycle) { lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+        now = System.currentTimeMillis()
+        while (j.restUntil > now) { delay(500); now = System.currentTimeMillis() }
+    } }
     val session = j.snapshot?.active
     val current = currentSet(session)
     val slot = current?.first
