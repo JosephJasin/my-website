@@ -68,7 +68,7 @@ class Repository(context: Application) {
             check(response.protocol == 1) { "Please update the watch app." }
             // UI can enqueue an entry while a GET is in flight. Never replace those local entries.
             val latest = _state.value.journal
-            if (latest.pending.isEmpty()) save(latest.copy(snapshot = response))
+            if (latest.pending.isEmpty()) save(latest.copy(snapshot = response, undo = latest.undo?.takeIf { it.sessionId == response.active?.id && it.revision == response.active.revision }))
             _state.value = _state.value.copy(message = "")
         } catch (e: ApiFailure) {
             val j = _state.value.journal
@@ -93,9 +93,11 @@ class Repository(context: Application) {
         task { sync() }
     }
     fun log(reps: Int, load: String) = task {
-        val j = _state.value.journal; val s = j.snapshot?.active ?: return@task; val (slot, index) = currentSet(s) ?: return@task
+        val j = _state.value.journal; if (j.restUntil > System.currentTimeMillis()) return@task
+        val s = j.snapshot?.active ?: return@task; val (slot, index) = currentSet(s) ?: return@task
         val c = command("set", s) { put("slotId", slot.id); put("index", index); put("log", wire.encodeToJsonElement(SetLog(reps.toString(), load, true))) }
-        enqueue(c, System.currentTimeMillis() + 90_000, Undo(s.id, slot.id, index, slot.logs[index]))
+        val remaining = currentSet(applyCommand(j.snapshot!!, c).active) != null
+        enqueue(c, if (remaining) System.currentTimeMillis() + 90_000 else 0, Undo(s.id, slot.id, index, slot.logs[index], s.revision + 1))
     }
     fun skip() = task {
         val s = _state.value.journal.snapshot?.active ?: return@task; val slot = currentSet(s)?.first ?: return@task
@@ -103,7 +105,7 @@ class Repository(context: Application) {
     }
     fun undo() = task {
         val j = _state.value.journal; val u = j.undo ?: return@task; val s = j.snapshot?.active ?: return@task
-        require(s.id == u.sessionId)
+        require(s.id == u.sessionId && s.revision == u.revision) { "The last set changed on another device. Review it on the website." }
         enqueue(command("set", s) { put("slotId", u.slotId); put("index", u.index); put("log", wire.encodeToJsonElement(u.log)) }, 0, null)
     }
     fun finish() = task {

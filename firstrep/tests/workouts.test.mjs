@@ -188,3 +188,69 @@ test('plan and session views render both plans, original slots, set logs and gro
  html=renderToStaticMarkup(React.createElement(Workouts,{store,learning:allLearned,pace:2,mode:'today',onOpen(){},onNavigate(){}}));assert.equal((html.match(/class="set-log-row /g)||[]).length,8);assert.match(html,/Finish this visit/);
  html=renderToStaticMarkup(React.createElement(Groups,{visible:machines,learning:allLearned,onOpen(){}}));assert.equal((html.match(/class="panel family-card"/g)||[]).length,17);assert.match(html,/27|17 of 17/);
 });
+
+const {watchService}=load('firstrep/server/watch.ts');
+function watchFixture(){
+ const f=fixture(),service=watchService(f.db,async()=>f.learning);
+ const native=async(path,method='GET',data,token,headers={})=>{const r=await service.native(new Request(origin+'/firstrep-watch-api/'+path,{method,headers:{...(data?{'content-type':'application/json'}:{}),...(token?{authorization:'Bearer '+token}:{}),...headers},...(data?{body:JSON.stringify(data)}:{})}));return {status:r.status,data:await r.json()}};
+ const owner=async(data,user='alice',requestOrigin=origin)=>{const r=await service.owner(new Request(origin+'/firstrep/api/watch',{method:data?'POST':'GET',headers:{origin:requestOrigin,'content-type':'application/json'},...(data?{body:JSON.stringify(data)}:{})}),user);return {status:r.status,data:await r.json()}};
+ const pair=async()=>{const p=await native('pair','POST',{name:'Pixel Watch 4'});assert.equal(p.status,201);return p.data};
+ const approved=async()=>{const p=await pair();assert.equal((await owner({type:'approve',code:p.code})).status,200);return p};
+ return {...f,native,owner,pair,approved};
+}
+test('watch pairing requires owner approval, blocks browser origins, expires and revokes per device',async()=>{
+ const {native,owner,pair,db}=watchFixture();
+ assert.equal((await native('workout')).status,401);
+ assert.equal((await native('pair','POST',{name:'Watch'},undefined,{origin:'https://bad.example'})).status,403);
+ assert.equal((await native('export')).status,404);
+ const p=await pair();assert.match(p.code,/^[A-Z2-9]{8}$/);assert.match(p.token,/^[a-f0-9]{64}$/);
+ assert.equal((await native('pair','GET',undefined,p.token)).data.approved,false);
+ assert.equal((await native('workout','GET',undefined,p.token)).status,403);
+ assert.equal((await owner({type:'approve',code:p.code},'alice','https://bad.example')).status,403);
+ assert.equal((await owner({type:'approve',code:'ZZZZZZZZ'})).status,404);
+ const approved=await owner({type:'approve',code:p.code});assert.equal(approved.status,200);assert.equal(approved.data.devices.length,1);
+ assert.equal((await owner({type:'approve',code:p.code})).status,404);
+ assert.equal((await native('pair','GET',undefined,p.token)).data.approved,true);
+ assert.equal((await owner(undefined,'bob')).data.devices.length,0);
+ await owner({type:'revoke',id:approved.data.devices[0].id},'bob');assert.equal((await native('workout','GET',undefined,p.token)).status,200);
+ await owner({type:'revoke',id:approved.data.devices[0].id});assert.equal((await native('workout','GET',undefined,p.token)).status,401);
+ const expired=await pair();await db.prepare('UPDATE watch_devices SET expires_at=0').run();
+ assert.equal((await owner({type:'approve',code:expired.code})).status,404);assert.equal((await native('pair','GET',undefined,expired.token)).status,401);
+ const stored=await db.prepare('SELECT token_hash,code_hash FROM watch_devices').all();assert.ok(stored.results.every(r=>r.token_hash!==expired.token&&r.code_hash!==expired.code));
+});
+test('watch pairing is bounded and native endpoint cannot edit settings, import or export private data',async()=>{
+ const {native,approved}=watchFixture();const p=await approved();
+ for(const type of ['settings','import','profile','machine'])assert.equal((await native('command','POST',{operationId:crypto.randomUUID(),command:{type}},p.token)).status,400);
+ const state=await native('workout','GET',undefined,p.token);assert.equal(state.status,200);assert.equal(state.data.protocol,1);
+ assert.equal(state.data.profile,undefined);assert.equal(state.data.sessions,undefined);assert.equal(state.data.settings,undefined);
+ for(let i=1;i<10;i++)assert.equal((await native('pair','POST',{name:'Another watch'})).status,201);
+ assert.equal((await native('pair','POST',{name:'Too many'})).status,429);
+});
+test('watch retries after a lost response are idempotent and cannot overwrite a concurrent phone edit',async()=>{
+ const f=watchFixture(),p=await f.approved();
+ const send=(command,operationId=crypto.randomUUID())=>f.native('command','POST',{operationId,command},p.token);
+ const start={type:'start',id:crypto.randomUUID(),settingsRevision:0};
+ let r=await send(start);assert.equal(r.status,200);let session=r.data.active;
+ const repeated=await send(start);assert.equal(repeated.data.active.id,session.id);
+ const slot=session.slots.find(s=>!s.skipped&&s.option),op=crypto.randomUUID();
+ const first={type:'set',id:session.id,revision:0,slotId:slot.id,index:0,log:{reps:'10',load:'20 kg',done:true}};
+ r=await send(first,op);assert.equal(r.status,200);assert.equal(r.data.active.revision,1);
+ // Same command reaches the server again after its original response was lost.
+ r=await send(first,op);assert.equal(r.status,200);assert.equal(r.data.active.revision,1);assert.equal(r.data.active.slots.find(s=>s.id===slot.id).logs.filter(l=>l.done).length,1);
+ assert.equal((await send({...first,log:{...first.log,load:'30 kg'}},op)).status,409);
+ const phone={...first,revision:1,index:1,log:{reps:'8',load:'20 kg',done:true}};
+ assert.equal((await f.post(phone)).status,200);
+ assert.equal((await send({...phone,log:{reps:'12',load:'20 kg',done:true}})).status,409);
+ r=await f.native('workout','GET',undefined,p.token);assert.equal(r.data.active.revision,2);assert.equal(r.data.active.slots.find(s=>s.id===slot.id).logs[1].reps,'8');
+ const finish={type:'finish',id:session.id,revision:2},finishId=crypto.randomUUID();
+ assert.equal((await send(finish,finishId)).status,200);assert.equal((await send(finish,finishId)).status,200);
+ assert.equal((await f.get()).data.sessions.filter(s=>s.status==='finished').length,1);
+ const next=await f.native('workout','GET',undefined,p.token);assert.equal(next.data.active,null);assert.deepEqual(next.data.previous[slot.option.guideId||slot.option.id],{reps:'8',load:'20 kg'});
+});
+test('watch write and receipt roll back together if the receipt insert fails',async()=>{
+ const f=watchFixture(),p=await f.approved();const send=(c)=>f.native('command','POST',{operationId:crypto.randomUUID(),command:c},p.token);
+ const start=await send({type:'start',id:crypto.randomUUID(),settingsRevision:0});const s=start.data.active,slot=s.slots.find(s=>!s.skipped&&s.option);
+ await f.db.prepare("CREATE TRIGGER fail_watch_receipt BEFORE INSERT ON watch_receipts BEGIN SELECT RAISE(ABORT,'test interruption'); END").run();
+ const r=await send({type:'set',id:s.id,revision:0,slotId:slot.id,index:0,log:{reps:'10',load:'20 kg',done:true}});assert.equal(r.status,503);
+ const stored=await f.active();assert.equal(stored.revision,0);assert.equal(stored.slots.find(s=>s.id===slot.id).logs[0].done,false);
+});
