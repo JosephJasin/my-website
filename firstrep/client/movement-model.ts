@@ -5,6 +5,8 @@ import { extraMovementPose, isExtraMotion } from './extra-motion-model';
 export type MovementInfo={out:string;back:string;example:string;cue:string;muscle:'legs'|'arms'|'back'|'chest'|'shoulders'|'core'|'cardio'};
 export const movementInfo:Record<string,MovementInfo>={
  'bike':{out:'Pedal smoothly',back:'Pedal smoothly',example:'Upright bike',cue:'Stay relaxed; keep a slight knee bend at the bottom.',muscle:'cardio'},
+ 'elliptical':{out:'Stride forward smoothly',back:'Stride forward smoothly',example:'Elliptical · fixed grips while learning',cue:'Stand tall with a light grip. Slow down and stop the pedals before stepping off.',muscle:'cardio'},
+ 'barbell-bench-press':{out:'Press up over your shoulders',back:'Lower with control',example:'Flat barbell bench press · side view',cue:'The bar is seen end-on. Have a trainer check the rack and safeties, and use a capable spotter while learning.',muscle:'chest'},
  'leg-press':{out:'Press away',back:'Return slowly',example:'Seated leg press',cue:'Keep hips supported and stop short of locking your knees.',muscle:'legs'},
  'chest-press':{out:'Press forward',back:'Return slowly',example:'Seated chest press',cue:'Keep wrists straight and your back on the pad.',muscle:'chest'},
  'seated-row':{out:'Pull toward your ribs',back:'Reach forward slowly',example:'Low cable row',cue:'Move your arms without rocking your torso.',muscle:'back'},
@@ -54,9 +56,9 @@ export function movementPose(id:string,phase:number):Pose{
    wrist=[mix(264,217,t),mix(234,199,t)];elbow=joint(shoulder,wrist,50,50,1);
    extra={farKnee:[217,229],farAnkle:[228,274],farWrist:[294,198],farElbow:joint(shoulder,[294,198],40,40,-1)};
   }
-  if(id==='dumbbell-bench-press'){
+  if(id==='dumbbell-bench-press'||id==='barbell-bench-press'){
    hip=[270,196];shoulder=[190,196];head=[155,196];knee=[316,229];ankle=[309,274];
-   wrist=[205,mix(158,99,t)];elbow=joint(shoulder,wrist,51,51,1);
+   wrist=id==='barbell-bench-press'?[mix(226,193,t),mix(177,99,t)]:[205,mix(158,99,t)];elbow=joint(shoulder,wrist,51,51,1);
    extra={farKnee:[302,231],farAnkle:[290,274],farWrist:[wrist[0]-9,wrist[1]+2],farElbow:[elbow[0]-9,elbow[1]+2]};
   }
   if(id==='goblet-squat'){

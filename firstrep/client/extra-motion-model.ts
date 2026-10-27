@@ -1,5 +1,5 @@
-import type { Point, Pose } from './movement-model';
-export const extraMotionIds=['dumbbell-lateral-raise','face-pull','pec-fly','rear-delt-fly','hip-abduction','hip-adduction','rowing-erg'];
+import { joint, type Point, type Pose } from './movement-model';
+export const extraMotionIds=['dumbbell-lateral-raise','face-pull','pec-fly','rear-delt-fly','hip-abduction','hip-adduction','rowing-erg','elliptical'];
 export const isExtraMotion=(id:string)=>extraMotionIds.includes(id);
 export const isFrontMotion=(id:string)=>['dumbbell-lateral-raise','hip-abduction','hip-adduction'].includes(id);
 export const isFlyMotion=(id:string)=>id==='pec-fly'||id==='rear-delt-fly';
@@ -8,6 +8,13 @@ const lerp=(a:Point,b:Point,t:number):Point=>[mix(a[0],b[0],t),mix(a[1],b[1],t)]
 const mirror=(p:Point):Point=>[480-p[0],p[1]];
 export function extraMovementPose(id:string,phase:number):Pose {
  const t=(1-Math.cos(phase*Math.PI*2))/2;
+ if(id==='elliptical'){
+  const a=phase*Math.PI*2,hip:Point=[225,170],shoulder:Point=[225,100];
+  const ankle:Point=[230+38*Math.cos(a),248+12*Math.sin(a)];
+  const farAnkle:Point=[230-38*Math.cos(a),248-12*Math.sin(a)];
+  const wrist:Point=[290,128],farWrist:Point=[280,122];
+  return {hip,shoulder,head:[225,70],ankle,knee:joint(hip,ankle,52,52,-1),farAnkle,farKnee:joint(hip,farAnkle,52,52,-1),wrist,elbow:joint(shoulder,wrist,43,43,1),farWrist,farElbow:joint(shoulder,farWrist,43,43,1)};
+ }
  if(id==='rowing-erg'){
   const catchPose:Pose={hip:[225,215],shoulder:[262,144],head:[275,118],knee:[296,214],ankle:[286,267],wrist:[338,170],elbow:[300,157]};
   const legs:Pose={...catchPose,hip:[146,215],shoulder:[183,144],head:[196,118],knee:[216,240],wrist:[259,170],elbow:[221,157]};

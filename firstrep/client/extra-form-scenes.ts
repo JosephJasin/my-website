@@ -1,6 +1,6 @@
 import { extraMovementPose, isFlyMotion } from './extra-motion-model';
 import type { CueKind } from './form-cues';
-import type { Point, Pose } from './movement-model';
+import { joint, type Point, type Pose } from './movement-model';
 const plus=(p:Point,x:number,y:number):Point=>[p[0]+x,p[1]+y];
 const midway=(a:Point,b:Point):Point=>[(a[0]+b[0])/2,(a[1]+b[1])/2];
 function rotate(p:Point,c:Point,degrees:number):Point{const a=degrees*Math.PI/180,x=p[0]-c[0],y=p[1]-c[1];return [c[0]+x*Math.cos(a)-y*Math.sin(a),c[1]+x*Math.sin(a)+y*Math.cos(a)]}
@@ -14,7 +14,10 @@ export function extraCueScene(id:string,kind:CueKind,bad:boolean){
  }
  if(kind==='torso-swing'){
   if(bad){
-   if(id==='face-pull'||id==='dumbbell-lateral-raise'){
+   if(id==='elliptical'){
+    p.shoulder=plus(p.shoulder,38,15);p.head=plus(p.head,45,15);
+    p.elbow=joint(p.shoulder,p.wrist,43,43,1);p.farElbow=joint(p.shoulder,p.farWrist!,43,43,1);
+   }else if(id==='face-pull'||id==='dumbbell-lateral-raise'){
     const center:Point=id==='face-pull'?p.hip:[240,185];
     for(const key of ['shoulder','otherShoulder','head','elbow','wrist','farElbow','farWrist'] as const)if(p[key])p[key]=rotate(p[key]!,center,-18);
    }else{p.shoulder=plus(p.shoulder,-24,-4);p.otherShoulder=plus(p.otherShoulder!,-24,-4);p.head=plus(p.head,-31,-2);p.elbow=plus(p.elbow,-12,0);p.farElbow=plus(p.farElbow!,-12,0)}

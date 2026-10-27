@@ -70,7 +70,7 @@ export function cueScene(id:string,kind:CueKind,bad:boolean){
   p.elbow=joint(p.shoulder,p.wrist,51,51,1);
  }
  if(isFreeWeight(id)){
-  view=id==='dumbbell-bench-press'?'120 65 245 230':id==='dumbbell-row'?'135 75 255 220':'120 45 265 250';
+  view=id==='dumbbell-bench-press'||id==='barbell-bench-press'?'105 45 265 250':id==='dumbbell-row'?'135 75 255 220':'120 45 265 250';
   if(kind==='wrist')view=`${p.wrist[0]-70} ${p.wrist[1]-60} 160 145`;
   if(kind==='torso-swing'&&bad){p.farElbow=plus(p.elbow,-8,1);p.farWrist=plus(p.wrist,-8,1)}
   if(id==='dumbbell-row'&&kind==='neck'){

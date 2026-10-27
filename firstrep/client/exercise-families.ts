@@ -1,6 +1,6 @@
 export type Family = {id:string; name:string; ids:string[]; relationship:string; note:string};
 export const families:Family[] = [
- {id:'chest-press',name:'Chest pressing',ids:['chest-press','dumbbell-bench-press'],relationship:'Close alternatives',note:'Usually choose one for a chest-press slot. The support, setup and load differ.'},
+ {id:'chest-press',name:'Chest pressing',ids:['chest-press','dumbbell-bench-press','barbell-bench-press'],relationship:'Close alternatives',note:'Usually choose one for a chest-press slot. The support, setup and load differ. Learn barbell rack safety with help.'},
  {id:'chest-fly',name:'Chest fly',ids:['pec-fly'],relationship:'Separate movement',note:'Overlaps chest pressing, but does not replace all of its pressing work.'},
  {id:'row',name:'Horizontal pulling',ids:['seated-row','dumbbell-row'],relationship:'Close alternatives',note:'A seated row and a supported dumbbell row can fill the same general pulling slot.'},
  {id:'pulldown',name:'Vertical pulling',ids:['lat-pulldown'],relationship:'Separate movement',note:'Shares back muscles with rows, but pulls from a different direction.'},
@@ -16,7 +16,7 @@ export const families:Family[] = [
  {id:'hip-out',name:'Outer hips',ids:['hip-abduction'],relationship:'Separate movement',note:'Moves the thighs outward. Sharing a machine does not make this an adduction alternative.'},
  {id:'hip-in',name:'Inner thighs',ids:['hip-adduction'],relationship:'Separate movement',note:'Moves the thighs inward, working different muscles from abduction.'},
  {id:'crunch',name:'Abdominal crunching',ids:['abdominal-crunch'],relationship:'Separate movement',note:'Focused abdominal work, with its own setup and learning progress.'},
- {id:'cardio',name:'Cardio',ids:['bike','treadmill','rowing-erg'],relationship:'Cardio alternatives',note:'Choose a comfortable cardio option. A rowing ergometer does not replace a strength row.'},
+ {id:'cardio',name:'Cardio',ids:['bike','treadmill','elliptical','rowing-erg'],relationship:'Cardio alternatives',note:'Choose a comfortable cardio option. A rowing ergometer does not replace a strength row.'},
 ];
 export const familyFor=(id:string)=>families.find(f=>f.ids.includes(id));
 export const closeAlternatives=(id:string):string[] => {

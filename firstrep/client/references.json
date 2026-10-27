@@ -382,5 +382,45 @@
     "illustrated": true,
     "tutorialUrl": "https://www.concept2.com/training/rowing-technique",
     "tutorialLabel": "Concept2 rowing sequence"
+  },
+  "elliptical": {
+    "title": "Elliptical cross trainer",
+    "source": "https://www.precor.com/en-US/cardio/ellipticals",
+    "image": "/firstrep/equipment/elliptical-rear-drive.svg",
+    "illustrated": true,
+    "tutorialUrl": "https://contentcdn.eacefitness.com/continuingeducation/resources/4a5wy7yz/fss/Chapter5.pdf",
+    "tutorialLabel": "ACE equipment guide · elliptical technique (PDF)"
+  },
+  "elliptical-front-drive": {
+    "title": "Front-drive cross trainer",
+    "source": "https://www.soletreadmills.com/collections/ellipticals",
+    "image": "/firstrep/equipment/elliptical-front-drive.svg",
+    "illustrated": true
+  },
+  "elliptical-rear-drive": {
+    "title": "Rear-drive elliptical",
+    "source": "https://www.precor.com/en-US/cardio/ellipticals",
+    "image": "/firstrep/equipment/elliptical-rear-drive.svg",
+    "illustrated": true
+  },
+  "barbell-bench-press": {
+    "title": "Flat barbell bench press in a rack",
+    "source": "https://www.roguefitness.com/theindex/gear-how-tos/how-to-use-a-rogue-rack-safely-effectively",
+    "image": "/firstrep/equipment/bench-power-rack.svg",
+    "illustrated": true,
+    "tutorialUrl": "https://www.acefitness.org/resources/everyone/exercise-library/5/chest-press/",
+    "tutorialLabel": "ACE barbell bench press technique"
+  },
+  "bench-power-rack": {
+    "title": "Flat bench inside a power rack",
+    "source": "https://www.roguefitness.com/theindex/gear-how-tos/how-to-use-a-rogue-rack-safely-effectively",
+    "image": "/firstrep/equipment/bench-power-rack.svg",
+    "illustrated": true
+  },
+  "bench-press-station": {
+    "title": "Dedicated barbell bench station",
+    "source": "https://www.roguefitness.com/de/theindex/gear-how-tos/rogue-bench-guide-find-the-right-bench-for-your-training",
+    "image": "/firstrep/equipment/bench-press-station.svg",
+    "illustrated": true
   }
 }

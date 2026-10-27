@@ -31,8 +31,8 @@ const originalHashes={
  'human-5':'458247af119d1471db8c59b63131dbc873d2f4df921ea52963c68b68014a5023',
  'human-6':'70d3f08c59c5a0711c938e6c7ed23d73e15b51d376999789d7080156c37e9cc7',
 };
-test('all 27 guides have one family and original prescriptions remain faithful to supplied PDFs',()=>{
- const ids=families.flatMap(f=>f.ids);assert.equal(new Set(ids).size,27);assert.deepEqual([...ids].sort(),plain(machines.map(m=>m.id)).sort());
+test('all guides have one family and original prescriptions remain faithful to supplied PDFs',()=>{
+ const ids=families.flatMap(f=>f.ids);assert.equal(new Set(ids).size,machines.length);assert.deepEqual([...ids].sort(),plain(machines.map(m=>m.id)).sort());
  assert.equal(families.length,17);assert.equal(model.supplements.length,5);
  for(const p of source.plans){
   const text=p.sessions.flatMap(s=>s.exercises.map(e=>e.originalLine)).join('\n');
@@ -186,7 +186,7 @@ test('plan and session views render both plans, original slots, set logs and gro
  store.data.settings={planId:'human-4',choices:{}};html=renderToStaticMarkup(React.createElement(Workouts,{store,learning:allLearned,pace:2,mode:'plans',onOpen(){},onNavigate(){}}));assert.match(html,/Human Coach Guide/);assert.match(html,/Explore original routines/);assert.equal((html.match(/class="slot-number"/g)||[]).length,11);assert.doesNotMatch(html,/Add original PDFs|Human Coach Guide PDFs|<iframe/);assert.equal((html.match(/<h2>Original supporting text<\/h2>/g)||[]).length,1);for(const supplement of model.supplements)assert.ok(html.includes(renderToStaticMarkup(React.createElement('summary',null,supplement.title))));assert.match(html,/Original schedule/);
  const p=model.planById('starter');store.data.sessions=[{id:crypto.randomUUID(),planId:'starter',templateId:'A',title:'Full body A',startedAt:new Date().toISOString(),finishedAt:null,status:'active',revision:0,slots:model.prepareSlots(p,p.templates[0],model.defaultWorkoutSettings,allLearned,2),notes:'',custom:false,introductory:false}];
  html=renderToStaticMarkup(React.createElement(Workouts,{store,learning:allLearned,pace:2,mode:'today',onOpen(){},onNavigate(){}}));assert.equal((html.match(/class="set-log-row /g)||[]).length,8);assert.match(html,/Finish this visit/);
- html=renderToStaticMarkup(React.createElement(Groups,{visible:machines,learning:allLearned,onOpen(){}}));assert.equal((html.match(/class="panel family-card"/g)||[]).length,17);assert.match(html,/27|17 of 17/);
+ html=renderToStaticMarkup(React.createElement(Groups,{visible:machines,learning:allLearned,onOpen(){}}));assert.equal((html.match(/class="panel family-card"/g)||[]).length,17);assert.match(html,/17 of 17/);
 });
 
 const {watchService}=load('firstrep/server/watch.ts');

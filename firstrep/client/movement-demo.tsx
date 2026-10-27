@@ -32,8 +32,9 @@ function FreeWeightEquipment({id,p}:{id:string;p:Pose}){
  return <g fill="#526449" stroke="#81956e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
   <path d="M70 284H423" stroke="#3d4b36"/>
   {id==='dumbbell-row'&&<g><path d="M298 210V279M367 210V279M286 279H312M354 279H380" stroke="#506047" strokeWidth="7"/><rect x="278" y="201" width="106" height="12" rx="5"/></g>}
-  {id==='dumbbell-bench-press'&&<g><path d="M164 218V279M270 218V279M150 279H179M255 279H285" stroke="#506047" strokeWidth="7"/><rect x="132" y="207" width="158" height="13" rx="5"/></g>}
-  {id.startsWith('barbell-')?<g><Line from={[p.wrist[0]-75,p.wrist[1]]} to={[p.wrist[0]+75,p.wrist[1]]} stroke="#b3c3a4" strokeWidth="5"/>{[-57,51].map(x=><g key={x}><rect x={p.wrist[0]+x} y={p.wrist[1]-17} width="8" height="34" rx="3"/><rect x={p.wrist[0]+x+(x<0?-5:9)} y={p.wrist[1]-6} width="4" height="12" fill="#c3ee74" stroke="none"/></g>)}</g>:
+  {(id==='dumbbell-bench-press'||id==='barbell-bench-press')&&<g><path d="M164 218V279M270 218V279M150 279H179M255 279H285" stroke="#506047" strokeWidth="7"/><rect x="132" y="207" width="158" height="13" rx="5"/></g>}
+  {id==='barbell-bench-press'&&<g fill="none"><path d="M116 280V51H352V280M100 280H132M336 280H368" stroke="#506047" strokeWidth="6"/><path d="M116 119H169V109" stroke="#a3b78e" strokeWidth="6"/><path d="M116 198H352" stroke="#91a57e" strokeWidth="6"/>{[83,145,168,221,245].map(y=><circle key={y} cx="116" cy={y} r="2" fill="#c1cbb9" stroke="none"/>)}</g>}
+  {id==='barbell-bench-press'?<g><circle cx={p.wrist[0]} cy={p.wrist[1]} r="14" fill="#526449" stroke="#b3c3a4" strokeWidth="3"/><circle cx={p.wrist[0]} cy={p.wrist[1]} r="4" fill="#c3ee74" stroke="none"/></g>:id.startsWith('barbell-')?<g><Line from={[p.wrist[0]-75,p.wrist[1]]} to={[p.wrist[0]+75,p.wrist[1]]} stroke="#b3c3a4" strokeWidth="5"/>{[-57,51].map(x=><g key={x}><rect x={p.wrist[0]+x} y={p.wrist[1]-17} width="8" height="34" rx="3"/><rect x={p.wrist[0]+x+(x<0?-5:9)} y={p.wrist[1]-6} width="4" height="12" fill="#c3ee74" stroke="none"/></g>)}</g>:
   id==='kettlebell-deadlift'?<g><path d={`M${p.wrist[0]-10} ${p.wrist[1]+13}q-6-22 10-22t10 22`} fill="none" strokeWidth="5"/><ellipse cx={p.wrist[0]} cy={p.wrist[1]+18} rx="18" ry="16"/></g>:
   id==='goblet-squat'?dumbbell([p.wrist[0],p.wrist[1]+9],90):<>{id!=='dumbbell-row'&&dumbbell(p.farWrist??[p.wrist[0]-8,p.wrist[1]+1],0,.55)}{dumbbell(p.wrist)}</>}
  </g>;
@@ -64,7 +65,7 @@ export default function MovementDemo({id,name,compact=false,autoPlay=true}:{id:s
  const container=useRef<HTMLDivElement>(null),position=useRef(0),label=useId(),info=movementInfo[id];
  useEffect(()=>{const media=window.matchMedia('(prefers-reduced-motion: reduce)');setPlaying(!media.matches&&(compact?autoPlay:true));const update=()=>setPlaying(!media.matches&&(compact?autoPlay:true));media.addEventListener('change',update);return()=>media.removeEventListener('change',update)},[autoPlay,compact]);
  useEffect(()=>{const io=new IntersectionObserver(([entry])=>setVisible(entry.isIntersecting),{threshold:.15});if(container.current)io.observe(container.current);return()=>io.disconnect()},[]);
- useEffect(()=>{if(!playing||!visible)return;let handle=0,last=0,lastPaint=0;const cycle=(id==='treadmill'||id==='bike'?2600:id==='rowing-erg'?6500:4800)/speed;
+ useEffect(()=>{if(!playing||!visible)return;let handle=0,last=0,lastPaint=0;const cycle=(id==='treadmill'||id==='bike'||id==='elliptical'?2600:id==='rowing-erg'?6500:4800)/speed;
  const frame=(now:number)=>{if(!last)last=now;const elapsed=Math.min(now-last,80);last=now;if(document.visibilityState==='visible'){position.current=(position.current+elapsed/cycle)%1;if(now-lastPaint>40){setPhase(position.current);lastPaint=now;}}handle=requestAnimationFrame(frame)};
  handle=requestAnimationFrame(frame);return()=>cancelAnimationFrame(handle);
  },[playing,visible,speed,id]);
